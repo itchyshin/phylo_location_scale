@@ -1,0 +1,169 @@
+---
+title: "formulas"
+format: html
+editor: visual
+---
+
+# Theory
+
+
+## Phylogentic location-scale model
+
+## without a random effect in the scale part
+
+$$
+y_{i} = \beta_0^{(l)} + \beta_1^{(l)} x_{1i} + a_i + e_i
+$$
+
+$y$ - body mass $x$ - species range
+
+$$
+\ln({\sigma_{e_i}}) = \beta_0^{(s)} + \beta_1^{(s)} x_{1i}
+$$ $$
+a_i =\mathbf{a}   \sim \mathcal{N}(\mathbf{0}, \sigma_{a}^2\mathbf{A})
+$$
+
+$$
+e_i = \mathbf{e} \sim \mathcal{N}(\mathbf{0}, \sigma_{e_i}^2\mathbf{I})
+$$
+
+### Phylogenetic signal
+
+this is adjusted
+
+$$
+H^2 = \frac{\sigma_{a}^2}{\sigma_{a}^2 + \bar{\sigma}_{e_i}^2}
+$$
+
+full verion
+
+$$
+H^2 = \frac{\sigma_{a}^2}{\sigma_{p}^2}
+$$
+
+$$
+\sigma_{p}^2 = \sigma_{al}^2 + \sigma_{f}^2 + \bar{\sigma}_{e_i}^2
+$$
+
+$$
+\sigma_{f}^2 = Var(\beta_1^{(l)} x_{1i})
+$$
+
+$$
+\sigma_{fl}^2 = Var\left(\sum_{o=1}^O\beta_o^{(l)} x_{oi}\right)
+$$
+
+
+### Evolvability
+
+$$
+CV_{A} = \frac{\sigma_{a}}{E(y_i)}
+$$
+
+
+$$
+\bar{\sigma}_{e_i}^2 = \exp \left(2 \beta_0^{(s)}  + 2\sigma_{as(ln)}^2 \right) 
+$$ 
+
+## with a random effect in the scale part
+
+$$
+y_{i} = \beta_0^{(l)} + \beta_1^{(l)} x_{1i} + a_i^{(l)} + e_i
+$$
+
+$$
+\ln({\sigma_{e_i}}) = \beta_0^{(s)} + \beta_1^{(s)} x_{1i} + a_i^{(s)}
+$$
+
+$$
+e_i = \mathbf{e} \sim \mathcal{N}(\mathbf{0}, \sigma_{e_i}^2\mathbf{I})
+$$
+
+$$
+ \begin{pmatrix} a_i^{(l)} \\ 
+ a_i^{(s)} 
+ \end{pmatrix} 
+ \sim \mathcal{N} \left( \mathbf{0}, \mathbf{\Sigma}_{a} \otimes \mathbf{A}  \right) 
+$$
+
+$$
+\mathbf{\Sigma}_{a} \otimes \mathbf{A} = 
+\begin{pmatrix} \sigma_{al}^{2} \mathbf{A} & 
+\rho_{ls}\sigma_{al}\sigma_{as(\ln)} \mathbf{A}\\ 
+\rho_{ls}\sigma_{al}\sigma_{as(\ln)} \mathbf{A} &
+\sigma_{as(\ln)}^{2}  \mathbf{A}
+\end{pmatrix}   
+$$
+
+### Phylogenetic signal
+
+$$
+H^2_{l} = \frac{\sigma_{a}^2}{\sigma_{a}^2 + \bar{\sigma}_{e_i}^2}
+$$
+
+
+
+$$
+\bar{\sigma}_{e_i}^2 = \exp \left(2 \beta_0^{(s)}  + 2\sigma_{as(ln)}^2 \right) 
+$$
+
+$$
+H^2_{l} = \frac{\sigma_{al}^2}{\sigma_{p}^2}
+$$
+
+
+$$
+\sigma_{as}^2 = \sigma_{\sigma_e^2}^2 \left(\frac{\sigma_{as(\ln)}^2}
+{\sigma_{as(\ln)}^2 + \sigma_{fs(\ln)}^2}
+\right)
+$$
+
+$$
+\sigma_{fs(\ln)}^2 = Var(\beta_1^{(s)} x_i)
+$$
+
+$$
+\sigma_{fs(\ln)}^2 = Var\left(\sum_{o=1}^O\beta_o^{(s)} x_{oi}\right)
+$$
+
+$$
+\sigma_{\sigma_e^2}^2 = \left(\exp{\left(4\sigma_{as(\ln)}^2\right) - 1} \right) 
+\exp{\left(4\left( \beta_0^{(s)} + \sigma_{as(\ln)}^2 + {\sigma_{fs(\ln)}^2}\right)
+\right)}
+$$
+
+$$
+H^2_{s} = \frac{\sigma_{as}^2}{\sigma^2_{\sigma_{p}^2}}
+$$
+
+$$
+\sigma^2_{\sigma_{p}^2} = 2\sigma_{p}^4 + 3\sigma_{\sigma_e^2}^2
+$$
+
+$$
+\sigma_{p}^2 = \sigma_{al}^2 + \sigma_{fl}^2 + \bar{\sigma}_{e_i}^2
+$$
+
+$$
+\sigma_{fl}^2 = Var(\beta_1^{(l)} x_{1i})
+$$
+
+$$
+\sigma_{fl}^2 = Var\left(\sum_{o=1}^O\beta_o^{(l)} x_{oi}\right)
+$$
+
+### Evolvability
+
+$$
+CV_{Al} = \frac{\sigma_{al}}{E(y_i)}
+$$
+
+$$
+CV_{As} = \frac{\sigma_{as}}{E(\sigma_{e_i}^2)}
+$$
+
+alternative experession but this does not account for variance in the fixed effects
+
+$$
+CV_{As}^* = \sqrt{\exp(\sigma_{as(\ln)}^2) - 1}
+$$
