@@ -6,7 +6,6 @@ editor: visual
 
 # Theory
 
-
 ## Phylogentic location-scale model
 
 ## without a random effect in the scale part
@@ -19,16 +18,13 @@ $y$ - body mass $x$ - species range
 
 $$
 \ln({\sigma_{e_i}}) = \beta_0^{(s)} + \beta_1^{(s)} x_{1i}
-$$ 
+$$
 
 $$
 y_{i} = \beta_0^{(l)} + \sum_{k=1}^K\beta_k^{(l)} x_{ki} + a_i + e_i
-$$
-$$
+$$ $$
 \ln({\sigma_{e_i}}) = \beta_0^{(s)} + \sum_{k=1}^K\beta_k^{(s)} x_{ki} x_{1i}
-$$ 
-
-
+$$
 
 $$
 a_i =\mathbf{a}   \sim \mathcal{N}(\mathbf{0}, \sigma_{a}^2\mathbf{A})
@@ -64,17 +60,15 @@ $$
 \sigma_{f}^2 = Var\left(\sum_{k=1}^K\beta_k^{(l)} x_{ki}\right)
 $$
 
-
 ### Evolvability
 
 $$
 CV_{A} = \frac{\sigma_{a}}{E(y_i)}
 $$
 
-
 $$
 \bar{\sigma}_{e_i}^2 = \exp \left(2 \beta_0^{(s)}  + 2\sigma_{as(ln)}^2 \right) 
-$$ 
+$$
 
 ## with a random effect in the scale part
 
@@ -112,8 +106,6 @@ $$
 H^2_{l} = \frac{\sigma_{a}^2}{\sigma_{a}^2 + \bar{\sigma}_{e_i}^2}
 $$
 
-
-
 $$
 \bar{\sigma}_{e_i}^2 = \exp \left(2 \beta_0^{(s)}  + 2\sigma_{as(ln)}^2 \right) 
 $$
@@ -121,7 +113,6 @@ $$
 $$
 H^2_{l} = \frac{\sigma_{al}^2}{\sigma_{p}^2}
 $$
-
 
 $$
 \sigma_{as}^2 = \sigma_{\sigma_e^2}^2 \left(\frac{\sigma_{as(\ln)}^2}
