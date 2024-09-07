@@ -8,7 +8,13 @@ editor: visual
 
 ## Phylogentic location-scale model
 
+It is best to introduce first the intercept modeland then do phylogenetic signals and evolvability etc and then move to regression models 
+
 ## without a random effect in the scale part
+
+$$
+y_{i} = \beta_0^{(l)} + a_i + e_i
+$$
 
 $$
 y_{i} = \beta_0^{(l)} + \beta_1^{(l)} x_{1i} + a_i + e_i
@@ -22,8 +28,10 @@ $$
 
 $$
 y_{i} = \beta_0^{(l)} + \sum_{k=1}^K\beta_k^{(l)} x_{ki} + a_i + e_i
-$$ $$
-\ln({\sigma_{e_i}}) = \beta_0^{(s)} + \sum_{k=1}^K\beta_k^{(s)} x_{ki} x_{1i}
+$$
+
+$$
+\ln({\sigma_{e_i}}) = \beta_0^{(s)} + \sum_{k=1}^K\beta_k^{(s)} x_{ki}
 $$
 
 $$
@@ -168,4 +176,50 @@ alternative experession but this does not account for variance in the fixed effe
 
 $$
 CV_{As}^* = \sqrt{\exp(\sigma_{as(\ln)}^2) - 1}
+$$
+
+# Extension
+
+$$
+y_{ij} = \beta_0^{(l)} + \sum_{k=1}^K\beta_k^{(l)} x_{kij}  + a_i^{(l)} 
++ e_i^{(l)} + \varepsilon_{ij}
+$$
+
+$$
+\ln({\sigma_{\varepsilon_{ij}}}) = \beta_0^{(s)} + \sum_{k=1}^K\beta_k^{(s)} x_{kij}  + a_i^{(s)}
++ e_i^{(s)}
+$$
+
+$$
+\varepsilon_{ij} = \mathbf{\varepsilon} \sim \mathcal{N}(\mathbf{0}, \sigma_{\varepsilon_{ij}}^2\mathbf{I})
+$$
+
+$$
+ \begin{pmatrix} a_i^{(l)} \\ 
+ a_i^{(s)} 
+ \end{pmatrix} 
+ \sim \mathcal{N} \left( \mathbf{0}, \mathbf{\Sigma}_{a} \otimes \mathbf{A}  \right) 
+$$
+
+$$
+\mathbf{\Sigma}_{a} \otimes \mathbf{A} = 
+\begin{pmatrix} \sigma_{al}^{2} \mathbf{A} & 
+\rho_{ls}\sigma_{al}\sigma_{as(\ln)} \mathbf{A}\\ 
+\rho_{ls}\sigma_{al}\sigma_{as(\ln)} \mathbf{A} &
+\sigma_{as(\ln)}^{2}  \mathbf{A}
+\end{pmatrix}   
+$$ $$
+ \begin{pmatrix} e_i^{(l)} \\ 
+ e_i^{(s)} 
+ \end{pmatrix} 
+ \sim \mathcal{N} \left( \mathbf{0}, \mathbf{\Sigma}_{e} \otimes \mathbf{I}  \right) 
+$$
+
+$$
+\mathbf{\Sigma}_{e} \otimes \mathbf{I} = 
+\begin{pmatrix} \sigma_{el}^{2} \mathbf{A} & 
+\rho_{ls}\sigma_{el}\sigma_{es(\ln)} \mathbf{I}\\ 
+\rho_{ls}\sigma_{el}\sigma_{es(\ln)} \mathbf{I} &
+\sigma_{es(\ln)}^{2}  \mathbf{I}
+\end{pmatrix}   
 $$
