@@ -8,7 +8,7 @@ editor: visual
 
 ## Phylogentic location-scale model
 
-It is best to introduce first the intercept modeland then do phylogenetic signals and evolvability etc and then move to regression models 
+It is best to introduce first the intercept modeland then do phylogenetic signals and evolvability etc and then move to regression models
 
 ## without a random effect in the scale part
 
