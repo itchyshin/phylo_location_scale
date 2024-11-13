@@ -1,0 +1,299 @@
+---
+title: "test"
+format: html
+editor: visual
+---
+
+# Phylogenetic Location-Scale Model
+
+## Without a Random Effect in the Scale Part
+
+You start by defining a location model for a trait y_i (e.g., body mass) across species i : 1. Location Model:
+
+$$
+y_i = \beta0^{(l)} + \sum_{k=1}^K \beta*k^{(l)} x*{ki} + a_i^{(l)} + e_i^{(l)}
+$$
+
+• $y_i$ : Observed trait value for species i . • $\beta_0^{(l)}$ : Intercept for the location model. • $\beta_k^{(l)}$ : Fixed-effect coefficients for predictor variables $x_{ki}$ (e.g., species range). • $a_i^{(l)}$ : Phylogenetic random effect, accounting for shared evolutionary history. • $e_i^{(l)}$ : Residual error for the location model.
+
+2.  Scale Model:
+
+The variance of the residuals is modeled as a function of predictors:
+
+$$
+\ln(\sigma_{e_i}) = \beta_0^{(s)} + \sum_{k=1}^K \beta_k^{(s)} x_{ki}
+$$
+
+• $\sigma_{e_i}$ : Standard deviation of the residual error for species i . • $\beta_0^{(s)}$ : Intercept for the scale model. • $\beta_k^{(s)}$ : Fixed-effect coefficients for predictors in the scale model.
+
+3.  Random Effects: • Phylogenetic Random Effect in Location Model:
+
+$$a_i^{(l)} \sim \mathcal{N}\left(0, \sigma\_{a(l)}^2 \mathbf{A}\right)$$
+
+• $\sigma_{a(l)}^2$ : Variance of the phylogenetic random effect. • $\mathbf{A}$ : Phylogenetic relatedness matrix. • Residuals:
+
+$$e_i^{(l)} \sim \mathcal{N}\left(0, \sigma\_{e_i(l)}^2 \mathbf{I}\right)$$
+
+• $\sigma_{e_i(l)}^2$ : Species-specific residual variance from the scale model. • $\mathbf{I}$ : Identity matrix, assuming independence. 4. Phylogenetic Signal:
+
+The phylogenetic heritability ( H\^2 ) quantifies the proportion of total variance attributable to phylogenetic effects:
+
+$$H^2 = H^2_{(l)} = \frac{\sigma_{a(l)}^2}{\sigma_{a(l)}^2 + \bar{\sigma}_{e_i(l)}^2}$$
+
+• $\bar{\sigma}_{e_i(l)}^2$ : Average residual variance across species, derived from the scale model.
+
+Alternatively, accounting for variance explained by fixed effects:
+
+$$H^2 = \frac{\sigma_{a(l)}^2}{\sigma_p^2}$$
+
+where total phenotypic variance $\sigma_p^2$ is:
+
+$$\sigma_p^2 =* \sigma{a(l)}^2 + \sigma_{f(l)}^2 + \bar{\sigma}_{e_i(l)}^2$$
+
+• $\sigma\_{f(l)}\^2$ : Variance due to fixed effects in the location model. 5. Evolvability:
+
+Evolvability measures the potential for evolutionary change:
+
+$$\text{CV}A = \frac{\sigma{a(l)}}{E(y_i)}$$
+
+• $\text{CV}_A$ : Coefficient of variation due to phylogenetic effects. • $E(y_i)$ : Expected mean trait value. 6. Calculating Average Residual Variance:
+
+The average residual variance is:
+
+$$
+\bar{\sigma}{e_i}^2 = \exp\left(2 \beta_0^{(s)} + 2 \sigma_{a(s)}^2\right)
+$$
+
+• $\sigma_{as(\ln)}^2$ : Variance of the scale model (if applicable).
+
+## With a Random Effect in the Scale Part
+
+With a Random Effect in the Scale Part
+
+Here, you introduce a phylogenetic random effect in the scale model: 1. Location Model: Same as before:
+
+$$
+y_i = \beta_0^{(l)} + \sum_{k=1}x^K \beta*k^{(l)} x*{ki} + a_i^{(l)} + e_i^{(l)}
+$$
+
+2.  Scale Model with Random Effect:
+
+$$
+\ln(\sigma_{e_i(l)}) = \beta_0^{(s)} + \sum_{k=1}^K \beta_k^{(s)} x_{ki} + a_i^{(s)}
+$$
+
+• $a_i^{(s)}$ : Phylogenetic random effect in the scale model. 3. Residuals:
+
+$$
+e_i^{(l)} \sim \mathcal{N}\left(0, \sigma_{e_i(l)}^2 \mathbf{I}\right)
+$$
+
+4.  Joint Distribution of Random Effects:
+
+$$
+\begin{pmatrix}
+a_i^{(l)} \\
+a_i^{(s)}
+\end{pmatrix}
+\sim \mathcal{N} \left(
+\begin{pmatrix}
+0 \\
+0
+\end{pmatrix}
+, \boldsymbol{\Sigma}\_a \otimes \mathbf{A} \right)
+$$
+
+with the covariance matrix:
+
+$$
+\boldsymbol{\Sigma}a \otimes \mathbf{A} =
+\begin{pmatrix}
+\sigma{a(l)}^2 \mathbf{A} & \rho_{ls} \sigma_{a(l)} \sigma_{a(s(\ln))} \mathbf{A} \\
+\rho_{ls} \sigma_{a(l)} \sigma_{a(s(\ln))} \mathbf{A} & \sigma_{a(s(\ln))}^2 \mathbf{A}
+\end{pmatrix}
+$$
+
+• $\rho_{ls}$ : Correlation between the location and scale phylogenetic effects. 5. Adjusted Phylogenetic Signal:
+
+$$
+H^2\_{(l)} = \frac{\sigma_{a(l)}^2}{\sigma_{a(l)}^2 + \bar{\sigma}_{e_i(l)}^2}
+$$
+
+where:
+
+$$
+\bar{\sigma}{e_i(l)}^2 = \exp\left(2 \beta_0^{(s)} + 2 \sigma_{a(s)}^2\right)
+$$
+
+6.  Variance Components in Scale Model:
+
+The variance of $\sigma_{e_i(l)}^2$ :
+
+$$
+\sigma*{*\sigma{e(l)}^2}^2 = \left( \exp\left(4 \sigma*{a(s)}^2\right) - 1 \right) \exp\left(4 \left( \beta_0^{(s)} + \sigma_{a(s)}^2 + \sigma{f(s)}^2 \right) \right)
+$$
+
+• $\sigma_{f(s)}^2$ : Variance due to fixed effects in the scale model. 7. Evolvability in Scale:
+
+$\text{CV}A\^{(s)} = \frac{\sigma{a(s)}}{E(\sigma_{e_i(l)}^2)}$
+
+Alternatively, if variance in fixed effects is not accounted for:
+
+$\text{CV}A\^{(s)} = \sqrt{\exp\left(\sigma{a(s)}^2\right) - 1}$
+
+## Extension to Multivariate Models
+
+You further extend the model to a multivariate framework, allowing for multiple traits and their variances to be modeled simultaneously.
+
+Joint Location Models:
+
+$$
+\mathbf{y}_{i} =
+\begin{pmatrix}
+y_i^{(1)} \\
+y_i^{(2)}
+\end{pmatrix}
+\begin{pmatrix}
+\beta_0^{(l1)} + \sum_{k=1}^K \beta_k^{(l1)} x_{ki} + a_i^{(l1)} + e_i^{(l1)} \\
+\beta_0^{(l2)} + \sum_{k=1}^K \beta_k^{(l2)} x_{ki} + a_i^{(l2)} + e_i^{(l2)}
+\end{pmatrix}
+$$
+
+Joint Scale Models:
+
+$$
+\ln\left( \boldsymbol{\sigma}{e_i} \right) =
+\begin{pmatrix}
+\ln(\sigma_{e_i(l1)}) \\
+\ln(\sigma_{e_i(l2)})
+\end{pmatrix}
+\begin{pmatrix}
+\beta_0^{(s1)} + \sum_{k=1}^K \beta_k^{(s1)} x_{ki} + a_i^{(s1)} \\
+\beta_0^{(s2)} + \sum_{k=1}^K \beta_k^{(s2)} x_{ki} + a_i^{(s2)}
+\end{pmatrix}
+$$
+
+Joint Random Effects:
+
+$$
+\begin{pmatrix}
+a_i^{(l1)} \\
+a_i^{(l2)} \\
+a_i^{(s1)} \\
+a_i^{(s2)}
+\end{pmatrix}
+\sim \mathcal{N} \left(
+\begin{pmatrix}
+0 \\
+0 \\
+0 \\
+0
+\end{pmatrix}
+, \boldsymbol{\Sigma}\_a \otimes \mathbf{A} \right) 
+$$
+
+The covariance matrix $\boldsymbol{\Sigma}$ *a captures: •* $\rho_{a(l1l2)}$ : Mean-mean coevolution between traits. • $\rho)_{a(s1s2)}$ : Variance-variance coevolution between traits. •$\\rho_{a(l1s1)}$, $\rho_{a(l2s2)}$ : Mean-variance coevolution within traits. •$\rho_{a(l1s2)}$, $\rho_{a(l2s1)}$ : Mean-variance coevolution across traits.
+
+## Multivariate Phylogenetic Location-Scale Model
+
+In matrix notation, the model becomes: 1. Location Model:
+
+$$
+\mathbf{y}_i = \mathbf{X}_i \boldsymbol{\beta}^{(l)} + \mathbf{a}_i^{(l)} + \mathbf{e}_i^{(l)}
+$$
+
+2.  Scale Model:
+
+$$
+\ln\left( \boldsymbol{\sigma}_{\mathbf{e}_i(l)} \right) = \mathbf{X}_i \boldsymbol{\beta}^{(s)} + \mathbf{a}_i^{(s)}
+$$
+
+## Phylogenetic Location-Scale Model with Within-Species Effects
+
+This extension accounts for individual-level variability within species: 1. Location Model:
+
+$$
+y_{ij} = \beta_0^{(l)} + \sum_{k=1}^K \beta_k^{(l)} x_{kij} + a_i^{(l)} + e_i^{(l)} + \varepsilon_{ij}^{(l)}
+$$
+
+•    $y_{ij}$ : Observation  j  within species  i .
+•    $x_{kij}$ : Predictor variables at the individual level.
+•    $\varepsilon_{ij}^{(l)}$ : Individual-level residual error.
+2.  Scale Model:
+
+$$
+\ln(\sigma_{\varepsilon_{ij}(l)}) = \beta_0^{(s)} + \sum_{k=1}^K \beta_k^{(s)} x_{kij} + a_i^{(s)} + e_i^{(s)}
+$$ • $\sigma_{\varepsilon_{ij}(l)}$ : Individual-level residual standard deviation. 3. Random Effects: • Phylogenetic Random Effects:
+
+$$
+\begin{pmatrix}
+a_i^{(l)} \\
+a_i^{(s)}
+\end{pmatrix}
+\sim \mathcal{N}\left(0, \boldsymbol{\Sigma}_{a(ls)} \otimes \mathbf{A}\right)
+$$ • Species-Level Residuals: 
+
+$$
+\begin{pmatrix}
+e_i^{(l)} \\
+e_i^{(s)}
+\end{pmatrix}
+\sim \mathcal{N}\left(0, \boldsymbol{\Sigma}_e \otimes \mathbf{I}\right)
+$$ • Individual-Level Residuals: $$
+\varepsilon_{ij}^{(l)} \sim \mathcal{N}\left(0, \sigma_{\varepsilon_{ij}(l)}^2\right)
+$$
+
+## Thoughts and Suggestions
+
+1.  Novel Contribution: Extending location-scale models to phylogenetic comparative analysis is a significant advancement. It allows for the examination of how both the mean and variability of traits are influenced by evolutionary relationships.
+2.  Interpretation of Random Effects: • Phylogenetic Random Effects in Scale Model: Incorporating $a_i^{(s)}$ acknowledges that the variability of a trait can also be phylogenetically structured. • Correlation Between Location and Scale Effects: The parameter $\rho_{ls}$ can provide insights into whether species that have higher mean trait values also tend to have greater variability.
+3.  Complexity and Identifiability: • Model Complexity: With the addition of random effects in both the location and scale parts, and their potential correlations, the model becomes complex. • Data Requirements: Adequate sample sizes at both the species and individual levels (if applicable) are necessary to reliably estimate parameters.
+4.  Statistical Estimation: • Bayesian Methods: Given the complexity, Bayesian approaches (e.g., using MCMC techniques) might be more suitable for parameter estimation. • Software: Software like Stan or MCMCglmm in R can handle such models but may require careful coding and convergence diagnostics.
+5.  Assumptions: • Normality: The models assume normal distributions for random effects and residuals, which should be assessed in practice. • Log-Linear Relationship: The log-linear form of the scale model assumes multiplicative effects on variance, which is reasonable but should be validated.
+6.  Applications: • Trait Variability: Useful for studying traits where variability is biologically meaningful, such as behavioral traits, phenotypic plasticity, or developmental instability. • Evolutionary Questions: Can address whether evolutionary processes affect not just trait means but also the dispersion around those means.
+7.  Interpretation of Evolvability: • Evolvability in Mean and Variance: By calculating coefficients of variation for both location and scale components, you can compare the potential for evolutionary change in both aspects.
+
+## Conclusion
+
+Your proposed models offer a comprehensive framework for phylogenetic comparative analysis that accounts for both the mean and variance of traits across species. This extension has the potential to reveal new insights into evolutionary processes affecting trait evolution.
+
+Next Steps: • Empirical Validation: Apply the models to real datasets to test their applicability and refine them based on practical findings. • Simulation Studies: Conduct simulations to assess the performance of the models under different conditions (e.g., varying sample sizes, effect sizes). • Further Development: Explore the possibility of including other types of random effects or extending the models to non-Gaussian traits. • Collaboration: Consider collaborating with statisticians or computational biologists to tackle potential challenges in model estimation and interpretation.
+
+1. Phylogenetic Generalized Least Squares (PGLS):
+
+•   Description: PGLS is a standard method in comparative biology that incorporates phylogenetic relationships into regression analyses of continuous traits. It models the covariance among species due to shared ancestry using a phylogenetic covariance matrix.
+•   Relation to Your Work: While PGLS typically focuses on the mean structure of traits, extensions of PGLS can account for heteroscedasticity (non-constant variance) across species. This could be analogous to modeling the scale (variance) component in your location-scale model.
+
+2.  Phylogenetic Mixed Models (PMM): • Description: Phylogenetic mixed models extend linear mixed models by including random effects that capture the phylogenetic relationships among species. These models can handle complex data structures and multiple random effects. • Relation to Your Work: Your inclusion of phylogenetic random effects in both the mean (location) and variance (scale) components aligns with the framework of PMMs. They provide a foundation for modeling trait evolution while accounting for phylogenetic dependencies.
+
+3.  Phylogenetic Generalized Linear Mixed Models (PGLMM): • Description: PGLMMs extend generalized linear mixed models to phylogenetic comparative data, allowing for non-normal response variables (e.g., binary, count data) and incorporating phylogenetic random effects. • Relation to Your Work: If you plan to extend your models to handle non-Gaussian traits or generalized responses, PGLMMs provide a relevant framework. They can accommodate overdispersion and hierarchical variance structures, similar to your scale modeling.
+
+4.  Heteroskedastic Models in Phylogenetics: • Description: Some studies have developed phylogenetic models that allow for heteroskedasticity, where the variance differs among species and may depend on predictor variables. • Example: Ives, Midford, and Garland (2007) introduced methods to incorporate within-species variance and measurement error into phylogenetic comparative analyses. • Relation to Your Work: These models consider variance heterogeneity across species, which is conceptually similar to your scale model where the residual variance is modeled as a function of predictors.
+
+5.  Bayesian Phylogenetic Models: • Description: Bayesian approaches offer flexibility in modeling complex hierarchical structures and variance components. Software like MCMCglmm allows for specifying models with phylogenetic random effects and can handle multiple variance structures. • Relation to Your Work: Your proposed models, especially with random effects in both location and scale components, could be implemented within a Bayesian framework. This allows for direct estimation of the posterior distributions of all parameters, including variances and covariances.
+
+6.  Phylogenetic Meta-analysis: • Description: Phylogenetic meta-analysis combines effect sizes from multiple studies while accounting for phylogenetic relationships among species. It often models both the mean effect and the variance among studies or species. • Relation to Your Work: Techniques from phylogenetic meta-analysis could inform your modeling of variance components, especially if you’re dealing with aggregated data or effect sizes that come with their own variances.
+
+7.  Models of Trait Variance Evolution: • Description: Some researchers have explored models where not only the trait means but also the variances evolve across the phylogeny. • Example: Hansen, Pienaar, and Orzack (2008) discussed models of stabilizing selection that can incorporate changing variances over time. • Relation to Your Work: Your scale model aligns with the idea of modeling the evolution of trait variances. Incorporating changing variances can provide insights into evolutionary processes like stabilizing selection or adaptive radiation.
+
+8.  Ornstein-Uhlenbeck (OU) Models with Variable Selection Strength: • Description: OU models are used to model trait evolution under stabilizing selection towards an optimal value. Extensions of OU models allow for varying selection strengths and optima across the phylogeny. • Relation to Your Work: While traditional OU models focus on the mean trait evolution, some extensions consider heterogeneity in evolutionary rates, which could be analogous to modeling variance (scale) in your framework.
+
+9.  Measurement Error and Within-Species Variation Models: • Description: These models explicitly account for measurement error and within-species variation when estimating phylogenetic signal and evolutionary parameters. • Relation to Your Work: By incorporating within-species variance into your scale model, you can improve the accuracy of phylogenetic comparative analyses, especially when within-species variation is substantial.
+
+10. Phylogenetic Path Analysis: • Description: Phylogenetic path analysis allows for modeling complex relationships among multiple traits while accounting for phylogenetic relationships. • Relation to Your Work: While not directly modeling variance components, path analysis can be extended to include variance modeling, potentially integrating with your multivariate location-scale models.
+
+## References for Further Reading: 
+
+1. Ives, A. R., Midford, P. E., & Garland, T. (2007). Within-species variation and measurement error in phylogenetic comparative methods. Systematic Biology, 56(2), 252–270. 
+
+2. Hadfield, J. D. (2010). MCMC methods for multi-response generalized linear mixed models: The MCMCglmm R package. Journal of Statistical Software, 33(2), 1–22. 
+
+3. Hansen, T. F., Pienaar, J., & Orzack, S. H. (2008). A comparative method for studying adaptation to a randomly evolving environment. Evolution, 62(8), 1965–1977. 
+
+4. Beaulieu, J. M., Jhwueng, D. C., Boettiger, C., & O’Meara, B. C. (2012). Modeling stabilizing selection: Expanding the Ornstein-Uhlenbeck model of adaptive evolution. Evolution, 66(8), 2369–2383. 
+
+5. Pennell, M. W., & Harmon, L. J. (2013). An integrative view of phylogenetic comparative methods: Connections to population genetics, community ecology, and paleobiology. Annals of the New York Academy of Sciences, 1289(1), 90–105.
+
+While your approach of extending scale and location models to phylogenetic comparative analysis is innovative, these related methods offer foundational concepts and techniques that might be valuable. They can provide insights into modeling variances, covariances, and evolutionary processes affecting both trait means and variances.
+
+Suggestions: • Integrate Concepts: Consider how elements from these methods can be integrated into your models, especially regarding variance modeling and phylogenetic covariance structures. • Software Implementation: Look into software packages like MCMCglmm in R, which can handle complex hierarchical models with phylogenetic relationships and might be suitable for your analysis. • Collaborate and Consult: Engaging with other researchers who have experience in these methods could provide practical insights and help refine your models.
