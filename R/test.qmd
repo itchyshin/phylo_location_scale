@@ -11,7 +11,7 @@ editor: visual
 You start by defining a location model for a trait y_i (e.g., body mass) across species i : 1. Location Model:
 
 $$
-y_i = \beta0^{(l)} + \sum_{k=1}^K \beta*k^{(l)} x*{ki} + a_i^{(l)} + e_i^{(l)}
+y_i = \beta0^{(l)} + \sum_{k=1}^K \beta_k^{(l)} x_{ki} + a_i^{(l)} + e_i^{(l)}
 $$
 
 • $y_i$ : Observed trait value for species i . • $\beta_0^{(l)}$ : Intercept for the location model. • $\beta_k^{(l)}$ : Fixed-effect coefficients for predictor variables $x_{ki}$ (e.g., species range). • $a_i^{(l)}$ : Phylogenetic random effect, accounting for shared evolutionary history. • $e_i^{(l)}$ : Residual error for the location model.
@@ -130,7 +130,7 @@ $$
 The variance of $\sigma_{e_i(l)}^2$ :
 
 $$
-\sigma*{*\sigma{e(l)}^2}^2 = \left( \exp\left(4 \sigma*{a(s)}^2\right) - 1 \right) \exp\left(4 \left( \beta_0^{(s)} + \sigma_{a(s)}^2 + \sigma{f(s)}^2 \right) \right)
+\sigma_{\sigma_{e(l)}^2}^2 = \left( \exp\left(4 \sigma*{a(s)}^2\right) - 1 \right) \exp\left(4 \left( \beta_0^{(s)} + \sigma_{a(s)}^2 + \sigma{f(s)}^2 \right) \right)
 $$
 
 • $\sigma_{f(s)}^2$ : Variance due to fixed effects in the scale model. 7. Evolvability in Scale:
