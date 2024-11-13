@@ -20,7 +20,7 @@ $$
 y_{i} = \beta_0^{(l)} + \beta_1^{(l)} x_{1i} + a_i^{(l)} + e_i^{(l)}
 $$
 
-$y$ - body mass $x$ - species range
+examples could be $y$ - body mass $x$ - species range
 
 $$
 \ln({\sigma_{e_i}}) = \beta_0^{(s)} + \beta_1^{(s)} x_{1i}
@@ -233,6 +233,11 @@ $$
 \sigma_{a(s2)}^{2}  \mathbf{A} &
 \end{pmatrix}     \right)
 $$
+$\rho_{a(l1l2)}$ - across-trait mean-mean coevolution (coevolution of traits)
+$\rho_{a(s1s2)}$ - across-trait variance-variance coevolution (common?)
+$\rho_{a(l1s1)}$ & $\rho_{a(l2s2)}$ - within-trait mean-variance coevolution (common?)
+$\rho_{a(l1s2)}$ & $\rho_{a(l2s1)}$ - across-trait mean-variance coevolution (rare?)
+
 
 $$
  \begin{pmatrix} 
@@ -308,30 +313,4 @@ $$
 \rho_{ls}\sigma_{el}\sigma_{es(\ln)} \mathbf{I} &
 \sigma_{es(\ln)}^{2}  \mathbf{I}
 \end{pmatrix}   
-$$
-
-## Bivaraite phylogentic location-scale model
-
-$$
-\begin{pmatrix} y_{i1} \\
-y_{i2}
-\end{pmatrix} =
-\begin{pmatrix} \beta_{01}^{(l)} \\
-\beta_{02}^{(l)}
-\end{pmatrix} +
-\begin{pmatrix} \beta_{11}^{(l)} & \beta_{12}^{(l)} \\
-\beta_{21}^{(l)} & \beta_{22}^{(l)}
-\end{pmatrix}
-$$
-
-$$
-\begin{pmatrix} \ln({\sigma_{e_{i1}}}) \\
-\ln({\sigma_{e_{i2}}})
-\end{pmatrix} =
-\begin{pmatrix} \beta_{01}^{(s)} \\
-\beta_{02}^{(s)}
-\end{pmatrix} +
-\begin{pmatrix} \beta_{11}^{(s)} & \beta_{12}^{(s)} \\
-\beta_{21}^{(s)} & \beta_{22}^{(s)}
-\end{pmatrix}
 $$
