@@ -239,20 +239,17 @@ $$
  e_i^{(l1)} \\ 
  e_i^{(l2)} 
  \end{pmatrix} 
- \sim \mathcal{N} \left( \mathbf{0}, \mathbf{\Sigma}_{e_{i}} \otimes \mathbf{I}  \right) 
-$$
-
-$$
-\mathbf{\Sigma}_{ei} \otimes \mathbf{I} = 
-\begin{pmatrix} \sigma_{ei(l1)}^{2} \mathbf{I} & 
+ \sim \mathcal{N} \left( 
+ \begin{pmatrix} 
+ \mathbf{0} \\
+ \mathbf{0} 
+  \end{pmatrix},
+ \begin{pmatrix} \sigma_{ei(l1)}^{2} \mathbf{I} & 
 \rho_{ls}\sigma_{el1}\sigma_{al2} \mathbf{I}\\ 
 \rho_{ls}\sigma_{el1}\sigma_{al2} \mathbf{I} &
 \sigma_{al2}^{2}  \mathbf{I}
-\end{pmatrix}   
+\end{pmatrix}    \right) 
 $$
-
-
-
 
 ## Mulitvariate phylogentic location-scale model
 
