@@ -13,11 +13,11 @@ It is best to introduce first the intercept modeland then do phylogenetic signal
 ## without a random effect in the scale part
 
 $$
-y_{i} = \beta_0^{(l)} + a_i + e_i
+y_{i} = \beta_0^{(l)} + a_i^{(l)} + e_i^{(l)}
 $$
 
 $$
-y_{i} = \beta_0^{(l)} + \beta_1^{(l)} x_{1i} + a_i + e_i
+y_{i} = \beta_0^{(l)} + \beta_1^{(l)} x_{1i} + a_i^{(l)} + e_i^{(l)}
 $$
 
 $y$ - body mass $x$ - species range
@@ -27,7 +27,7 @@ $$
 $$
 
 $$
-y_{i} = \beta_0^{(l)} + \sum_{k=1}^K\beta_k^{(l)} x_{ki} + a_i + e_i
+y_{i} = \beta_0^{(l)} + \sum_{k=1}^K\beta_k^{(l)} x_{ki} + a_i^{(l)} + e_i^{(l)}
 $$
 
 $$
@@ -35,11 +35,11 @@ $$
 $$
 
 $$
-a_i =\mathbf{a}   \sim \mathcal{N}(\mathbf{0}, \sigma_{a}^2\mathbf{A})
+a_i =\mathbf{a}   \sim \mathcal{N}(\mathbf{0}, \sigma_{a(l)}^2\mathbf{A})
 $$
 
 $$
-e_i = \mathbf{e} \sim \mathcal{N}(\mathbf{0}, \sigma_{e_i}^2\mathbf{I})
+e_i^{(l)} = \mathbf{e}^{(l)} \sim \mathcal{N}(\mathbf{0}, \sigma_{e_i(l)}^{2}\mathbf{I})
 $$
 
 ### Phylogenetic signal
@@ -47,31 +47,31 @@ $$
 this is adjusted
 
 $$
-H^2 = \frac{\sigma_{a}^2}{\sigma_{a}^2 + \bar{\sigma}_{e_i}^2}
+H^2 = H^2_{(l)} = \frac{\sigma_{a(l)}^2}{\sigma_{a(l)}^2 + \bar{\sigma}_{e_i(l)}^2}
 $$
 
 full version
 
 $$
-H^2 = \frac{\sigma_{a}^2}{\sigma_{p}^2}
+H^2 = \frac{\sigma_{a(l)}^2}{\sigma_{p}^2}
 $$
 
 $$
-\sigma_{p}^2 = \sigma_{al}^2 + \sigma_{f}^2 + \bar{\sigma}_{e_i}^2
+\sigma_{p}^2 = \sigma_{a(l)}^2 + \sigma_{f(l)}^2 + \bar{\sigma}_{e_i(l)}^2
 $$
 
 $$
-\sigma_{f}^2 = Var(\beta_1^{(l)} x_{1i})
+\sigma_{f(l)}^2 = Var(\beta_1^{(l)} x_{1i})
 $$
 
 $$
-\sigma_{f}^2 = Var\left(\sum_{k=1}^K\beta_k^{(l)} x_{ki}\right)
+\sigma_{f(l)}^2 = Var\left(\sum_{k=1}^K\beta_k^{(l)} x_{ki}\right)
 $$
 
 ### Evolvability
 
 $$
-CV_{A} = \frac{\sigma_{a}}{E(y_i)}
+CV_{A} = \frac{\sigma_{a(l)}}{E(y_i)}
 $$
 
 $$
@@ -81,15 +81,15 @@ $$
 ## with a random effect in the scale part
 
 $$
-y_{i} = \beta_0^{(l)} + \beta_1^{(l)} x_{1i} + a_i^{(l)} + e_i
+y_{i} = \beta_0^{(l)} + \beta_1^{(l)} x_{1i} + a_i^{(l)} + e_i^{(l)}
 $$
 
 $$
-\ln({\sigma_{e_i}}) = \beta_0^{(s)} + \beta_1^{(s)} x_{1i} + a_i^{(s)}
+\ln(\sigma_{e_i(l)}) = \beta_0^{(s)} + \beta_1^{(s)} x_{1i} + a_i^{(s)}
 $$
 
 $$
-e_i = \mathbf{e} \sim \mathcal{N}(\mathbf{0}, \sigma_{e_i}^2\mathbf{I})
+e_{i}^{(l)} = \mathbf{e}^{(l)} \sim \mathcal{N}(\mathbf{0}, \sigma_{e_i(l)}^2\mathbf{I})
 $$
 
 $$
@@ -101,114 +101,203 @@ $$
 
 $$
 \mathbf{\Sigma}_{a} \otimes \mathbf{A} = 
-\begin{pmatrix} \sigma_{al}^{2} \mathbf{A} & 
+\begin{pmatrix} \sigma_{a(l)}^{2} \mathbf{A} & 
 \rho_{ls}\sigma_{al}\sigma_{as(\ln)} \mathbf{A}\\ 
 \rho_{ls}\sigma_{al}\sigma_{as(\ln)} \mathbf{A} &
 \sigma_{as(\ln)}^{2}  \mathbf{A}
 \end{pmatrix}   
-$$
+$$ 
 
 ### Phylogenetic signal
 
 $$
-H^2_{l} = \frac{\sigma_{a}^2}{\sigma_{a}^2 + \bar{\sigma}_{e_i}^2}
+H^2_{(l)} = \frac{\sigma_{a(l)}^2}{\sigma_{a(l)}^2 + \bar{\sigma}_{e_i(l)}^2}
 $$
 
 $$
-\bar{\sigma}_{e_i}^2 = \exp \left(2 \beta_0^{(s)}  + 2\sigma_{as(ln)}^2 \right) 
+\bar{\sigma}_{e_i(l)}^2 = \exp \left(2 \beta_0^{(s)}  + 2\sigma_{a(s)}^2 \right) 
 $$
 
 $$
-H^2_{l} = \frac{\sigma_{al}^2}{\sigma_{p}^2}
+H^2_{l} = \frac{\sigma_{a(l)}^2}{\sigma_{p}^2}
 $$
 
 $$
-\sigma_{as}^2 = \sigma_{\sigma_e^2}^2 \left(\frac{\sigma_{as(\ln)}^2}
-{\sigma_{as(\ln)}^2 + \sigma_{fs(\ln)}^2}
+\sigma_{a(s)}^2 = \sigma_{\sigma_{e(l)}^2}^2 \left(\frac{\sigma_{a(s)}^2}
+{\sigma_{a(s)}^2 + \sigma_{f(s)}^2}
 \right)
 $$
 
 $$
-\sigma_{fs(\ln)}^2 = Var(\beta_1^{(s)} x_i)
+\sigma_{f(s)}^2 = Var(\beta_1^{(s)} x_i)
 $$
 
 $$
-\sigma_{fs(\ln)}^2 = Var\left(\sum_{k=1}^K\beta_k^{(s)} x_{ki}\right)
+\sigma_{f(s)}^2 = Var\left(\sum_{k=1}^K\beta_k^{(s)} x_{ki}\right)
 $$
 
 $$
-\sigma_{\sigma_e^2}^2 = \left(\exp{\left(4\sigma_{as(\ln)}^2\right) - 1} \right) 
-\exp{\left(4\left( \beta_0^{(s)} + \sigma_{as(\ln)}^2 + {\sigma_{fs(\ln)}^2}\right)
+\sigma_{\sigma_{e(l)}^2}^2 = \left(\exp{\left(4\sigma_{a(s)}^2\right) - 1} \right) 
+\exp{\left(4\left( \beta_0^{(s)} + \sigma_{a(s)}^2 + {\sigma_{f(s)}^2}\right)
 \right)}
 $$
 
 $$
-H^2_{s} = \frac{\sigma_{as}^2}{\sigma^2_{\sigma_{p}^2}}
+H^2_{s} = \frac{\sigma_{a(s)}^2}{\sigma^2_{\sigma_{p}^2}}
 $$
 
 $$
-\sigma^2_{\sigma_{p}^2} = 2\sigma_{p}^4 + 3\sigma_{\sigma_e^2}^2
+\sigma^2_{\sigma_{p}^2} = 2\sigma_{p}^4 + 3\sigma_{\sigma_{e(l)}^2}^2
 $$
 
 $$
-\sigma_{p}^2 = \sigma_{al}^2 + \sigma_{fl}^2 + \bar{\sigma}_{e_i}^2
+\sigma_{p}^2 = \sigma_{a(l)}^{2} + \sigma_{f(l)}^2 + \bar{\sigma}_{e_i(l)}^2
 $$
 
 $$
-\sigma_{fl}^2 = Var(\beta_1^{(l)} x_{1i})
+\sigma_{f(l)}^2 = Var(\beta_1^{(l)} x_{1i})
 $$
 
 $$
-\sigma_{fl}^2 = Var\left(\sum_{k=1}^K\beta_k^{(l)} x_{ki}\right)
+\sigma_{f(l)}^2 = Var\left(\sum_{k=1}^K\beta_k^{(l)} x_{ki}\right)
 $$
 
 ### Evolvability
 
 $$
-CV_{Al} = \frac{\sigma_{al}}{E(y_i)}
+CV_{Al} = \frac{\sigma_{a(l)}}{E(y_i)}
 $$
 
 $$
-CV_{As} = \frac{\sigma_{as}}{E(\sigma_{e_i}^2)}
+CV_{A}^{(s)} = \frac{\sigma_{a(s)}}{E(\sigma_{e_i(l)}^2)}
 $$
 
 alternative experession but this does not account for variance in the fixed effects
 
 $$
-CV_{As}^* = \sqrt{\exp(\sigma_{as(\ln)}^2) - 1}
+CV_{A}^{(s)} = \sqrt{\exp(\sigma_{a(s)}^2) - 1}
 $$
 
 # Extension
 
 $$
-y_{ij} = \beta_0^{(l)} + \sum_{k=1}^K\beta_k^{(l)} x_{kij}  + a_i^{(l)} 
-+ e_i^{(l)} + \varepsilon_{ij}
+\mathbf{y_{i}} = 
+\begin{pmatrix} 
+y_{i}^{(1)} = \beta_0^{(l1)} + \sum_{k=1}^K\beta_k^{(l1)} x_{ki} + a_i^{(l1)} + e_i^{(l1)}\\
+y_{i}^{(2)} = \beta_0^{(l2)} + \sum_{k=1}^K\beta_k^{(l2)} x_{ki} + a_i^{(l2)} + e_i^{(l2)}
+\end{pmatrix},
+$$
+$$
+\mathbf{s_{i}} = 
+\begin{pmatrix} 
+\ln(\sigma_{e_{i(l1)}}) = \beta_0^{(s1)} + \sum_{k=1}^K\beta_k^{(s1)} x_{ki} + a_i^{(s1)} \\
+\ln(\sigma_{e_{i(l2)}}) = \beta_0^{(s2)} + \sum_{k=1}^K\beta_k^{(s2)} x_{ki} + a_i^{(s2)}
+\end{pmatrix},
+$$
+
+
+$$
+ \begin{pmatrix} 
+ a_i^{(l1)} \\ 
+ a_i^{(l2)} \\ 
+ a_i^{(s1)} \\ 
+ a_i^{(s2)} 
+ \end{pmatrix} 
+ \sim \mathcal{N} \left( 
+\begin{pmatrix} 
+ \mathbf{0} \\
+ \mathbf{0} \\
+ \mathbf{0} \\
+ \mathbf{0} 
+  \end{pmatrix},
+  
+\begin{pmatrix} 
+\sigma_{a(l1)}^{2} \mathbf{A} & 
+\rho_{a(l1l2)}\sigma_{a(l1)}\sigma_{a(l2)} \mathbf{A} &
+\rho_{a(l1s1)}\sigma_{a(l1)}\sigma_{a(s1)} \mathbf{A} &
+\rho_{a(l1s2)}\sigma_{a(l1)}\sigma_{a(s2)} \mathbf{A}
+\\ 
+\rho_{a(l1l2)}\sigma_{a(l1)}\sigma_{a(l2)} \mathbf{A} &
+\sigma_{a(l2))}^{2}  \mathbf{A} &
+\rho_{a(l2s1)}\sigma_{a(l2)}\sigma_{a(s1)} \mathbf{A} &
+\rho_{a(l2s2)}\sigma_{a(l2)}\sigma_{a(s2)} \mathbf{A} 
+\\
+\rho_{a(l1s1)}\sigma_{a(l1)}\sigma_{a(s1)} \mathbf{A} &
+\rho_{a(l2s1)}\sigma_{a(l2)}\sigma_{as(s1)} \mathbf{A} &
+\sigma_{a(s1))}^{2}  \mathbf{A} &
+\rho_{a(s1s2)}\sigma_{a(s1)}\sigma_{a(s2)} \mathbf{A} 
+\\
+\rho_{a(l1s2)}\sigma_{a(l1)}\sigma_{a(s2)} \mathbf{A} &
+\rho_{a(l2s1)}\sigma_{a(l2)}\sigma_{a(s1)} \mathbf{A}  &
+\rho_{a(s1s2)}\sigma_{a(s1)}\sigma_{a(s2)} \mathbf{A}  &
+\sigma_{a(s2)}^{2}  \mathbf{A} &
+\end{pmatrix}     \right)
 $$
 
 $$
-\ln({\sigma_{\varepsilon_{ij}}}) = \beta_0^{(s)} + \sum_{k=1}^K\beta_k^{(s)} x_{kij}  + a_i^{(s)}
+ \begin{pmatrix} 
+ e_i^{(l1)} \\ 
+ e_i^{(l2)} 
+ \end{pmatrix} 
+ \sim \mathcal{N} \left( \mathbf{0}, \mathbf{\Sigma}_{e_{i}} \otimes \mathbf{I}  \right) 
+$$
+
+$$
+\mathbf{\Sigma}_{ei} \otimes \mathbf{I} = 
+\begin{pmatrix} \sigma_{ei(l1)}^{2} \mathbf{I} & 
+\rho_{ls}\sigma_{el1}\sigma_{al2} \mathbf{I}\\ 
+\rho_{ls}\sigma_{el1}\sigma_{al2} \mathbf{I} &
+\sigma_{al2}^{2}  \mathbf{I}
+\end{pmatrix}   
+$$
+
+
+
+
+## Mulitvariate phylogentic location-scale model
+
+$$
+\mathbf{y}_{i} = \mathbf{X}_{i}\mathbf{\beta}^{(l)} + \mathbf{a}_{i}^{(l)} + \mathbf{e}_{i}^{(l)}
+$$
+$$
+\ln({\sigma_{\mathbf{e}_{i(l)}}}) = \mathbf{X}_{i}\mathbf{\beta}^{(s)} + \mathbf{a}_{i}^{(s)}
+$$
+
+
+## Phylogentic location-scale model with within-species effects
+
+$$
+y_{ij} = \beta_0^{(l)} + \sum_{k=1}^K\beta_k^{(l)} x_{kij}  + a_i^{(l)} 
++ e_i^{(l)} + \varepsilon_{ij}^{(l)}
+$$
+
+$$
+\ln({\sigma_{\varepsilon_{ij(l)}}}) = \beta_0^{(s)} + \sum_{k=1}^K\beta_k^{(s)} x_{kij}  + a_i^{(s)}
 + e_i^{(s)}
 $$
 
 $$
-\varepsilon_{ij} = \mathbf{\varepsilon} \sim \mathcal{N}(\mathbf{0}, \sigma_{\varepsilon_{ij}}^2\mathbf{I})
+\varepsilon_{ij}^{(l)}  = \mathbf{\varepsilon}^{(l)}  \sim \mathcal{N}(\mathbf{0}, \sigma_{\varepsilon_{ij(l)}}^2\mathbf{I})
 $$
 
 $$
  \begin{pmatrix} a_i^{(l)} \\ 
  a_i^{(s)} 
  \end{pmatrix} 
- \sim \mathcal{N} \left( \mathbf{0}, \mathbf{\Sigma}_{a} \otimes \mathbf{A}  \right) 
+ \sim \mathcal{N} \left( \mathbf{0}, \mathbf{\Sigma}_{a(ls)} \otimes \mathbf{A}  \right) 
 $$
 
 $$
 \mathbf{\Sigma}_{a} \otimes \mathbf{A} = 
-\begin{pmatrix} \sigma_{al}^{2} \mathbf{A} & 
+\begin{pmatrix} \sigma_{a(l)}^{2} \mathbf{A} & 
 \rho_{ls}\sigma_{al}\sigma_{as(\ln)} \mathbf{A}\\ 
 \rho_{ls}\sigma_{al}\sigma_{as(\ln)} \mathbf{A} &
 \sigma_{as(\ln)}^{2}  \mathbf{A}
 \end{pmatrix}   
-$$ $$
+$$ 
+
+
+$$
  \begin{pmatrix} e_i^{(l)} \\ 
  e_i^{(s)} 
  \end{pmatrix} 
@@ -217,9 +306,35 @@ $$
 
 $$
 \mathbf{\Sigma}_{e} \otimes \mathbf{I} = 
-\begin{pmatrix} \sigma_{el}^{2} \mathbf{A} & 
+\begin{pmatrix} \sigma_{el}^{2} \mathbf{I} & 
 \rho_{ls}\sigma_{el}\sigma_{es(\ln)} \mathbf{I}\\ 
 \rho_{ls}\sigma_{el}\sigma_{es(\ln)} \mathbf{I} &
 \sigma_{es(\ln)}^{2}  \mathbf{I}
 \end{pmatrix}   
+$$
+
+## Bivaraite phylogentic location-scale model
+
+$$
+\begin{pmatrix} y_{i1} \\
+y_{i2}
+\end{pmatrix} =
+\begin{pmatrix} \beta_{01}^{(l)} \\
+\beta_{02}^{(l)}
+\end{pmatrix} +
+\begin{pmatrix} \beta_{11}^{(l)} & \beta_{12}^{(l)} \\
+\beta_{21}^{(l)} & \beta_{22}^{(l)}
+\end{pmatrix}
+$$
+
+$$
+\begin{pmatrix} \ln({\sigma_{e_{i1}}}) \\
+\ln({\sigma_{e_{i2}}})
+\end{pmatrix} =
+\begin{pmatrix} \beta_{01}^{(s)} \\
+\beta_{02}^{(s)}
+\end{pmatrix} +
+\begin{pmatrix} \beta_{11}^{(s)} & \beta_{12}^{(s)} \\
+\beta_{21}^{(s)} & \beta_{22}^{(s)}
+\end{pmatrix}
 $$
