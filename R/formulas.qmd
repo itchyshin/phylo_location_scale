@@ -244,10 +244,10 @@ $$
  \mathbf{0} \\
  \mathbf{0} 
   \end{pmatrix},
- \begin{pmatrix} \sigma_{ei(l1)}^{2} \mathbf{I} & 
-\rho_{ls}\sigma_{el1}\sigma_{al2} \mathbf{I}\\ 
-\rho_{ls}\sigma_{el1}\sigma_{al2} \mathbf{I} &
-\sigma_{al2}^{2}  \mathbf{I}
+ \begin{pmatrix} \sigma_{e_{i}(l1)}^{2} \mathbf{I} & 
+\rho_{e(l1l2)}\sigma_{e_{i}(l1)}\sigma_{e_{i}(l2)} \mathbf{I}\\ 
+\rho_{e(l1l2)}\sigma_{e_{i}(l1)}\sigma_{e_{i}(l2)} \mathbf{I}&
+\sigma_{e_{i}(l2)}^{2}  \mathbf{I}
 \end{pmatrix}    \right) 
 $$
 
