@@ -8,7 +8,9 @@ editor: visual
 
 ## Without a Random Effect in the Scale Part
 
-You start by defining a location model for a trait y_i (e.g., body mass) across species i : 1. Location Model:
+You start by defining a location model for a trait $y_i$ (e.g., body mass) across species i : 
+
+1. Location Model:
 
 $$
 y_i = \beta0^{(l)} + \sum_{k=1}^K \beta_k^{(l)} x_{ki} + a_i^{(l)} + e_i^{(l)}
@@ -116,13 +118,13 @@ $$
 • $\rho_{ls}$ : Correlation between the location and scale phylogenetic effects. 5. Adjusted Phylogenetic Signal:
 
 $$
-H^2\_{(l)} = \frac{\sigma_{a(l)}^2}{\sigma_{a(l)}^2 + \bar{\sigma}_{e_i(l)}^2}
+H^2_{(l)} = \frac{\sigma_{a(l)}^2}{\sigma_{a(l)}^2 + \bar{\sigma}_{e_i(l)}^2}
 $$
 
 where:
 
 $$
-\bar{\sigma}{e_i(l)}^2 = \exp\left(2 \beta_0^{(s)} + 2 \sigma_{a(s)}^2\right)
+\bar{\sigma}_{e_i(l)}^2 = \exp\left(2 \beta_0^{(s)} + 2 \sigma_{a(s)}^2\right)
 $$
 
 6.  Variance Components in Scale Model:
@@ -135,11 +137,11 @@ $$
 
 • $\sigma_{f(s)}^2$ : Variance due to fixed effects in the scale model. 7. Evolvability in Scale:
 
-$\text{CV}A^{(s)} = \frac{\sigma{a(s)}}{E(\sigma_{e_i(l)}^2)}$
+$\text{CV}_A^{(s)} = \frac{\sigma{a(s)}}{E(\sigma_{e_i(l)}^2)}$
 
 Alternatively, if variance in fixed effects is not accounted for:
 
-$\text{CV}A^{(s)} = \sqrt{\exp\left(\sigma{a(s)}^2\right) - 1}$
+$\text{CV}_A^{(s)} = \sqrt{\exp\left(\sigma{a(s)}^2\right) - 1}$
 
 ## Extension to Multivariate Models
 

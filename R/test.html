@@ -95,9 +95,12 @@ window.Quarto = {
 <h1>Phylogenetic Location-Scale Model</h1>
 <section id="without-a-random-effect-in-the-scale-part" class="level2">
 <h2 class="anchored" data-anchor-id="without-a-random-effect-in-the-scale-part">Without a Random Effect in the Scale Part</h2>
-<p>You start by defining a location model for a trait y_i (e.g., body mass) across species i : 1. Location Model:</p>
+<p>You start by defining a location model for a trait <span class="math inline">\(y_i\)</span> (e.g., body mass) across species i :</p>
+<ol type="1">
+<li>Location Model:</li>
+</ol>
 <p><span class="math display">\[
-y_i = \beta0^{(l)} + \sum_{k=1}^K \beta*k^{(l)} x*{ki} + a_i^{(l)} + e_i^{(l)}
+y_i = \beta0^{(l)} + \sum_{k=1}^K \beta_k^{(l)} x_{ki} + a_i^{(l)} + e_i^{(l)}
 \]</span></p>
 <p>• <span class="math inline">\(y_i\)</span> : Observed trait value for species i . • <span class="math inline">\(\beta_0^{(l)}\)</span> : Intercept for the location model. • <span class="math inline">\(\beta_k^{(l)}\)</span> : Fixed-effect coefficients for predictor variables <span class="math inline">\(x_{ki}\)</span> (e.g., species range). • <span class="math inline">\(a_i^{(l)}\)</span> : Phylogenetic random effect, accounting for shared evolutionary history. • <span class="math inline">\(e_i^{(l)}\)</span> : Residual error for the location model.</p>
 <ol start="2" type="1">
@@ -174,23 +177,23 @@ a_i^{(s)}
 \]</span></p>
 <p>• <span class="math inline">\(\rho_{ls}\)</span> : Correlation between the location and scale phylogenetic effects. 5. Adjusted Phylogenetic Signal:</p>
 <p><span class="math display">\[
-H^2\_{(l)} = \frac{\sigma_{a(l)}^2}{\sigma_{a(l)}^2 + \bar{\sigma}_{e_i(l)}^2}
+H^2_{(l)} = \frac{\sigma_{a(l)}^2}{\sigma_{a(l)}^2 + \bar{\sigma}_{e_i(l)}^2}
 \]</span></p>
 <p>where:</p>
 <p><span class="math display">\[
-\bar{\sigma}{e_i(l)}^2 = \exp\left(2 \beta_0^{(s)} + 2 \sigma_{a(s)}^2\right)
+\bar{\sigma}_{e_i(l)}^2 = \exp\left(2 \beta_0^{(s)} + 2 \sigma_{a(s)}^2\right)
 \]</span></p>
 <ol start="6" type="1">
 <li>Variance Components in Scale Model:</li>
 </ol>
 <p>The variance of <span class="math inline">\(\sigma_{e_i(l)}^2\)</span> :</p>
 <p><span class="math display">\[
-\sigma*{*\sigma{e(l)}^2}^2 = \left( \exp\left(4 \sigma*{a(s)}^2\right) - 1 \right) \exp\left(4 \left( \beta_0^{(s)} + \sigma_{a(s)}^2 + \sigma{f(s)}^2 \right) \right)
+\sigma_{\sigma_{e(l)}^2}^2 = \left( \exp\left(4 \sigma*{a(s)}^2\right) - 1 \right) \exp\left(4 \left( \beta_0^{(s)} + \sigma_{a(s)}^2 + \sigma{f(s)}^2 \right) \right)
 \]</span></p>
 <p>• <span class="math inline">\(\sigma_{f(s)}^2\)</span> : Variance due to fixed effects in the scale model. 7. Evolvability in Scale:</p>
-<p><span class="math inline">\(\text{CV}A^{(s)} = \frac{\sigma{a(s)}}{E(\sigma_{e_i(l)}^2)}\)</span></p>
+<p><span class="math inline">\(\text{CV}_A^{(s)} = \frac{\sigma{a(s)}}{E(\sigma_{e_i(l)}^2)}\)</span></p>
 <p>Alternatively, if variance in fixed effects is not accounted for:</p>
-<p><span class="math inline">\(\text{CV}A^{(s)} = \sqrt{\exp\left(\sigma{a(s)}^2\right) - 1}\)</span></p>
+<p><span class="math inline">\(\text{CV}_A^{(s)} = \sqrt{\exp\left(\sigma{a(s)}^2\right) - 1}\)</span></p>
 </section>
 <section id="extension-to-multivariate-models" class="level2">
 <h2 class="anchored" data-anchor-id="extension-to-multivariate-models">Extension to Multivariate Models</h2>
