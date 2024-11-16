@@ -5,7 +5,7 @@
 #library(pacman)
 
 #remotes::install_github("stan-dev/cmdstanr")
-install_cmdstan(cores = 18)
+#install_cmdstan(cores = 18)
 
 pacman::p_load(tidyverse, 
        ggplot2,
@@ -65,11 +65,11 @@ fit1 <- brm(formula1,
             data2 = list(A = A),
             chains = 2, 
             cores = 2, 
-            iter = 3000, 
-            warmup = 2000,
+            iter = 5000, 
+            warmup = 3000,
             prior = prior1,
-            backend = "cmdstanr",
-            threads = threading(9),
+            #backend = "cmdstanr",
+            #threads = threading(9),
             control = list(adapt_delta = 0.95, max_treedepth = 15)
             )
 
@@ -85,7 +85,7 @@ formula2 <- bf(cbeak_length ~1 + (1|p|gr(Phylo, cov = A)),
 )
 
 
-# creat prior
+# create prior
 
 prior2 <- default_prior(formula2, 
                         data = dat, 
@@ -102,7 +102,7 @@ fit2 <- brm(formula2,
             cores = 2, 
             iter = 3000, 
             warmup = 2000,
-            backend = "cmdstanr",
+            #backend = "cmdstanr",
             prior = prior2,
             threads = threading(9),
             control = list(adapt_delta = 0.95, max_treedepth = 15)
@@ -116,6 +116,13 @@ formula2b <- bf(cbeak_width ~1 + (1|p|gr(Phylo, cov = A)),
                sigma ~ 1 + (1|p|gr(Phylo, cov = A))
 )
 
+prior2b <- default_prior(formula2b, 
+                        data = dat, 
+                        data2 = list(A = A),
+                        family = gaussian()
+)
+
+
 fit2b <- brm(formula2b, 
             data = dat, 
             data2 = list(A = A),
@@ -123,8 +130,8 @@ fit2b <- brm(formula2b,
             cores = 2, 
             iter = 3000, 
             warmup = 2000,
-            backend = "cmdstanr",
-            prior = prior2,
+            #backend = "cmdstanr",
+            prior = prior2b,
             threads = threading(9),
             control = list(adapt_delta = 0.95, max_treedepth = 15)
 )
@@ -137,6 +144,13 @@ formula2c <- bf(cbeak_depth ~1 + (1|p|gr(Phylo, cov = A)),
                sigma ~ 1 + (1|p|gr(Phylo, cov = A))
 )
 
+prior2c <- default_prior(formula2c, 
+                        data = dat, 
+                        data2 = list(A = A),
+                        family = gaussian()
+)
+
+
 fit2c <- brm(formula2c, 
             data = dat, 
             data2 = list(A = A),
@@ -144,7 +158,7 @@ fit2c <- brm(formula2c,
             cores = 2, 
             iter = 3000, 
             warmup = 2000,
-            backend = "cmdstanr",
+            #backend = "cmdstanr",
             prior = prior2,
             threads = threading(9),
             control = list(adapt_delta = 0.95, max_treedepth = 15)
@@ -182,8 +196,8 @@ fit3 <- brm(formula3,
             data2 = list(A = A),
             chains = 2, 
             cores = 2, 
-            iter = 3000, 
-            warmup = 2000,
+            iter = 5000, 
+            warmup = 3000,
             prior = prior3,
             backend = "cmdstanr",
             threads = threading(9),
