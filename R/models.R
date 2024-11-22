@@ -363,6 +363,36 @@ fit2f <- brm(formula2f,
 
 summary(fit2f)
 
+# controlling body size
+
+formula2f_al <- bf(ctail_length ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
+                   sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
+)
+
+prior2f_al <- default_prior(formula2f_al, 
+                            data = dat, 
+                            data2 = list(A = A),
+                            family = gaussian()
+)
+
+fit2f_al <- brm(formula2f_al, 
+                data = dat, 
+                data2 = list(A = A),
+                chains = 2, 
+                cores = 2, 
+                iter = 3000, 
+                warmup = 2000,
+                #backend = "cmdstanr",
+                prior = prior2f_al,
+                threads = threading(9),
+                control = list(adapt_delta = 0.95, max_treedepth = 15)
+)
+
+summary(fit2f_al)
+
+
+
+
 # tarsus length
 
 formula2g <- bf(tarsus_length ~1 + (1|p|gr(Phylo, cov = A)), 
@@ -389,6 +419,34 @@ fit2g <- brm(formula2g,
 )
 
 summary(fit2g)
+
+
+# controlling for body mass
+
+formula2g_al <- bf(tarsus_length ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
+               sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
+)
+
+prior2g_al <- default_prior(formula2g_al, 
+                        data = dat, 
+                        data2 = list(A = A),
+                        family = gaussian()
+)
+
+fit2g_al <- brm(formula2g_al, 
+            data = dat, 
+            data2 = list(A = A),
+            chains = 2, 
+            cores = 2, 
+            iter = 3000, 
+            warmup = 2000,
+            #backend = "cmdstanr",
+            prior = prior2g_al,
+            threads = threading(9),
+            control = list(adapt_delta = 0.95, max_treedepth = 15)
+)
+
+summary(fit2g_al)
 
 # range size
 
@@ -418,6 +476,32 @@ fit2h <- brm(formula2h,
 summary(fit2h)
 
 
+# controlling for body mass
+
+formula2h_al <- bf(crange_size ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
+               sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
+)
+
+prior2h_al <- default_prior(formula2h_al, 
+                        data = dat, 
+                        data2 = list(A = A),
+                        family = gaussian()
+)
+
+fit2h_al <- brm(formula2h_al, 
+            data = dat, 
+            data2 = list(A = A),
+            chains = 2, 
+            cores = 2, 
+            iter = 3000, 
+            warmup = 2000,
+            #backend = "cmdstanr",
+            prior = prior2h_al,
+            threads = threading(9),
+            control = list(adapt_delta = 0.95, max_treedepth = 15)
+)
+
+summary(fit2h_al)
 
 
 ########################
