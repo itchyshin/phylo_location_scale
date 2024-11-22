@@ -83,8 +83,8 @@ summary(fit1)
 
 # putting body mass into the model
 
-formula1b <- bf(cbeak_length ~1 + cmass (1|gr(Phylo, cov = A)), 
-                sigma ~ 1)
+formula1b <- bf(cbeak_length ~1 + cmass + (1|gr(Phylo, cov = A)), 
+                sigma ~ 1 + cmass)
 
 prior1b <- default_prior(formula1b, 
                         data = dat, 
@@ -104,6 +104,8 @@ fit1b <- brm(formula1b,
             #threads = threading(9),
             control = list(adapt_delta = 0.95, max_treedepth = 15)
 )
+
+summary(fit1b)
 
 ########################
 # location-scale model 2 using brms with phylogenetic correlation
@@ -140,6 +142,35 @@ fit2 <- brm(formula2,
 
 summary(fit2)
 
+# controlling body size
+
+formula2_al <- bf(cbeak_length ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
+               sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
+)
+
+prior2_al <- default_prior(formula2_al, 
+                        data = dat, 
+                        data2 = list(A = A),
+                        family = gaussian()
+)
+
+fit2_al <- brm(formula2_al, 
+            data = dat, 
+            data2 = list(A = A),
+            chains = 2, 
+            cores = 2, 
+            iter = 3000, 
+            warmup = 2000,
+            #backend = "cmdstanr",
+            prior = prior2_al,
+            threads = threading(9),
+            control = list(adapt_delta = 0.95, max_treedepth = 15)
+)
+
+summary(fit2_al)
+
+
+
 # width
 
 formula2b <- bf(cbeak_width ~1 + (1|p|gr(Phylo, cov = A)), 
@@ -167,6 +198,33 @@ fit2b <- brm(formula2b,
 )
 
 summary(fit2b)
+
+# controlling body size
+
+formula2b_al <- bf(cbeak_width ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
+               sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
+)
+
+prior2b_al <- default_prior(formula2b_al, 
+                        data = dat, 
+                        data2 = list(A = A),
+                        family = gaussian()
+)
+
+fit2b_al <- brm(formula2b_al, 
+            data = dat, 
+            data2 = list(A = A),
+            chains = 2, 
+            cores = 2, 
+            iter = 3000, 
+            warmup = 2000,
+            #backend = "cmdstanr",
+            prior = prior2b_al,
+            threads = threading(9),
+            control = list(adapt_delta = 0.95, max_treedepth = 15)
+)
+
+summary(fit2b_al)
 
 # depth
 
@@ -249,6 +307,34 @@ fit2e <- brm(formula2e,
 )
 
 summary(fit2e)
+
+# controlling body size
+
+formula2e_al <- bf(cwing_length ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
+               sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
+)
+
+prior2e_al <- default_prior(formula2e_al, 
+                        data = dat, 
+                        data2 = list(A = A),
+                        family = gaussian()
+)
+
+fit2e_al <- brm(formula2e_al, 
+            data = dat, 
+            data2 = list(A = A),
+            chains = 2, 
+            cores = 2, 
+            iter = 3000, 
+            warmup = 2000,
+            #backend = "cmdstanr",
+            prior = prior2e_al,
+            threads = threading(9),
+            control = list(adapt_delta = 0.95, max_treedepth = 15)
+)
+
+summary(fit2e_al)
+
 
 # tail length
 
@@ -338,15 +424,15 @@ summary(fit2h)
 # location-scale model 2 using brms with phylogenetic correlation
 ########################
 
-formula3A <- bf(cbeak_length ~1 + (1|p|gr(Phylo, cov = A)), 
-               sigma ~ 1 + (1|p|gr(Phylo, cov = A))
+formula3A <- bf(cbeak_length ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
+               sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
 )
 
-formula3B <- bf(cbeak_depth ~1 + (1|p|gr(Phylo, cov = A)), 
-                sigma ~ 1 + (1|p|gr(Phylo, cov = A))
+formula3B <- bf(cbeak_depth ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
+                sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
 )
 
-formula3 <- formula3A + formula3B + set_rescor(TRUE) #do we need to do correlction??
+formula3 <- formula3A + formula3B + set_rescor(TRUE) #do we need to do correction??
 
 # creat prior
 
