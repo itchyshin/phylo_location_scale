@@ -59,7 +59,7 @@ from1 <- bf(cbrain ~1 + devo_mode + cweight + (1|a|gr(tip_label, cov = A)),
 )
 
 
-# creat prior
+# create prior
 
 prior1 <- default_prior(from1, 
                         data = dat_full, 

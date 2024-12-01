@@ -545,21 +545,17 @@ summary(fit3)
 
 # saving
 
-saveRDS(fit3, here("Rdata", "fit3.rds"))
-
-# reading this file again
-
-fit3 <- readRDS(here("Rdata", "fit3.rds"))
+saveRDS(fit1, here("Rdata", "fit3.rds"))
 
 
 # fit 4
 
-formula4A <- bf(cbeak_width ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
-                sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
+formula4A <- bf(cbeak_width ~1 + (1|p|gr(Phylo, cov = A)), 
+                sigma ~ 1 + (1|p|gr(Phylo, cov = A))
 )
 
-formula4B <- bf(cbeak_depth ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
-                sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
+formula4B <- bf(cbeak_depth ~1 + (1|p|gr(Phylo, cov = A)), 
+                sigma ~ 1 + (1|p|gr(Phylo, cov = A))
 )
 
 formula4 <- formula4A + formula4B + set_rescor(TRUE) #do we need to do correlction??
@@ -591,97 +587,8 @@ summary(fit4)
 
 # save models rds
 
-saveRDS(fit4, here("Rdata", "fit4.rds"))
+saveRDS(fit1, here("Rdata", "fit4.rds"))
 
 
-# fit 5
 
-formula5A <- bf(cwing_length ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
-                sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
-)
-
-formula5B <- bf(crange_size ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
-                sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
-)
-
-formula5 <- formula5A + formula5B + set_rescor(TRUE) #do we need to do correaltion?
-
-# create prior
-
-prior5 <- default_prior(formula5, 
-                        data = dat, 
-                        data2 = list(A = A),
-                        family = gaussian()
-)
-
-# fit model
-
-fit5 <- brm(formula5, 
-            data = dat, 
-            data2 = list(A = A),
-            chains = 2, 
-            cores = 2, 
-            iter = 5000, 
-            warmup = 3000,
-            prior = prior5,
-            #backend = "cmdstanr",
-            #threads = threading(9),
-            control = list(adapt_delta = 0.95, max_treedepth = 15)
-)
-
-summary(fit5)
-
-# save models rds
-
-saveRDS(fit5, here("Rdata", "fit5.rds"))
-
-
-# fit 6 
-
-
-formula6A <- bf(cbeak_width ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
-                sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
-)
-
-formula6B <- bf(cbeak_depth ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
-                sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
-)
-
-formula6C <- bf(cbeak_length ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
-                sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
-)
-
-formula6 <- formula6A + formula6B + formula6C + set_rescor(TRUE) #do we need to do correlction??
-
-# creat prior
-
-prior6 <- default_prior(formula6, 
-                        data = dat, 
-                        data2 = list(A = A),
-                        family = gaussian()
-)
-
-# fit model
-
-fit6 <- brm(formula6, 
-            data = dat, 
-            data2 = list(A = A),
-            chains = 2, 
-            cores = 2, 
-            iter = 5000, 
-            warmup = 3000,
-            prior = prior6,
-            #backend = "cmdstanr",
-            #threads = threading(9),
-            control = list(adapt_delta = 0.99, max_treedepth = 15)
-)
-
-summary(fit6)
-
-# save models rds
-
-saveRDS(fit6, here("Rdata", "fit6.rds"))
-
-
-########
 
