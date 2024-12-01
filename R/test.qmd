@@ -8,9 +8,9 @@ editor: visual
 
 ## Without a Random Effect in the Scale Part
 
-You start by defining a location model for a trait $y_i$ (e.g., body mass) across species i : 
+You start by defining a location model for a trait $y_i$ (e.g., body mass) across species i :
 
-1. Location Model:
+1.  Location Model:
 
 $$
 y_i = \beta0^{(l)} + \sum_{k=1}^K \beta_k^{(l)} x_{ki} + a_i^{(l)} + e_i^{(l)}
@@ -218,10 +218,7 @@ $$
 y_{ij} = \beta_0^{(l)} + \sum_{k=1}^K \beta_k^{(l)} x_{kij} + a_i^{(l)} + e_i^{(l)} + \varepsilon_{ij}^{(l)}
 $$
 
-•    $y_{ij}$ : Observation  j  within species  i .
-•    $x_{kij}$ : Predictor variables at the individual level.
-•    $\varepsilon_{ij}^{(l)}$ : Individual-level residual error.
-2.  Scale Model:
+• $y_{ij}$ : Observation j within species i . • $x_{kij}$ : Predictor variables at the individual level. • $\varepsilon_{ij}^{(l)}$ : Individual-level residual error. 2. Scale Model:
 
 $$
 \ln(\sigma_{\varepsilon_{ij}(l)}) = \beta_0^{(s)} + \sum_{k=1}^K \beta_k^{(s)} x_{kij} + a_i^{(s)} + e_i^{(s)}
@@ -233,7 +230,7 @@ a_i^{(l)} \\
 a_i^{(s)}
 \end{pmatrix}
 \sim \mathcal{N}\left(0, \boldsymbol{\Sigma}_{a(ls)} \otimes \mathbf{A}\right)
-$$ • Species-Level Residuals: 
+$$ • Species-Level Residuals:
 
 $$
 \begin{pmatrix}
@@ -261,10 +258,9 @@ Your proposed models offer a comprehensive framework for phylogenetic comparativ
 
 Next Steps: • Empirical Validation: Apply the models to real datasets to test their applicability and refine them based on practical findings. • Simulation Studies: Conduct simulations to assess the performance of the models under different conditions (e.g., varying sample sizes, effect sizes). • Further Development: Explore the possibility of including other types of random effects or extending the models to non-Gaussian traits. • Collaboration: Consider collaborating with statisticians or computational biologists to tackle potential challenges in model estimation and interpretation.
 
-1. Phylogenetic Generalized Least Squares (PGLS):
+1.  Phylogenetic Generalized Least Squares (PGLS):
 
-•   Description: PGLS is a standard method in comparative biology that incorporates phylogenetic relationships into regression analyses of continuous traits. It models the covariance among species due to shared ancestry using a phylogenetic covariance matrix.
-•   Relation to Your Work: While PGLS typically focuses on the mean structure of traits, extensions of PGLS can account for heteroscedasticity (non-constant variance) across species. This could be analogous to modeling the scale (variance) component in your location-scale model.
+• Description: PGLS is a standard method in comparative biology that incorporates phylogenetic relationships into regression analyses of continuous traits. It models the covariance among species due to shared ancestry using a phylogenetic covariance matrix. • Relation to Your Work: While PGLS typically focuses on the mean structure of traits, extensions of PGLS can account for heteroscedasticity (non-constant variance) across species. This could be analogous to modeling the scale (variance) component in your location-scale model.
 
 2.  Phylogenetic Mixed Models (PMM): • Description: Phylogenetic mixed models extend linear mixed models by including random effects that capture the phylogenetic relationships among species. These models can handle complex data structures and multiple random effects. • Relation to Your Work: Your inclusion of phylogenetic random effects in both the mean (location) and variance (scale) components aligns with the framework of PMMs. They provide a foundation for modeling trait evolution while accounting for phylogenetic dependencies.
 
@@ -284,17 +280,17 @@ Next Steps: • Empirical Validation: Apply the models to real datasets to test 
 
 10. Phylogenetic Path Analysis: • Description: Phylogenetic path analysis allows for modeling complex relationships among multiple traits while accounting for phylogenetic relationships. • Relation to Your Work: While not directly modeling variance components, path analysis can be extended to include variance modeling, potentially integrating with your multivariate location-scale models.
 
-## References for Further Reading: 
+## References for Further Reading:
 
-1. Ives, A. R., Midford, P. E., & Garland, T. (2007). Within-species variation and measurement error in phylogenetic comparative methods. Systematic Biology, 56(2), 252–270. 
+1.  Ives, A. R., Midford, P. E., & Garland, T. (2007). Within-species variation and measurement error in phylogenetic comparative methods. Systematic Biology, 56(2), 252–270.
 
-2. Hadfield, J. D. (2010). MCMC methods for multi-response generalized linear mixed models: The MCMCglmm R package. Journal of Statistical Software, 33(2), 1–22. 
+2.  Hadfield, J. D. (2010). MCMC methods for multi-response generalized linear mixed models: The MCMCglmm R package. Journal of Statistical Software, 33(2), 1–22.
 
-3. Hansen, T. F., Pienaar, J., & Orzack, S. H. (2008). A comparative method for studying adaptation to a randomly evolving environment. Evolution, 62(8), 1965–1977. 
+3.  Hansen, T. F., Pienaar, J., & Orzack, S. H. (2008). A comparative method for studying adaptation to a randomly evolving environment. Evolution, 62(8), 1965–1977.
 
-4. Beaulieu, J. M., Jhwueng, D. C., Boettiger, C., & O’Meara, B. C. (2012). Modeling stabilizing selection: Expanding the Ornstein-Uhlenbeck model of adaptive evolution. Evolution, 66(8), 2369–2383. 
+4.  Beaulieu, J. M., Jhwueng, D. C., Boettiger, C., & O’Meara, B. C. (2012). Modeling stabilizing selection: Expanding the Ornstein-Uhlenbeck model of adaptive evolution. Evolution, 66(8), 2369–2383.
 
-5. Pennell, M. W., & Harmon, L. J. (2013). An integrative view of phylogenetic comparative methods: Connections to population genetics, community ecology, and paleobiology. Annals of the New York Academy of Sciences, 1289(1), 90–105.
+5.  Pennell, M. W., & Harmon, L. J. (2013). An integrative view of phylogenetic comparative methods: Connections to population genetics, community ecology, and paleobiology. Annals of the New York Academy of Sciences, 1289(1), 90–105.
 
 While your approach of extending scale and location models to phylogenetic comparative analysis is innovative, these related methods offer foundational concepts and techniques that might be valuable. They can provide insights into modeling variances, covariances, and evolutionary processes affecting both trait means and variances.
 

@@ -28,29 +28,35 @@ dat <- readxl::read_xlsx(here("data", "201126_all_species_corrected.xlsx"))
 
 str(dat)
 
+
+dat <- select(dat, tip_label, brain, weight, devo_mode)
+
 # reading nexus file (use ape pacakge)
 
 tree <- read.nexus(here("data", "Jetztree1.nex"))
 
-# triming tree
+# trimming tree
 
 #tree <- drop.tip(tree, tree$tip.label[dat$tip_label %in% tree$tip.label])
 
 retain <- match(tree$tip.label, dat$tip_label)
 keep <- is.na(retain)
 
-keep <- drop.tip(tree, tree$tip.label[keep])               
+tree <- drop.tip(tree, tree$tip.label[keep])               
 # trun tree into correlation matrix using vcv function
 
 A <- vcv.phylo(tree, corr = TRUE)
+
+exclude <- setdiff(dat$tip_label, row.names(A))
 
 # centering the data
 
 dat$cbrain <- scale(dat$brain, center = TRUE, scale = FALSE)
 dat$cweight <- scale(dat$weight, center = TRUE, scale = FALSE)
 
-dat_full <- dat %>% filter(!is.na(cweight)) %>% 
-  mutate(devo_mode = ifelse(devo_mode == "altricial", 1, 0))
+dat_full <- dat %>% 
+  filter(!tip_label %in% exclude) %>%
+  filter(!is.na(cweight)) 
 
 # modeling
 
@@ -78,7 +84,7 @@ mod1 <- brm(from1,
                #backend = "cmdstanr",
                prior = prior1,
                threads = threading(9),
-               control = list(adapt_delta = 0.99, max_treedepth = 15)
+               control = list(adapt_delta = 0.95, max_treedepth = 15)
 )
 
 summary(mod1)
