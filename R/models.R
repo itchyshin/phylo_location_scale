@@ -547,6 +547,10 @@ summary(fit3)
 
 saveRDS(fit3, here("Rdata", "fit3.rds"))
 
+# reading this file again
+
+fit3 <- readRDS(here("Rdata", "fit3.rds"))
+
 
 # fit 4
 
@@ -630,4 +634,54 @@ summary(fit5)
 # save models rds
 
 saveRDS(fit5, here("Rdata", "fit5.rds"))
+
+
+# fit 6 
+
+
+formula6A <- bf(cbeak_width ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
+                sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
+)
+
+formula6B <- bf(cbeak_depth ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
+                sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
+)
+
+formula6C <- bf(cbeak_length ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
+                sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
+)
+
+formula6 <- formula6A + formula6B + formula6C + set_rescor(TRUE) #do we need to do correlction??
+
+# creat prior
+
+prior6 <- default_prior(formula6, 
+                        data = dat, 
+                        data2 = list(A = A),
+                        family = gaussian()
+)
+
+# fit model
+
+fit6 <- brm(formula6, 
+            data = dat, 
+            data2 = list(A = A),
+            chains = 2, 
+            cores = 2, 
+            iter = 5000, 
+            warmup = 3000,
+            prior = prior6,
+            #backend = "cmdstanr",
+            #threads = threading(9),
+            control = list(adapt_delta = 0.99, max_treedepth = 15)
+)
+
+summary(fit6)
+
+# save models rds
+
+saveRDS(fit6, here("Rdata", "fit6.rds"))
+
+
+########
 

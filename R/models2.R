@@ -1,0 +1,85 @@
+# brain, body size etc model
+
+# test
+
+# packages
+
+#library(pacman)
+
+#remotes::install_github("stan-dev/cmdstanr")
+#install_cmdstan(cores = 18)
+
+pacman::p_load(tidyverse, 
+               ggplot2,
+               brms,
+               rstan,
+               rstanarm,
+               loo,
+               bayesplot,
+               here,
+               ape,
+               cmdstanr
+)
+
+# load data
+# reading xlsx file
+
+dat <- readxl::read_xlsx(here("data", "201126_all_species_corrected.xlsx"))
+
+str(dat)
+
+# reading nexus file (use ape pacakge)
+
+tree <- read.nexus(here("data", "Jetztree1.nex"))
+
+# triming tree
+
+#tree <- drop.tip(tree, tree$tip.label[dat$tip_label %in% tree$tip.label])
+
+retain <- match(tree$tip.label, dat$tip_label)
+keep <- is.na(retain)
+
+keep <- drop.tip(tree, tree$tip.label[keep])               
+# trun tree into correlation matrix using vcv function
+
+A <- vcv.phylo(tree, corr = TRUE)
+
+# centering the data
+
+dat$cbrain <- scale(dat$brain, center = TRUE, scale = FALSE)
+dat$cweight <- scale(dat$weight, center = TRUE, scale = FALSE)
+
+dat_full <- dat %>% filter(!is.na(cweight)) %>% 
+  mutate(devo_mode = ifelse(devo_mode == "altricial", 1, 0))
+
+# modeling
+
+from1 <- bf(cbrain ~1 + devo_mode + cweight + (1|a|gr(tip_label, cov = A)), 
+               sigma ~ 1 + devo_mode + cweight + (1|a|gr(tip_label, cov = A))
+)
+
+
+# creat prior
+
+prior1 <- default_prior(from1, 
+                        data = dat_full, 
+                        data2 = list(A = A),
+                        family = gaussian()
+)
+
+
+mod1 <- brm(from1, 
+               data = dat_full, 
+               data2 = list(A = A),
+               chains = 2, 
+               cores = 2, 
+               iter = 3000, 
+               warmup = 2000,
+               #backend = "cmdstanr",
+               prior = prior1,
+               threads = threading(9),
+               control = list(adapt_delta = 0.99, max_treedepth = 15)
+)
+
+summary(mod1)
+
