@@ -106,7 +106,7 @@ $$
 \rho_{ls}\sigma_{al}\sigma_{as(\ln)} \mathbf{A} &
 \sigma_{as(\ln)}^{2}  \mathbf{A}
 \end{pmatrix}   
-$$ 
+$$
 
 ### Phylogenetic signal
 
@@ -186,8 +186,7 @@ $$
 y_{i}^{(1)} = \beta_0^{(l1)} + \sum_{k=1}^K\beta_k^{(l1)} x_{ki} + a_i^{(l1)} + e_i^{(l1)}\\
 y_{i}^{(2)} = \beta_0^{(l2)} + \sum_{k=1}^K\beta_k^{(l2)} x_{ki} + a_i^{(l2)} + e_i^{(l2)}
 \end{pmatrix},
-$$
-$$
+$$ $$
 \mathbf{s_{i}} = 
 \begin{pmatrix} 
 \ln(\sigma_{e_{i(l1)}}) = \beta_0^{(s1)} + \sum_{k=1}^K\beta_k^{(s1)} x_{ki} + a_i^{(s1)} \\
@@ -195,22 +194,20 @@ $$
 \end{pmatrix},
 $$
 
-
 $$
- \begin{pmatrix} 
+\begin{pmatrix} 
  a_i^{(l1)} \\ 
  a_i^{(l2)} \\ 
  a_i^{(s1)} \\ 
  a_i^{(s2)} 
- \end{pmatrix} 
- \sim \mathcal{N} \left( 
+ \end{pmatrix}
+\sim \mathcal{N} \left(
 \begin{pmatrix} 
  \mathbf{0} \\
  \mathbf{0} \\
  \mathbf{0} \\
  \mathbf{0} 
   \end{pmatrix},
-  
 \begin{pmatrix} 
 \sigma_{a(l1)}^{2} \mathbf{A} & 
 \rho_{a(l1l2)}\sigma_{a(l1)}\sigma_{a(l2)} \mathbf{A} &
@@ -231,13 +228,10 @@ $$
 \rho_{a(l2s1)}\sigma_{a(l2)}\sigma_{a(s1)} \mathbf{A}  &
 \rho_{a(s1s2)}\sigma_{a(s1)}\sigma_{a(s2)} \mathbf{A}  &
 \sigma_{a(s2)}^{2}  \mathbf{A} &
-\end{pmatrix}     \right)
+\end{pmatrix} \right)
 $$
-$\rho_{a(l1l2)}$ - across-trait mean-mean coevolution (coevolution of traits)
-$\rho_{a(s1s2)}$ - across-trait variance-variance coevolution (common?)
-$\rho_{a(l1s1)}$ & $\rho_{a(l2s2)}$ - within-trait mean-variance coevolution (common?)
-$\rho_{a(l1s2)}$ & $\rho_{a(l2s1)}$ - across-trait mean-variance coevolution (rare?)
 
+$\rho_{a(l1l2)}$ - across-trait mean-mean coevolution (coevolution of traits) $\rho_{a(s1s2)}$ - across-trait variance-variance coevolution (common?) $\rho_{a(l1s1)}$ & $\rho_{a(l2s2)}$ - within-trait mean-variance coevolution (common?) $\rho_{a(l1s2)}$ & $\rho_{a(l2s1)}$ - across-trait mean-variance coevolution (rare?)
 
 $$
  \begin{pmatrix} 
@@ -261,10 +255,10 @@ $$
 $$
 \mathbf{y}_{i} = \mathbf{X}_{i}\mathbf{\beta}^{(l)} + \mathbf{a}_{i}^{(l)} + \mathbf{e}_{i}^{(l)}
 $$
+
 $$
 \ln({\sigma_{\mathbf{e}_{i(l)}}}) = \mathbf{X}_{i}\mathbf{\beta}^{(s)} + \mathbf{a}_{i}^{(s)}
 $$
-
 
 ## Phylogentic location-scale model with within-species effects
 
@@ -296,8 +290,7 @@ $$
 \rho_{ls}\sigma_{al}\sigma_{as(\ln)} \mathbf{A} &
 \sigma_{as(\ln)}^{2}  \mathbf{A}
 \end{pmatrix}   
-$$ 
-
+$$
 
 $$
  \begin{pmatrix} e_i^{(l)} \\ 
@@ -314,6 +307,3 @@ $$
 \sigma_{es(\ln)}^{2}  \mathbf{I}
 \end{pmatrix}   
 $$
-
-
-

@@ -6,6 +6,22 @@ editor: visual
 
 # Phylogenetic Location-Scale Model
 
+## introduction key things to cover
+
+1.  **Background**: Phylogenetic comparative analysis aims to understand how traits evolve across species, accounting for shared evolutionary history. While traditional models focus on trait means, incorporating variance (scale) can provide a more comprehensive view of trait evolution.
+
+2.  **Motivation**: By extending location-scale models to a phylogenetic framework, you can investigate not only the mean trait values but also the variability around those means. This approach offers insights into the evolutionary processes shaping trait distributions.
+
+3.  **Objective**: Develop a comprehensive phylogenetic location-scale model that captures both the mean and variance components of traits, accounting for phylogenetic relationships and predictor variables.
+
+4.  **Approach**: Introduce a hierarchical model that includes random effects for phylogenetic relatedness in both the location (mean) and scale (variance) parts. This allows for the estimation of phylogenetic signal, evolvability, and variance components.
+
+5.  **Significance**: By modeling trait variance in a phylogenetic context, you can address questions related to trait evolution, adaptive processes, and the role of phylogenetic history in shaping trait variability.
+
+6.  **Structure**: The model consists of a location model for the trait mean and a scale model for the trait variance, with random effects capturing phylogenetic dependencies. The extension to multivariate models allows for the simultaneous analysis of multiple traits.
+
+Models - 3 models to cover: 1) Without a Random Effect in the Scale Part, 2) With a Random Effect in the Scale Part, 3) Extension to Multivariate Models
+
 ## Without a Random Effect in the Scale Part
 
 You start by defining a location model for a trait $y_i$ (e.g., body mass) across species i :

@@ -93,6 +93,18 @@ window.Quarto = {
 
 <section id="phylogenetic-location-scale-model" class="level1">
 <h1>Phylogenetic Location-Scale Model</h1>
+<section id="introduction-key-things-to-cover" class="level2">
+<h2 class="anchored" data-anchor-id="introduction-key-things-to-cover">introduction key things to cover</h2>
+<ol type="1">
+<li><p><strong>Background</strong>: Phylogenetic comparative analysis aims to understand how traits evolve across species, accounting for shared evolutionary history. While traditional models focus on trait means, incorporating variance (scale) can provide a more comprehensive view of trait evolution.</p></li>
+<li><p><strong>Motivation</strong>: By extending location-scale models to a phylogenetic framework, you can investigate not only the mean trait values but also the variability around those means. This approach offers insights into the evolutionary processes shaping trait distributions.</p></li>
+<li><p><strong>Objective</strong>: Develop a comprehensive phylogenetic location-scale model that captures both the mean and variance components of traits, accounting for phylogenetic relationships and predictor variables.</p></li>
+<li><p><strong>Approach</strong>: Introduce a hierarchical model that includes random effects for phylogenetic relatedness in both the location (mean) and scale (variance) parts. This allows for the estimation of phylogenetic signal, evolvability, and variance components.</p></li>
+<li><p><strong>Significance</strong>: By modeling trait variance in a phylogenetic context, you can address questions related to trait evolution, adaptive processes, and the role of phylogenetic history in shaping trait variability.</p></li>
+<li><p><strong>Structure</strong>: The model consists of a location model for the trait mean and a scale model for the trait variance, with random effects capturing phylogenetic dependencies. The extension to multivariate models allows for the simultaneous analysis of multiple traits.</p></li>
+</ol>
+<p>Models - 3 models to cover: 1) Without a Random Effect in the Scale Part, 2) With a Random Effect in the Scale Part, 3) Extension to Multivariate Models</p>
+</section>
 <section id="without-a-random-effect-in-the-scale-part" class="level2">
 <h2 class="anchored" data-anchor-id="without-a-random-effect-in-the-scale-part">Without a Random Effect in the Scale Part</h2>
 <p>You start by defining a location model for a trait <span class="math inline">\(y_i\)</span> (e.g., body mass) across species i :</p>
