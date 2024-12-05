@@ -61,8 +61,7 @@ dat_full <- dat %>%
 # modeling
 
 from1 <- bf(cbrain ~1 + devo_mode + cweight + (1|a|gr(tip_label, cov = A)), 
-               sigma ~ 1 + devo_mode + cweight + (1|a|gr(tip_label, cov = A))
-)
+               sigma ~ 1 + devo_mode + cweight)
 
 
 # create prior
@@ -88,4 +87,8 @@ mod1 <- brm(from1,
 )
 
 summary(mod1)
+
+# save mod1
+
+save(mod1, file = here("Rdata", "mod1.RData"))
 

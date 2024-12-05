@@ -473,11 +473,11 @@ saveRDS(fit1, here("Rdata", "fit3.rds"))
 # fit 4
 
 formula4A <- bf(cbeak_width ~1 + cmass +  (1|p|gr(Phylo, cov = A)), 
-                sigma ~ 1 + (1|p|gr(Phylo, cov = A))
+                sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
 )
 
 formula4B <- bf(cbeak_depth ~1 + cmass +(1|p|gr(Phylo, cov = A)), 
-                sigma ~ 1 + (1|p|gr(Phylo, cov = A))
+                sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
 )
 
 formula4 <- formula4A + formula4B + set_rescor(TRUE) #do we need to do correlction??
