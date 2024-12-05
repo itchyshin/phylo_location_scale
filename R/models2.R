@@ -51,8 +51,8 @@ exclude <- setdiff(dat$tip_label, row.names(A))
 
 # centering the data
 
-dat$cbrain <- scale(dat$brain, center = TRUE, scale = FALSE)
-dat$cweight <- scale(dat$weight, center = TRUE, scale = FALSE)
+dat$cbrain <- scale(log(dat$brain), center = TRUE, scale = FALSE)
+dat$cweight <- scale(log(dat$weight), center = TRUE, scale = FALSE)
 
 dat_full <- dat %>% 
   filter(!tip_label %in% exclude) %>%
