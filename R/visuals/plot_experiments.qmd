@@ -1,3 +1,24 @@
+---
+title: Phylo location-scale plot trials
+author: Szymon Drobniak
+date: '`r Sys.Date()`'
+format:
+    gfm: default
+crossref:
+    fig-title: Figure
+    tbl-title: Table
+    title-delim: —
+    fig-prefix: Fig.
+    tbl-prefix: Tab.
+    eq-prefix: Eq.
+editor_options:
+    chunk_output_type: console
+execute:
+    cache: false
+    warning: false
+---
+
+```{r}
 library(here)
 library(tidyverse)
 library(plot3D)
@@ -77,3 +98,4 @@ ggplot(data = data1, aes(
     stat_ellipse(aes(group = Genus)) +
     guides(colour = FALSE) +
     scale_colour_gradient(low = "#0e91b9", high = "red")
+```
