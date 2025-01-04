@@ -308,9 +308,8 @@ get_variables_dynamic <- function(model, pattern) {
 rename_vars <- function(variable) {
   variable <- gsub("b_", "", variable)                # Remove "b_"
   variable <- gsub("sd_", "SD_", variable)            # Replace "sd_" with "SD_"
-  variable <- gsub("cor_", "Cor_", variable)          # Replace "cor_" with "Cor_"
+  variable <- gsub("cor_", "Correlation_", variable)  # Replace "cor_" with "Correlation_"
   variable <- gsub("_", " ", variable)                # Replace "_" with space
-  variable <- substr(variable, 1, 10)                # Truncate to max 10 characters
   return(variable)
 }
 
