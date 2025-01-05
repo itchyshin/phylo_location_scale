@@ -53,7 +53,9 @@ cor(dat$cbeak_width, dat$cbeak_depth)
 
 dat$forest <- ifelse(dat$Habitat == "Forest", 1, 0)
 
+#####################################################
 # Different varainces for different groups (Model 3)
+#######################################################
 
 form1 <- bf(cbeak_length ~ 1 + cmass + (1|p|gr(Phylo, cov = A)), 
             sigma ~ 1 + forest 
@@ -91,8 +93,9 @@ mod1 <- readRDS(here("Rdata", "mod1.rds"))
 
 summary(mod1)
 
-
+#########################################
 # Mean-variance correlation (Model 4)
+#########################################
 
 form2 <- bf(crange_size ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
             sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
@@ -129,8 +132,9 @@ mod2 <- readRDS(here("Rdata", "mod2.rds"))
 
 summary(mod2)
 
-
+################################################
 # Co-evolution of means and variances (Model 5)
+################################################
 
 form3A <- bf(cbeak_width ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
                 sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
