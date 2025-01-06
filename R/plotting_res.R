@@ -1,22 +1,15 @@
 # figs
 
-
-# chatGPT code
-
-# load all the models rds
-
-# Load models
-mod_psit_1 <- readRDS(here("Rdata", "mod_psit_1.rds"))
-mod_psit_2 <- readRDS(here("Rdata", "mod_psit_2.rds"))
-mod_psit_3 <- readRDS(here("Rdata", "mod_psit_3.rds"))
-mod_psit_4 <- readRDS(here("Rdata", "mod_psit_4.rds"))
-mod_psit_5 <- readRDS(here("Rdata", "mod_psit_5.rds"))
-mod_psit_6 <- readRDS(here("Rdata", "mod_psit_6.rds"))
-
 library(tidyverse)
 library(tidybayes)
 library(ggplot2)
 library(patchwork)
+library(here)
+# Load models
+mod1 <- readRDS(here("Rdata", "mod1.rds"))
+mod2 <- readRDS(here("Rdata", "mod2.rds"))
+mod3 <- readRDS(here("Rdata", "mod3.rds"))
+
 
 # Function to get variable names dynamically
 get_variables_dynamic <- function(model, pattern) {
@@ -26,41 +19,13 @@ get_variables_dynamic <- function(model, pattern) {
 
 
 rename_vars <- function(variable) {
-  variable <- gsub("b_", "", variable)                # Remove "b_"
+  variable <- gsub("b_", "b_", variable)                # Remove "b_"
   variable <- gsub("sd_", "SD_", variable)            # Replace "sd_" with "SD_"
-  variable <- gsub("cor_", "Correlation_", variable)  # Replace "cor_" with "Correlation_"
+  variable <- gsub("cor_", "r_", variable)  # Replace "cor_" with "Correlation_"
   variable <- gsub("_", " ", variable)                # Replace "_" with space
   return(variable)
 }
 
-# Function to visualize fixed effects
-visualize_fixed_effects <- function(model, title) {
-  fixed_effect_vars <- get_variables_dynamic(model, "^b_")
-  if (length(fixed_effect_vars) == 0) {
-    message("No fixed effects found for ", title)
-    return(NULL)
-  }
-  
-  tryCatch({
-    fixed_effects_samples <- model %>%
-      spread_draws(!!!syms(fixed_effect_vars)) %>%
-      pivot_longer(cols = all_of(fixed_effect_vars), names_to = ".variable", values_to = ".value")
-    
-    ggplot(fixed_effects_samples, aes(x = .value, y = .variable)) +
-      stat_halfeye(
-        normalize = "xy", 
-        point_interval = "mean_qi", 
-        fill = "lightcyan3", 
-        color = "lightcyan4"
-      ) +
-      geom_vline(xintercept = 0, linetype = "dashed", color = "#005") +
-      labs(title = title, y = "Fixed Effects", x = "Posterior Values") +
-      theme_classic()
-  }, error = function(e) {
-    message("Error in visualize_fixed_effects: ", e$message)
-    return(NULL)
-  })
-}
 
 # Function to visualize fixed effects
 visualize_fixed_effects <- function(model, title) {
@@ -154,36 +119,22 @@ visualize_correlations <- function(model, title) {
 
 # Visualizing each model
 plots_model1 <- list(
-  visualize_fixed_effects(mod_psit_1, "Model 1: Fixed Effects"),
-  visualize_random_effects(mod_psit_1, "Model 1: Random Effects"),
-  visualize_correlations(mod_psit_1, "Model 1: Correlations")
+  visualize_fixed_effects(mod1, "Model 1: Fixed Effects"),
+  visualize_random_effects(mod1, "Model 1: Random Effects")
 )
 
 plots_model2 <- list(
-  visualize_fixed_effects(mod_psit_2, "Model 2: Fixed Effects"),
-  visualize_random_effects(mod_psit_2, "Model 2: Random Effects"),
-  visualize_correlations(mod_psit_2, "Model 2: Residual Correlations")
+  visualize_fixed_effects(mod2, "Model 2: Fixed Effects"),
+  visualize_random_effects(mod2, "Model 2: Random Effects"),
+  visualize_correlations(mod2, "Model 2: Residual Correlations")
 )
 
 plots_model3 <- list(
-  visualize_fixed_effects(mod_psit_3, "Model 3: Fixed Effects"),
-  visualize_random_effects(mod_psit_3, "Model 3: Random Effects")
+  visualize_fixed_effects(mod3, "Model 3: Fixed Effects"),
+  visualize_random_effects(mod3, "Model 3: Random Effects"),
+  visualize_correlations(mod3, "Model 3: Correlations")
 )
 
-plots_model4 <- list(
-  visualize_fixed_effects(mod_psit_4, "Model 4: Fixed Effects"),
-  visualize_random_effects(mod_psit_4, "Model 4: Random Effects")
-)
-
-plots_model5 <- list(
-  visualize_fixed_effects(mod_psit_5, "Model 5: Fixed Effects"),
-  visualize_random_effects(mod_psit_5, "Model 5: Random Effects")
-)
-
-plots_model6 <- list(
-  visualize_fixed_effects(mod_psit_6, "Model 6: Fixed Effects"),
-  visualize_random_effects(mod_psit_6, "Model 6: Random Effects")
-)
 
 # Create a placeholder plot for models without correlations
 placeholder_plot <- ggplot() +
@@ -194,18 +145,11 @@ placeholder_plot <- ggplot() +
 all_plots <- patchwork::wrap_plots(
   list(
     # Row 1 (Model 1)
-    plots_model1[[1]], plots_model1[[2]], plots_model1[[3]],
+    plots_model1[[1]], plots_model1[[2]], placeholder_plot,
     # Row 2 (Model 2)
     plots_model2[[1]], plots_model2[[2]], plots_model2[[3]],
     # Row 3 (Model 3)
-    plots_model3[[1]], plots_model3[[2]], placeholder_plot,
-    # Row 4 (Model 4)
-    plots_model4[[1]], plots_model4[[2]], placeholder_plot,
-    # Row 5 (Model 5)
-    plots_model5[[1]], plots_model5[[2]], placeholder_plot,
-    # Row 6 (Model 6)
-    plots_model6[[1]], plots_model6[[2]], placeholder_plot
-  ),
+    plots_model3[[1]], plots_model3[[2]], plots_model3[[3]]),
   ncol = 3,  # Specify 3 columns: Fixed Effects, Random Effects, Correlations
   byrow = TRUE
 )

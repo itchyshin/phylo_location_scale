@@ -38,9 +38,6 @@ dat$cbeak_length <- scale(log(dat$Beak.Length_Culmen), center = TRUE, scale = FA
 dat$cbeak_width <- scale(log(dat$Beak.Width), center = TRUE, scale = FALSE)
 dat$cbeak_depth <- scale(log(dat$Beak.Depth), center = TRUE, scale = FALSE)
 dat$cmass <- scale(log(dat$Mass), center = TRUE, scale = FALSE)
-dat$cwing_length <- scale(log(dat$Wing.Length), center = TRUE, scale = FALSE)
-dat$ctail_length <- scale(log(dat$Tail.Length), center = TRUE, scale = FALSE)
-dat$tarsus_length <- scale(log(dat$Tarsus.Length), center = TRUE, scale = FALSE)
 dat$crange_size <- scale(log(dat$Range.Size), center = TRUE, scale = FALSE)
 
 # correlaiton check
@@ -83,8 +80,7 @@ mod1 <- brm(form1,
 summary(mod1)
 
 # saving
-
-saveRDS(mod1, here("Rdata", "mod1.rds"))
+#saveRDS(mod1, here("Rdata", "mod1.rds"))
 
 
 # loading and checking
@@ -101,7 +97,7 @@ form2 <- bf(crange_size ~1 + cmass + (1|p|gr(Phylo, cov = A)),
             sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
 )
 
-prior2 <- default_prior(form1, 
+prior2 <- default_prior(form2, 
                         data = dat, 
                         data2 = list(A = A),
                         family = gaussian()
@@ -123,8 +119,7 @@ mod2 <- brm(form2,
 summary(mod2)
 
 # saving
-
-saveRDS(mod2, here("Rdata", "mod2.rds"))
+#saveRDS(mod2, here("Rdata", "mod2.rds"))
 
 # loading and checking
 
@@ -174,8 +169,7 @@ mod3 <- brm(form3,
 summary(mod3)
 
 # saving
-
-saveRDS(mod3, here("Rdata", "mod3.rds"))
+#saveRDS(mod3, here("Rdata", "mod3.rds"))
 
 # loading and looking at it again
 
