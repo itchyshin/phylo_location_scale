@@ -17,12 +17,13 @@ get_variables_dynamic <- function(model, pattern) {
   variables[grep(pattern, variables)]
 }
 
+# to change
 
 rename_vars <- function(variable) {
-  variable <- gsub("b_", "b_", variable)                # Remove "b_"
-  variable <- gsub("sd_", "SD_", variable)            # Replace "sd_" with "SD_"
-  variable <- gsub("cor_", "r_", variable)  # Replace "cor_" with "Correlation_"
-  variable <- gsub("_", " ", variable)                # Replace "_" with space
+  variable <- gsub("b_sigma_intercept", "b_s", variable)            
+  variable <- gsub("b_intercept", "b_l", variable)        
+  variable <- gsub("cor_", "r_", variable)  
+  variable <- gsub("_", " ", variable)    
   return(variable)
 }
 
