@@ -99,3 +99,114 @@ ggplot(data = data1, aes(
     guides(colour = FALSE) +
     scale_colour_gradient(low = "#0e91b9", high = "red")
 ```
+
+Other traits
+
+```{r}
+data$tars_resid <- residuals(lm(log(Tarsus.Length) ~ log(Mass), data = data))
+data <- data %>%
+    group_by(Genus) %>%
+    mutate(
+        rs_v = var(Range.Size)
+    )
+
+data1 <- data %>%
+    filter(Genus %in% names(ngenera))
+
+ggplot(data = data1, aes(
+    y = log(Mass),
+    x = log(Range.Size), colour = log(rs_v)
+)) +
+    geom_point() +
+    theme_bw() +
+    stat_ellipse(aes(group = Genus)) +
+    guides(colour = FALSE) +
+    scale_colour_gradient(low = "#0e91b9", high = "red")
+```
+
+```{r}
+data$tail_resid <- residuals(lm(log(Tail.Length) ~ log(Mass), data = data))
+data <- data %>%
+    group_by(Genus) %>%
+    mutate(
+        tail_v = var(Tail.Length)
+    )
+
+data1 <- data %>%
+    filter(Genus %in% names(ngenera))
+
+ggplot(data = data1, aes(
+    y = tars_resid,
+    x = tail_resid, colour = log(tail_v)
+)) +
+    geom_point() +
+    theme_bw() +
+    stat_ellipse(aes(group = Genus)) +
+    guides(colour = FALSE) +
+    scale_colour_gradient(low = "#0e91b9", high = "red")
+```
+
+```{r}
+data$wing_resid <- residuals(lm(log(Wing.Length) ~ log(Mass), data = data))
+data <- data %>%
+    group_by(Genus) %>%
+    mutate(
+        wing_v = var(Wing.Length)
+    )
+
+data1 <- data %>%
+    filter(Genus %in% names(ngenera))
+
+ggplot(data = data1, aes(
+    y = wing_resid,
+    x = log(Range.Size), colour = log(rs_v)
+)) +
+    geom_point() +
+    theme_bw() +
+    stat_ellipse(aes(group = Genus)) +
+    guides(colour = FALSE) +
+    scale_colour_gradient(low = "#0e91b9", high = "red")
+```
+
+```{r}
+data <- data %>%
+    group_by(Genus) %>%
+    mutate(
+        tars_v = var(Tarsus.Length)
+    )
+
+data1 <- data %>%
+    filter(Genus %in% names(ngenera))
+
+ggplot(data = data1, aes(
+    y = log(Tarsus.Length),
+    x = log(Mass), colour = log(rs_v)
+)) +
+    geom_point() +
+    theme_bw() +
+    stat_ellipse(aes(group = Genus)) +
+    guides(colour = FALSE) +
+    scale_colour_gradient(low = "#0e91b9", high = "red")
+```
+
+```{r}
+data$sec_resid <- residuals(lm(log(Secondary1) ~ log(Mass), data = data))
+data <- data %>%
+    group_by(Genus) %>%
+    mutate(
+        sec_v = var(Secondary1)
+    )
+
+data1 <- data %>%
+    filter(Genus %in% names(ngenera))
+
+ggplot(data = data1, aes(
+    y = sec_resid,
+    x = wing_resid, colour = log(sec_v)
+)) +
+    geom_point() +
+    theme_bw() +
+    stat_ellipse(aes(group = Genus)) +
+    guides(colour = FALSE) +
+    scale_colour_gradient(low = "#0e91b9", high = "red")
+```
