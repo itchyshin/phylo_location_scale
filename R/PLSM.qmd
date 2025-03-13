@@ -1,0 +1,820 @@
+---
+title: "Quantifying macro-evolutionary patterns of trait mean and variance with phylogenetic location-scale models"
+author: "**Shinichi Nakagawa, Ayumi Mizuno, Coralie Williams, Malgorzata Lagisz, Yefeng Yang and Szymon M Drobniak**"
+format:
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 3
+    toc-title: "**Table of Contents**"
+    output-file: "index.html"
+    theme: simplex
+    embed-resources: true
+    code-fold: show
+    code-tools: true
+    number-sections: true
+    #bibliography: ./bib/ref.bib
+    fontsize: "12"
+    max-width: "10"
+    code-overflow: wrap
+crossref: 
+  fig-title: Figure     # (default is "Figure")
+  tbl-title: Table     # (default is "Table")
+  title-delim: —     # (default is ":")
+  fig-prefix: Fig.   # (default is "Figure")
+  tbl-prefix: Tab.    # (default is "Table")
+editor_options: 
+  chunk_output_type: console
+editor: 
+  markdown: 
+    wrap: sentence
+---
+
+```{r setup}
+#| include: false
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  message = FALSE,
+  warnings = FALSE,
+  echo = TRUE#,
+  #comment = "#>"
+)
+```
+
+# Update
+
+Last update March 2025.
+
+We will update this tutorial when necessary.
+Readers can access the latest version in our [GitHub repository](https://github.com/itchyshin/phylo_location_scale).
+
+If you have any questions, errors or bug reports, please contact Szymon M Drobniak (szymek.drobniak\@gmail.com) or Shinichi Nakagawa (snakagaw\@ualberta.ca).
+
+# Introduction
+
+This online material is a supplement to our paper "Quantifying macro-evolutionary patterns of trait mean and variance with phylogenetic location-scale models".
+You will see how to fit phylogenetic location-scale models (PLSMs) in a Bayesian framework using `brms` package in `R`.
+
+# Contents
+
+In this online material, we will illustrate how to fit three models described in our paper, subtitled as:
+
+- Different Trait Variance in Two Groups (Model 3)
+
+- Co-evolution of Mean and Variance (Model 4)
+
+- Co-evolution of Two Traits (Model 5)
+
+All results presented in this online material are for illustrative purposes only (more careful thoughts are required to draw biological conclusions). 
+
+Additionally, we will show how to obtain phylogenetic heritablity and evolvability from the fitted `brms` object.
+
+Also, importantly, there is a sister paper to this one, which focuses on locatoin-scale meta-analytic and meta-regression. You can find the sister paper's tutorial [here](https://itchyshin.github.io/location-scale_meta-analysis/#multilevel-meta-analysis-and-location-scale-meta-regression); also, the preprint of the sister paper is available on [EcoEvoRxiv](https://ecoevorxiv.org/repository/view/8540/):
+
+> Nakagawa S, Mizuno A, Morrison K, Ricolfi L, Williams C, Drobniak SM, Lagisz M, Yang Y. Location-scale Meta-analysis and Meta-regression as a Tool to Capture Large-scale Changes in Biological and Methodological Heterogeneity: a Spotlight on Heteroscedasticity. EcoEvoRxiv. 2025. 
+
+This tutorial has several tips to run location-scale models using `brms`. 
+
+# Prerequisites
+
+## Loading pacakges
+
+Our tutorial uses `R` statistical software and existing `R` packages, which you will first need to download and install.
+
+If the packages are archived in CRAN, use `install.packages()` to install them.
+For example, to install the `brms` , you can execute `install.packages("brms")` in the console (bottom left pane of `R Studio`).
+
+Version information of each package is listed at the end of this tutorial.
+
+```{r packages}
+# attempt to load or install necessary packages
+if(!require(pacman)) install.packages("pacman")
+pacman::p_load(tidyverse, 
+               ggplot2,
+               brms,
+               bayesplot,
+               tidybayes,
+               here,
+               ape,
+               patchwork,
+               pander
+)
+
+```
+
+## Custom functions
+
+We also provide some additional helper functions to help visualize the results (mainly extracted from the `brms` object).
+If you want to use these custom functions in your own data, you'll need to change the variable names according to your own data (check out the `R` code and you'll see what we mean).
+
+```{r}
+#| code-fold: true
+
+# Function to get variable names dynamically
+get_variables_dynamic <- function(model, pattern) {
+  variables <- get_variables(model)
+  variables[grep(pattern, variables)]
+}
+
+rename_vars <- function(variable) {
+  # b
+  variable <- gsub("b_Intercept", "l_int", variable)
+  variable <- gsub("b_sigma_Intercept", "s_int", variable)  
+  variable <- gsub("b_cmass", "l_cmass", variable)            
+  variable <- gsub("b_sigma_cmass", "s_cmass", variable)
+  variable <- gsub("b_forest", "l_contrast", variable)            
+  variable <- gsub("b_sigma_forest", "s_contrast", variable) 
+  # mod3
+  variable <- gsub("b_cbeakwidth_Intercept", "l_width_int", variable)
+  variable <- gsub("b_sigma_cbeakwidth_Intercept", "s_width_int", variable)  
+  variable <- gsub("b_cbeakdepth_Intercept", "l_depth_int", variable)            
+  variable <- gsub("b_sigma_cbeakdepth_Intercept", "s_depth_int", variable)
+  variable <- gsub("b_cbeakwidth_cmass", "l_width_cmass", variable)            
+  variable <- gsub("b_sigma_cbeakwidth_cmass", "s_width_cmass", variable) 
+  variable <- gsub("b_cbeakdepth_cmass", "l_depth_cmass", variable)            
+  variable <- gsub("b_sigma_cbeakdepth_cmass", "s_depth_cmass", variable) 
+  
+  # sd
+  variable <- gsub("sd_Phylo__Intercept", "l_sd", variable)  
+  variable <- gsub("sd_Phylo__sigma_Intercept", "s_sd", variable)  
+  # mod3
+  variable <- gsub("sd_Phylo__cbeakwidth_Intercept", "l_width_sd", variable)  
+  variable <- gsub("sd_Phylo__sigma_cbeakwidth_Intercept", "s_width_sd", variable)  
+  variable <- gsub("sd_Phylo__cbeakdepth_Intercept", "l_depth_sd", variable)  
+  variable <- gsub("sd_Phylo__sigma_cbeakdepth_Intercept", "s_depth_sd", variable) 
+  
+  # corr
+  variable <- gsub("cor_Phylo__Intercept__sigma_Intercept", "ls_cor", variable)  
+  # mod3
+  variable <- gsub("cor_Phylo__cbeakwidth_Intercept__sigma_cbeakwidth_Intercept", "ls_width-width_cor", variable) 
+  variable <- gsub("cor_Phylo__cbeakwidth_Intercept__cbeakdepth_Intercept", "ll_width-depth_cor", variable) 
+  variable <- gsub("cor_Phylo__sigma_cbeakwidth_Intercept__cbeakdepth_Intercept", "sl_width-depth_cor", variable) 
+  variable <- gsub("cor_Phylo__cbeakwidth_Intercept__sigma_cbeakdepth_Intercept", "ls_width-depth_cor", variable) 
+  variable <- gsub("cor_Phylo__sigma_cbeakwidth_Intercept__sigma_cbeakdepth_Intercept", "ss_width-depth_cor", variable) 
+  variable <- gsub("cor_Phylo__cbeakdepth_Intercept__sigma_cbeakdepth_Intercept", "ls_depth-depth_cor", variable) 
+  
+  return(variable)
+}
+
+
+# Function to visualize fixed effects
+visualize_fixed_effects <- function(model) {
+  fixed_effect_vars <- get_variables_dynamic(model, "^b_")
+  if (length(fixed_effect_vars) == 0) {
+    message("No fixed effects found")
+    return(NULL)
+  }
+  
+  tryCatch({
+    fixed_effects_samples <- model %>%
+      spread_draws(!!!syms(fixed_effect_vars)) %>%
+      pivot_longer(cols = all_of(fixed_effect_vars), names_to = ".variable", values_to = ".value") %>%
+      mutate(.variable = rename_vars(.variable))
+    
+    ggplot(fixed_effects_samples, aes(x = .value, y = .variable)) +
+      stat_halfeye(
+        normalize = "xy", 
+        point_interval = "mean_qi", 
+        fill = "lightcyan3", 
+        color = "lightcyan4"
+      ) +
+      geom_vline(xintercept = 0, linetype = "dashed", color = "#005") +
+      labs(y = "Fixed effects", x = "Posterior values") +
+      theme_classic()
+  }, error = function(e) {
+    message("Error in visualize_fixed_effects: ", e$message)
+    return(NULL)
+  })
+}
+
+# Function to visualize random effects
+visualize_random_effects <- function(model) {
+  random_effect_vars <- get_variables_dynamic(model, "^sd_")
+  random_effect_vars <- random_effect_vars[random_effect_vars != "sd_es_ID__Intercept"]
+  if (length(random_effect_vars) == 0) {
+    message("No random effects found")
+    return(NULL)
+  }
+  
+  tryCatch({
+    random_effects_samples <- model %>%
+      spread_draws(!!!syms(random_effect_vars)) %>%
+      pivot_longer(cols = all_of(random_effect_vars), names_to = ".variable", values_to = ".value") %>%
+      mutate(.variable = rename_vars(.variable)) #%>%
+      #mutate(.value = .value)  # leave SD as it is
+    
+    ggplot(random_effects_samples, aes(x = .value, y = .variable)) +
+      stat_halfeye(
+        normalize = "xy", 
+        point_interval = "mean_qi", 
+        fill = "olivedrab3", 
+        color = "olivedrab4"
+      ) +
+      geom_vline(xintercept = 0, linetype = "dashed", color = "#005") +
+      labs(y = "Random effects (SD)", x = "Posterior values") +
+      theme_classic()
+  }, error = function(e) {
+    message("Error in visualize_random_effects: ", e$message)
+    return(NULL)
+  })
+}
+
+# Function to visualize correlations
+visualize_correlations <- function(model) {
+  correlation_vars <- get_variables_dynamic(model, "^cor_")
+  if (length(correlation_vars) == 0) {
+    message("No correlations found")
+    return(NULL)
+  }
+  
+  tryCatch({
+    correlation_samples <- model %>%
+      spread_draws(!!!syms(correlation_vars)) %>%
+      pivot_longer(cols = all_of(correlation_vars), names_to = ".variable", values_to = ".value") %>%
+      mutate(.variable = rename_vars(.variable))
+    
+    ggplot(correlation_samples, aes(x = .value, y = .variable)) +
+      stat_halfeye(
+        normalize = "xy", 
+        fill = "#FF6347", 
+        color = "#8B3626"
+      ) +
+      geom_vline(xintercept = 0, linetype = "dashed", color = "#005") +
+      labs(y = "Correlations", x = "Posterior values") +
+      theme_classic()
+  }, error = function(e) {
+    message("Error in visualize_correlations: ", e$message)
+    return(NULL)
+  })
+}
+```
+
+
+# Data loding and preparation
+
+We use the data from **Avonet**:
+
+> J. A. Tobias, C. Sheard, A. L. Pigot, A. J. Devenish, J. Yang, F. Sayol, M. H. Neate-Clegg, N. Alioravainen, T. L. Weeks, R. A. Barber, et al.
+> Avonet: morphological, ecological and geographical data for all birds.
+> Ecology Letters, 25(3):581–597, 2022
+
+As described in the paper, we only use parrows species (*N* = 354) and we use phylogenetic trees form Jetz et al. (2012):
+
+> W. Jetz, G. H. Thomas, J. B. Joy, K. Hartmann, and A. O. Mooers. The global diversity of birds in space and time.
+Nature, 491(7424):444–448, 2012
+
+```{r}
+# load data
+dat <- read.csv(here("data", "Psittaciformes", "Psittaciformes_354spp.csv"))
+
+#str(dat)
+
+# reading nexus file (use ape pacakge)
+tree_all <- read.nexus(here("data", "Psittaciformes", "Psittaciformes_354spp_100.nex"))
+tree <- tree_all[[1]]
+
+# Turning phylogenetic tree into phylognetic correlation matrix
+A <- vcv.phylo(tree, corr = TRUE)
+
+# center data of interest
+dat$cbeak_length <- scale(log(dat$Beak.Length_Culmen), center = TRUE, scale = FALSE)
+dat$cbeak_width <- scale(log(dat$Beak.Width), center = TRUE, scale = FALSE)
+dat$cbeak_depth <- scale(log(dat$Beak.Depth), center = TRUE, scale = FALSE)
+dat$cmass <- scale(log(dat$Mass), center = TRUE, scale = FALSE)
+dat$crange_size <- scale(log(dat$Range.Size), center = TRUE, scale = FALSE)
+
+# phynotipic correlation among three beak traits
+# cor(dat$cbeak_length, dat$cbeak_width)
+# cor(dat$cbeak_length, dat$cbeak_depth)
+# cor(dat$cbeak_width, dat$cbeak_depth)
+
+# create a variable which says whether they live in Forest or not
+dat$forest <- ifelse(dat$Habitat == "Forest", 1, 0)
+```
+
+We use the following variables in our models:
+
+- `cbeak_length`: log-transformed and centred beak length (`Beak.Length_Culmen`)
+
+- `cbeak_width`: log-transformed and centred beak width (`Beak.Width`)
+
+- `cbeak_depth`: log-transformed and centred beak depth (`Beak.Depth`)
+
+- `cmass`: log-transformed and centred body mass (`Mass`)
+
+- `crange_size`: log-transformed and centred range size (`Range.Size`)
+
+- `forest`: a binary variable indicating whether the species lives in the forest or other habits (created based on `Habitat`)
+
+
+# Different trait variance in two groups (Model 3)
+
+In this first model, we will fit a location-scale model to investigate whether the mean and variance of beak length (`cbeak_length`) differs between species living in the forest and those living in other habitats.
+
+## Fitting the model
+
+The `brms` syntax for Model 3 is as follows:
+
+```{r}
+#| eval: false
+
+# creating the formula
+form1 <- bf(cbeak_length ~ 1 + cmass + forest + (1 | gr(Phylo, cov = A)) 
+         sigma ~ 1 + cmass + forest
+)
+
+# setting priors
+prior1 <- default_prior(form1, 
+                        data = dat, 
+                        data2 = list(A = A),
+                        family = gaussian()
+)
+
+# running the model
+mod1 <- brm(form1, 
+            data = dat, 
+            data2 = list(A = A),
+            chains = 2, 
+            cores = 2, 
+            iter = 40000, 
+            warmup = 10000,
+            prior = prior1,
+            control = list(adapt_delta = 0.99, max_treedepth = 15)
+)
+
+# saving
+saveRDS(mod1, here("Rdata", "mod1.rds"))
+```
+
+Check the results: 
+
+```{r}
+# loading and checking
+mod1 <- readRDS(here("Rdata", "mod1.rds"))
+
+summary(mod1)
+```
+
+## Visualizing results
+
+We can visualize the results (posteior distributions) of parameters (i.e., regression coefficents, variance/standard deviation components and correlations) using the custom functions we defined earlier.
+
+```{r}
+#| warning: false
+#| fig-height: 6
+
+# getting plots
+plots_mod1 <- list(
+  visualize_fixed_effects(mod1),
+  visualize_random_effects(mod1)
+)
+
+plots_mod1[[1]] / plots_mod1[[2]] + plot_layout(heights = c(2, 1))
+```
+
+**Posterior distributions of different types of parameters**; the vertical dashed line indicates zero, aiding the interpretation of effect direction with thick lines showing 66% credible intervals and thin whiskers 95% credible intervals (not spanning zero being interpreted as 'statistical significant'). 
+
+# Co-evolution of mean and variance (Model 4)
+
+In this second model, we will fit a phylogenetic location-scale model to investigate whether the mean and variance of beak length (`cbeak_length`) are evolving together among parrots, after controlling body mass (`cmass`).
+
+## Fitting the model
+
+The `brms` syntax for Model 4 is as follows:
+
+```{r}
+#| eval: false
+
+# creating the formula
+# |p| indicates we are going to estimate correlations between these two random effects
+form2 <- bf(crange_size ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
+            sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
+)
+
+# setting priors
+prior2 <- default_prior(form2, 
+                        data = dat, 
+                        data2 = list(A = A),
+                        family = gaussian()
+)
+
+# running the model
+mod2 <- brm(form2, 
+            data = dat, 
+            data2 = list(A = A),
+            chains = 2, 
+            cores = 2, 
+            iter = 6000, 
+            warmup = 3000,
+            prior = prior2,
+            control = list(adapt_delta = 0.99, max_treedepth = 15)
+)
+
+# saving
+saveRDS(mod2, here("Rdata", "mod2.rds"))
+
+```
+
+Check the results: 
+
+```{r}
+# loading and checking
+mod2 <- readRDS(here("Rdata", "mod2.rds"))
+
+summary(mod2)
+
+```
+
+
+## Visualizing results
+
+As above, using the custom functions:
+
+```{r}
+#| warning: false
+#| fig-height: 8
+
+# getting plots
+plots_mod2 <- list(
+  visualize_fixed_effects(mod2),
+  visualize_random_effects(mod2),
+  visualize_correlations(mod2)
+)
+
+
+plots_mod2[[1]] / plots_mod2[[2]] /plots_mod2[[3]] + plot_layout(heights = c(2, 1, 1))
+```
+
+**Posterior distributions of different types of parameters**; the vertical dashed line indicates zero, aiding the interpretation of effect direction with thick lines showing 66% credible intervals and thin whiskers 95% credible intervals (not spanning zero being interpreted as 'statistical significant'). 
+
+# Co-evolution of two traits (Model 5)
+
+In this third model, we will fit a phylogenetic bivariate location-scale model to investigate whether the mean and variance of beak length (`cbeak_length`) and beak width (`cbeak_width`) are evolving together among parrots, after controlling body mass (`cmass`).
+
+## Fitting the model
+
+The `brms` syntax for Model 4 is as follows:
+  
+```{r}
+#| eval: false
+
+# creating the formula
+# |p| indicates we are going to estimate correlations between these 4 random effects
+form3A <- bf(cbeak_width ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
+                sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
+)
+
+form3B <- bf(cbeak_depth ~1 + cmass + (1|p|gr(Phylo, cov = A)), 
+                sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
+)
+
+form3 <- form3A + form3B + set_rescor(TRUE) 
+
+# setting prior
+prior3 <- default_prior(form3, 
+                        data = dat, 
+                        data2 = list(A = A),
+                        family = gaussian()
+)
+
+# fit model
+mod3 <- brm(form3, 
+                  data = dat, 
+                  data2 = list(A = A),
+                  chains = 2, 
+                  cores = 2, 
+                  iter = 15000, 
+                  warmup = 5000,
+                  prior = prior3,
+                  control = list(adapt_delta = 0.99, max_treedepth = 15)
+)
+
+summary(mod3)
+
+# saving
+saveRDS(mod3, here("Rdata", "mod3.rds"))
+```
+
+Check the results: 
+
+```{r}
+# loading and checking
+mod3 <- readRDS(here("Rdata", "mod3.rds"))
+
+summary(mod3)
+```
+
+
+## Visualizing results
+
+Again, using the custom functions:
+
+```{r}
+#| warning: false
+#| fig-height: 10
+
+# getting plots
+plots_mod3 <- list(
+  visualize_fixed_effects(mod3),
+  visualize_random_effects(mod3),
+  visualize_correlations(mod3)
+)
+
+
+plots_mod3[[1]] / plots_mod3[[2]] /plots_mod3[[3]]
+```
+
+**Posterior distributions of different types of parameters**; the vertical dashed line indicates zero, aiding the interpretation of effect direction with thick lines showing 66% credible intervals and thin whiskers 95% credible intervals (not spanning zero being interpreted as 'statistical significant'). 
+
+# Bonus: obtaining heritability and evolvability
+
+## a model without fixed effects
+
+We first create a phylogenetic location-scale (double-hierarchical) model for `cmass` without any fixed effects. 
+
+The `brms` syntax for this phylogenetic location-scale model is as follows:
+
+```{r}
+#| eval: false
+
+# creating the formula
+# |p| indicates we are going to estimate correlations between these 2 random effects
+form0 <- bf(crange_size ~ 1  + (1 | p | gr(Phylo, cov = A)),
+            sigma ~ 1 + (1 | p | gr(Phylo, cov = A))
+)
+
+# setting prior
+prior0 <- default_prior(form0, 
+                        data = dat, 
+                        data2 = list(A = A),
+                        family = gaussian()
+)
+
+# fit model
+mod0 <- brm(form0, 
+            data = dat, 
+            data2 = list(A = A),
+            chains = 2, 
+            cores = 2, 
+            iter = 8000, 
+            warmup = 1000,
+            prior = prior0,
+            control = list(adapt_delta = 0.99, max_treedepth = 15)
+)
+
+# saving
+saveRDS(mod0, here("Rdata", "mod0.rds"))
+```
+
+Check the results: 
+
+```{r}
+# loading and checking
+mod0 <- readRDS(here("Rdata", "mod0.rds"))
+
+summary(mod0)
+```
+
+
+### Phylogenetic heritability
+
+Using Equations 14,  15 & 17 in the paper, we can calculate the phylogenetic heritability of the trait `crange_size` (the location part):
+
+```{r}
+
+# sigma2_p (total phenotypic variance)
+
+# posterior draws
+post <- as_draws_df(mod0)
+
+# Equation 17: first calculate sigma2_e_bar (average residual variance)
+sigma2_e_bar <- exp(2*post$b_sigma_Intercept + 2*post$sd_Phylo__sigma_Intercept^2)
+
+# Equation 15 (no fixed effects)
+sigma2_p <- post$sd_Phylo__Intercept^2 +  sigma2_e_bar
+
+# Equation 14
+
+H2l <- post$sd_Phylo__Intercept^2 / sigma2_p
+
+#summary(H2)
+quantile(H2l, probs = c(0.025, 0.5, 0.975)) %>% pander()
+```
+
+We can see the median phylogenetic heritablity is around 38%.
+
+Using Equations 18-21 in the paper, we can calculate the phylogenetic heritability of the trait `crange_size` (the scale part):
+
+```{r}
+# Eqatuion 21 - sigma2_sigma2_e (variance of the residual variance)
+sigma2_sigma2_e <- (exp(4*post$sd_Phylo__sigma_Intercept^2) - 1) * exp(4*(post$b_sigma_Intercept + post$sd_Phylo__sigma_Intercept^2))
+
+# Equation 19 - sigma2_a_star 
+sigma2_as_star <- sigma2_sigma2_e 
+
+# Equation 20 - sigma2_sigma2_p (variance of the total phenotypic variance)
+sigma2_sigma2_p = sigma2_p ^ 2 + 3 * sigma2_sigma2_e
+
+# Equation 18
+H2s <- sigma2_as_star / sigma2_sigma2_p
+
+#summary(H2)
+quantile(H2s, probs = c(0.025, 0.5, 0.975)) %>% pander()
+
+```
+
+
+### Evolvability
+
+Using Equations 6 in the paper, we can calculate the evolvability (CV_Al) of the trait `crange_size` (log-transformed trait; the location part), but the difficulty is that we need to calculate the phylogenetic variance on the orginal scale. We can do this by using the delta method. The details of this calculation are provided in this earlier work (see the supplmentary material):
+
+> O'Dea RE, Noble DW, Nakagawa S. Unifying individual differences in personality, predictability and plasticity: a practical guide. Methods in Ecology and Evolution. 2022 Feb;13(2):278-93.
+
+```{r}
+
+# exp(b0) is the median of the trait
+ln_b0 <- post$b_Intercept  + mean(log(dat$Range.Size), na.rm = T)
+sigma2_al <- post$sd_Phylo__Intercept^2 
+
+mean_b0 <- exp(ln_b0 +  0.5 * (sigma2_al +  sigma2_e_bar) )
+
+# (exp(sigma_ln^2) - 1) * exp(2 * mu_ln + sigma_ln^2)
+sd_al <- sqrt( (exp(sigma2_al) - 1) * exp(2*ln_b0 + sigma2_al) )
+
+CV_Al <- sd_al / mean_b0
+
+# alternatively, we can get CV on ln-scale
+
+CV_Al2 <- sigma2_al / ln_b0
+
+
+quantile(CV_Al, probs = c(0.025, 0.5, 0.975)) %>% pander()
+quantile(CV_Al2, probs = c(0.025, 0.5, 0.975)) %>% pander()
+```
+
+We now estimate the evolvability of the trait `crange_size` (the scale part) using Equatoin 24 (we assume that this CV_As is the same as the value for the original scale):
+
+```{r}
+
+CV_As <- sqrt(exp(4*post$sd_Phylo__sigma_Intercept^2) - 1)
+
+# Alternatively, we can get CV_As on the SD scale
+
+CV_As2 <- sqrt(exp(post$sd_Phylo__sigma_Intercept^2) - 1)
+
+
+quantile(CV_As, probs = c(0.025, 0.5, 0.975)) %>% pander()
+quantile(CV_As2, probs = c(0.025, 0.5, 0.975)) %>% pander()
+```
+
+
+Alternatively, we can use Equation 23:
+
+```{r}
+
+# original scale conversion does not seem to make sense so commented out
+#igma2_as_star_orig <- sqrt( (exp(sigma2_as_star) - 1) * exp(2*ln_b0 + sigma2_as_star) )
+#sigma2_e_bar_orig <- sqrt( (exp(sigma2_e_bar) - 1) * exp(2*ln_b0 + sigma2_e_bar) )
+
+CV_As2 <- sqrt(sigma2_as_star) / sigma2_e_bar
+#CV_As2_orig <- sqrt(sigma2_as_star_orig) / sigma2_e_bar_orig
+
+quantile(CV_As2, probs = c(0.025, 0.5, 0.975), na.rm = T) %>% pander()
+#quantile(CV_As2_orig, probs = c(0.025, 0.5, 0.975), na.rm = T) %>% pander()
+```
+
+## a model with fixed effects
+
+Here we use `mod2` as an example to see the hertiablity and evolvability of the trait `crange_size` after controlling for body mass `cmass`.
+
+### Phylogenetic heritability
+
+Using Equations 14-17 in the paper, we can calculate the phylogenetic heritability of the trait `crange_size` (the location part) after controlling for body mass `cmass`:
+
+```{r}
+
+# sigma2_p (total phenotypic variance)
+
+# posterior draws
+post <- as_draws_df(mod2)
+
+# Equation 17: first calculate sigma2_e_bar (average residual variance)
+sigma2_e_bar <- exp(2*post$b_sigma_Intercept + 2*post$sd_Phylo__sigma_Intercept^2)
+
+
+# Equation 16 - sigma2_f (variance of the fixed effects)
+
+sigma2_fl <- sapply(post$b_cmass, function(b) var(b*dat$cmass))
+
+# Equation 15 (no fixed effects)
+sigma2_p <- post$sd_Phylo__Intercept^2 + sigma2_fl  + sigma2_e_bar
+
+# Equation 14
+
+H2l <- post$sd_Phylo__Intercept^2 / sigma2_p
+
+#summary(H2)
+quantile(H2l, probs = c(0.025, 0.5, 0.975)) %>% pander()
+```
+
+We can see the median phylogenetic heritablity is around 38%.
+
+Using Equations 18-21 in the paper, we can calculate the phylogenetic heritability of the trait `crange_size` (the scale part):
+
+```{r}
+
+# Equation 22 - sigma2_fs
+
+sigma2_fs <- sapply(post$b_sigma_cmass, function(b) var(b*dat$cmass))
+
+# Equation 21 - sigma2_sigma2_e (variance of the residual variance)
+sigma2_sigma2_e <- (exp(4*(post$sd_Phylo__sigma_Intercept^2 + sigma2_fs)) - 1) * exp(4*(post$b_sigma_Intercept + post$sd_Phylo__sigma_Intercept^2 + sigma2_fs))
+
+# Equation 19 - sigma2_a_star 
+sigma2_as_star <- sigma2_sigma2_e * (post$sd_Phylo__sigma_Intercept^2 /(post$sd_Phylo__sigma_Intercept^2 + sigma2_fs))
+
+# Equation 20 - sigma2_sigma2_p (variance of the total phenotypic variance)
+sigma2_sigma2_p = sigma2_p ^ 2 + 3 * sigma2_sigma2_e
+
+# Equation 18
+H2s <- sigma2_as_star / sigma2_sigma2_p
+
+#summary(H2)
+quantile(H2s, probs = c(0.025, 0.5, 0.975)) %>% pander()
+
+```
+
+
+### Evolvability
+
+Using Equations 6 in the paper, we can calculate the evolvability (CV_Al) of the trait `crange_size` (log-transformed trait; the location part), but we first need to back-trasform like we did above. 
+
+```{r}
+
+# exp(b0) is the median of the trait
+ln_b0 <- post$b_Intercept  + mean(log(dat$Range.Size), na.rm = T)
+sigma2_al <- post$sd_Phylo__Intercept^2 
+
+mean_b0 <- exp(ln_b0 +  0.5 * (sigma2_al +  sigma2_e_bar) )
+
+# (exp(sigma_ln^2) - 1) * exp(2 * mu_ln + sigma_ln^2)
+sd_al <- sqrt( (exp(sigma2_al) - 1) * exp(2*ln_b0 + sigma2_al) )
+
+CV_Al <- sd_al / mean_b0
+
+# alternatively, we can get CV on ln-scale
+
+CV_Al2 <- sigma2_al / ln_b0
+
+
+quantile(CV_Al, probs = c(0.025, 0.5, 0.975)) %>% pander()
+quantile(CV_Al2, probs = c(0.025, 0.5, 0.975)) %>% pander()
+```
+
+We now estimate the evolvability of the trait `crange_size` (the scale part) using Equatoin 24 (we assume that this CV_As is the same as the value for the original scale):
+
+```{r}
+
+CV_As <- sqrt(exp(4*post$sd_Phylo__sigma_Intercept^2) - 1)
+
+# Alternatively, we can get CV_As on the SD scale
+
+CV_As2 <- sqrt(exp(post$sd_Phylo__sigma_Intercept^2) - 1)
+
+
+quantile(CV_As, probs = c(0.025, 0.5, 0.975)) %>% pander()
+quantile(CV_As2, probs = c(0.025, 0.5, 0.975)) %>% pander()
+```
+
+
+Alternatively, we can use Equation 23:
+
+```{r}
+
+# original scale conversion does not seem to make sense so commented out
+#igma2_as_star_orig <- sqrt( (exp(sigma2_as_star) - 1) * exp(2*ln_b0 + sigma2_as_star) )
+#sigma2_e_bar_orig <- sqrt( (exp(sigma2_e_bar) - 1) * exp(2*ln_b0 + sigma2_e_bar) )
+
+CV_As <- sqrt(sigma2_as_star) / sigma2_e_bar
+#CV_As2_orig <- sqrt(sigma2_as_star_orig) / sigma2_e_bar_orig
+
+quantile(CV_As, probs = c(0.025, 0.5, 0.975), na.rm = T) %>% pander()
+#quantile(CV_As2_orig, probs = c(0.025, 0.5, 0.975), na.rm = T) %>% pander()
+```
+
+
+# Figure code
+
+```{r}
+#| code-fold: true
+
+
+```
+
+# Software and package versions
+
+```{r}
+#| code-fold: true
+sessionInfo() %>% pander()
+```
