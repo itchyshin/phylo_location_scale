@@ -527,7 +527,9 @@ plots_mod3[[1]] / plots_mod3[[2]] /plots_mod3[[3]]
 
 **Posterior distributions of different types of parameters**; the vertical dashed line indicates zero, aiding the interpretation of effect direction with thick lines showing 66% credible intervals and thin whiskers 95% credible intervals (not spanning zero being interpreted as 'statistical significant'). 
 
-# Bonus: obtaining heritability and evolvability
+# Bonus: obtaining phylogenetic heritability and evolvability (phylogenetic CV)
+
+Below, we show how to calculate phylogenetic heritability and evolvability from the fitted `brms` object with and without a fixed effect(s). As you will see, phylogenetic hertiaiblity is fairly straightforward to obtain but evolvability is a bit more complex as it is not clear what sacle to calculate it on (e.g., log-scale or original scale). In fact, the same issue should be relevant to phylogenetic heritability as well but we do not consider this here. 
 
 ## a model without fixed effects
 
@@ -621,9 +623,9 @@ H2s <- sigma2_as_star / sigma2_sigma2_p
 
 #summary(H2)
 quantile(H2s, probs = c(0.025, 0.5, 0.975)) %>% pander()
-
 ```
 
+Here we found a median phylogenetic heritability of around 31%.
 
 ### Evolvability
 
@@ -632,26 +634,30 @@ Using Equations 6 in the paper, we can calculate the evolvability (CV_Al) of the
 > O'Dea RE, Noble DW, Nakagawa S. Unifying individual differences in personality, predictability and plasticity: a practical guide. Methods in Ecology and Evolution. 2022 Feb;13(2):278-93.
 
 ```{r}
-
 # exp(b0) is the median of the trait
 ln_b0 <- post$b_Intercept  + mean(log(dat$Range.Size), na.rm = T)
 sigma2_al <- post$sd_Phylo__Intercept^2 
 
 mean_b0 <- exp(ln_b0 +  0.5 * (sigma2_al +  sigma2_e_bar) )
 
-# (exp(sigma_ln^2) - 1) * exp(2 * mu_ln + sigma_ln^2)
+# conversion formula from log-scale to original scale
 sd_al <- sqrt( (exp(sigma2_al) - 1) * exp(2*ln_b0 + sigma2_al) )
 
 CV_Al <- sd_al / mean_b0
 
-# alternatively, we can get CV on ln-scale
+quantile(CV_Al, probs = c(0.025, 0.5, 0.975)) %>% pander()
+```
 
+We can see the median evolvability is around 0.08
+
+```{r}
+# alternatively, we can get CV on ln-scale
 CV_Al2 <- sigma2_al / ln_b0
 
-
-quantile(CV_Al, probs = c(0.025, 0.5, 0.975)) %>% pander()
 quantile(CV_Al2, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
+
+If we get the CV on the log-scale, we can see the median evolvability is around 0.85 (nearly 10 times bigger); this CV for the location is probably more comparable to CV for the scale below (as it turns, our CV for the scale is not estimable on the original scale). 
 
 We now estimate the evolvability of the trait `crange_size` (the scale part) using Equatoin 24 (we assume that this CV_As is the same as the value for the original scale):
 
@@ -659,30 +665,43 @@ We now estimate the evolvability of the trait `crange_size` (the scale part) usi
 
 CV_As <- sqrt(exp(4*post$sd_Phylo__sigma_Intercept^2) - 1)
 
+quantile(CV_As, probs = c(0.025, 0.5, 0.975)) %>% pander()
+```
+
+We get the median evolvability of around 3.4. This is evolvability of variance but we can get evolvability of the standard deviation using Equation 25. 
+
+```{r}
 # Alternatively, we can get CV_As on the SD scale
 
 CV_As2 <- sqrt(exp(post$sd_Phylo__sigma_Intercept^2) - 1)
-
-
-quantile(CV_As, probs = c(0.025, 0.5, 0.975)) %>% pander()
 quantile(CV_As2, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
+We get the median evolvability of around 0.94, which is not that different from the evolvability of the mean estiamted on the log scale. 
 
-Alternatively, we can use Equation 23:
+Also, we can use Equation 23:
 
 ```{r}
-
-# original scale conversion does not seem to make sense so commented out
-#igma2_as_star_orig <- sqrt( (exp(sigma2_as_star) - 1) * exp(2*ln_b0 + sigma2_as_star) )
-#sigma2_e_bar_orig <- sqrt( (exp(sigma2_e_bar) - 1) * exp(2*ln_b0 + sigma2_e_bar) )
-
 CV_As2 <- sqrt(sigma2_as_star) / sigma2_e_bar
-#CV_As2_orig <- sqrt(sigma2_as_star_orig) / sigma2_e_bar_orig
 
 quantile(CV_As2, probs = c(0.025, 0.5, 0.975), na.rm = T) %>% pander()
-#quantile(CV_As2_orig, probs = c(0.025, 0.5, 0.975), na.rm = T) %>% pander()
 ```
+
+This estimation, as expected, matches with that from Equation 24. 
+
+We also try to get the evolvability for the sacle on the original scale
+
+```{r}
+# original scale conversion does not seem to make sense so commented out
+sigma2_as_star_orig <- sqrt( (exp(sigma2_as_star) - 1) * exp(2*ln_b0 + sigma2_as_star) )
+sigma2_e_bar_orig <- sqrt( (exp(sigma2_e_bar) - 1) * exp(2*ln_b0 + sigma2_e_bar) )
+
+CV_As2_orig <- sqrt(sigma2_as_star_orig) / sigma2_e_bar_orig
+
+quantile(CV_As2_orig, probs = c(0.025, 0.5, 0.975), na.rm = T) %>% pander()
+```
+
+We get the median evolvability of a `Inf` value so this does not seem to work. 
 
 ## a model with fixed effects
 
@@ -695,7 +714,6 @@ Using Equations 14-17 in the paper, we can calculate the phylogenetic heritabili
 ```{r}
 
 # sigma2_p (total phenotypic variance)
-
 # posterior draws
 post <- as_draws_df(mod2)
 
@@ -704,7 +722,6 @@ sigma2_e_bar <- exp(2*post$b_sigma_Intercept + 2*post$sd_Phylo__sigma_Intercept^
 
 
 # Equation 16 - sigma2_f (variance of the fixed effects)
-
 sigma2_fl <- sapply(post$b_cmass, function(b) var(b*dat$cmass))
 
 # Equation 15 (no fixed effects)
@@ -718,14 +735,13 @@ H2l <- post$sd_Phylo__Intercept^2 / sigma2_p
 quantile(H2l, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
-We can see the median phylogenetic heritablity is around 38%.
+We can see the median phylogenetic heritablity is around 45%.
 
 Using Equations 18-21 in the paper, we can calculate the phylogenetic heritability of the trait `crange_size` (the scale part):
 
 ```{r}
 
 # Equation 22 - sigma2_fs
-
 sigma2_fs <- sapply(post$b_sigma_cmass, function(b) var(b*dat$cmass))
 
 # Equation 21 - sigma2_sigma2_e (variance of the residual variance)
@@ -745,6 +761,7 @@ quantile(H2s, probs = c(0.025, 0.5, 0.975)) %>% pander()
 
 ```
 
+Here we found a median phylogenetic heritability of around 28%.
 
 ### Evolvability
 
@@ -763,51 +780,62 @@ sd_al <- sqrt( (exp(sigma2_al) - 1) * exp(2*ln_b0 + sigma2_al) )
 
 CV_Al <- sd_al / mean_b0
 
-# alternatively, we can get CV on ln-scale
-
-CV_Al2 <- sigma2_al / ln_b0
-
 
 quantile(CV_Al, probs = c(0.025, 0.5, 0.975)) %>% pander()
+```
+
+We can see the median evolvability is around 0.38.
+
+```{r}
+# alternatively, we can get CV on ln-scale
+CV_Al2 <- sigma2_al / ln_b0
 quantile(CV_Al2, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
+
+If we get the CV on the log-scale, we can see the median evolvability is around 0.83, which is higher than what we got on the original scale (like above).
 
 We now estimate the evolvability of the trait `crange_size` (the scale part) using Equatoin 24 (we assume that this CV_As is the same as the value for the original scale):
 
 ```{r}
-
+# Using Equation 24
 CV_As <- sqrt(exp(4*post$sd_Phylo__sigma_Intercept^2) - 1)
 
-# Alternatively, we can get CV_As on the SD scale
+quantile(CV_As, probs = c(0.025, 0.5, 0.975)) %>% pander()
+```
 
+We get the median evolvability of around 3.2. As above, this is evolvability of variance but we can get evolvability of the standard deviation using Equation 25.
+
+```{r}
+# Alternatively, we can get CV_As on the SD scale
 CV_As2 <- sqrt(exp(post$sd_Phylo__sigma_Intercept^2) - 1)
 
-
-quantile(CV_As, probs = c(0.025, 0.5, 0.975)) %>% pander()
 quantile(CV_As2, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
+We get the median evolvability of around 0.91, which is not that different from the evolvability of the mean estiamted on the log scale.
 
-Alternatively, we can use Equation 23:
+Additionally, we can use Equation 23:
 
 ```{r}
-
-# original scale conversion does not seem to make sense so commented out
-#igma2_as_star_orig <- sqrt( (exp(sigma2_as_star) - 1) * exp(2*ln_b0 + sigma2_as_star) )
-#sigma2_e_bar_orig <- sqrt( (exp(sigma2_e_bar) - 1) * exp(2*ln_b0 + sigma2_e_bar) )
-
 CV_As <- sqrt(sigma2_as_star) / sigma2_e_bar
-#CV_As2_orig <- sqrt(sigma2_as_star_orig) / sigma2_e_bar_orig
 
 quantile(CV_As, probs = c(0.025, 0.5, 0.975), na.rm = T) %>% pander()
-#quantile(CV_As2_orig, probs = c(0.025, 0.5, 0.975), na.rm = T) %>% pander()
 ```
 
+This estimation does matches with that from Equation 24 unlike the above. This is because now we have a fixed effect which is taken into account in account for obtaining the phylogenetic variance on the scale part: `sigma2_as_star` (we will not try to get the evolvability on the original scale as it does not seem to work).
 
 # Figure code
 
 ```{r}
 #| code-fold: true
+
+# putting all plots together 
+
+(plots_mod1[[1]] + plots_mod1[[2]]) + 
+(plots_mod2[[1]] / plots_mod2[[2]] /plots_mod2[[3]] ) + 
+(plots_mod3[[1]] / plots_mod3[[2]] /plots_mod3[[3]]) + plot_layout(heights = c(1, 3), widths = c(1, 1)) + 
+  # put A, B, C
+  plot_annotation(tag_levels = 'A')
 
 
 ```
