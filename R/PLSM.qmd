@@ -828,7 +828,7 @@ This estimation does matches with that from Equation 24 unlike the above. This i
 
 ```{r}
 #| code-fold: true
-#| fig-height: 12
+#| fig-height: 10
 #| 
 # putting all plots together 
 (plots_mod1[[1]] + plots_mod1[[2]]) + 
