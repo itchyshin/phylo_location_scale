@@ -1,5 +1,5 @@
 ---
-title: "Quantifying macro-evolutionary patterns of trait mean and variance with phylogenetic location-scale models"
+title: "ONLINE SUPPLMENT: Quantifying macro-evolutionary patterns of trait mean and variance with phylogenetic location-scale models"
 author: "**Shinichi Nakagawa, Ayumi Mizuno, Coralie Williams, Malgorzata Lagisz, Yefeng Yang and Szymon M Drobniak**"
 format:
   html:
