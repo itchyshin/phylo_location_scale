@@ -76,6 +76,12 @@ Also, importantly, there is a sister paper to this one, which focuses on locatoi
 
 This tutorial has several tips to run location-scale models using `brms`. 
 
+Furthermore, we have another sister (you are in luck) paper, which teaches Bayesian generalised linear modelling both for continuous and discrete traits. You can find the tutorial [here](https://ayumi-495.github.io/multinomial-GLMM-tutorial/); also, the preprint of the sister paper is available on [EcoEvoRxiv](https://ecoevorxiv.org/repository/view/8458/):
+
+> Mizuno, A., Drobniak, S.M., Williams, C., Lagisz, M. and Nakagawa, S., 2025. Promoting the use of phylogenetic multinomial generalised mixed-effects model to understand the evolution of discrete traits. EcoEvoRxiv. 2025. 
+
+This paper teaches you how to diagnose Bayesian models and how to interpret the results.
+
 # Prerequisites
 
 ## Loading pacakges
