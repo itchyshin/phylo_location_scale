@@ -1,5 +1,5 @@
 ---
-title: "ONLINE SUPPLMENT: Quantifying macro-evolutionary patterns of trait mean and variance with phylogenetic location-scale models"
+title: "ONLINE SUPPLEMENT: Quantifying macro-evolutionary patterns of trait mean and variance with phylogenetic location-scale models"
 author: "**Shinichi Nakagawa, Ayumi Mizuno, Coralie Williams, Malgorzata Lagisz, Yefeng Yang and Szymon M Drobniak**"
 format:
   html:
@@ -68,15 +68,15 @@ In this online material, we will illustrate how to fit three models described in
 
 All results presented in this online material are for illustrative purposes only (more careful thoughts are required to draw biological conclusions). 
 
-Additionally, we will show how to obtain phylogenetic heritablity and evolvability from the fitted `brms` object.
+Additionally, we will show how to obtain phylogenetic heritability and evolvability from the fitted `brms` object.
 
-Also, importantly, there is a sister paper to this one, which focuses on locatoin-scale meta-analytic and meta-regression. You can find the sister paper's tutorial [here](https://itchyshin.github.io/location-scale_meta-analysis/#multilevel-meta-analysis-and-location-scale-meta-regression); also, the preprint of the sister paper is available on [EcoEvoRxiv](https://ecoevorxiv.org/repository/view/8540/):
+Also, importantly, there is a sister paper to this one, which focuses on location-scale meta-analytic and meta-regression. You can find the sister paper's tutorial [here](https://itchyshin.github.io/location-scale_meta-analysis/#multilevel-meta-analysis-and-location-scale-meta-regression); also, the preprint of this sister paper is available on [EcoEvoRxiv](https://ecoevorxiv.org/repository/view/8540/):
 
 > Nakagawa S, Mizuno A, Morrison K, Ricolfi L, Williams C, Drobniak SM, Lagisz M, Yang Y. Location-scale Meta-analysis and Meta-regression as a Tool to Capture Large-scale Changes in Biological and Methodological Heterogeneity: a Spotlight on Heteroscedasticity. EcoEvoRxiv. 2025. 
 
 This tutorial has several tips to run location-scale models using `brms`. 
 
-Furthermore, we have another sister (you are in luck) paper, which teaches Bayesian generalised linear modelling both for continuous and discrete traits. You can find the tutorial [here](https://ayumi-495.github.io/multinomial-GLMM-tutorial/); also, the preprint of the sister paper is available on [EcoEvoRxiv](https://ecoevorxiv.org/repository/view/8458/):
+Furthermore, we have another sister (you are in luck) paper, which teaches Bayesian generalised linear modelling both for continuous and discrete traits. You can find the tutorial [here](https://ayumi-495.github.io/multinomial-GLMM-tutorial/); also, the preprint of this sister paper is available on [EcoEvoRxiv](https://ecoevorxiv.org/repository/view/8458/):
 
 > Mizuno, A., Drobniak, S.M., Williams, C., Lagisz, M. and Nakagawa, S., 2025. Promoting the use of phylogenetic multinomial generalised mixed-effects model to understand the evolution of discrete traits. EcoEvoRxiv. 2025. 
 
@@ -257,7 +257,7 @@ visualize_correlations <- function(model) {
 ```
 
 
-# Data loding and preparation
+# Data loading and preparation
 
 We use the data from **Avonet**:
 
@@ -265,7 +265,7 @@ We use the data from **Avonet**:
 > Avonet: morphological, ecological and geographical data for all birds.
 > Ecology Letters, 25(3):581–597, 2022
 
-As described in the paper, we only use parrows species (*N* = 354) and we use phylogenetic trees form Jetz et al. (2012):
+As described in the paper, we only use parrot species (*N* = 354) and we use phylogenetic trees form Jetz et al. (2012):
 
 > W. Jetz, G. H. Thomas, J. B. Joy, K. Hartmann, and A. O. Mooers. The global diversity of birds in space and time.
 Nature, 491(7424):444–448, 2012
@@ -326,7 +326,7 @@ The `brms` syntax for Model 3 is as follows:
 #| eval: false
 
 # creating the formula
-form1 <- bf(cbeak_length ~ 1 + cmass + forest + (1 | gr(Phylo, cov = A)) 
+form1 <- bf(cbeak_length ~ 1 + cmass + forest + (1 | gr(Phylo, cov = A)), 
          sigma ~ 1 + cmass + forest
 )
 
@@ -364,7 +364,7 @@ summary(mod1)
 
 ## Visualizing results
 
-We can visualize the results (posteior distributions) of parameters (i.e., regression coefficents, variance/standard deviation components and correlations) using the custom functions we defined earlier.
+We can visualize the results (posterior distributions) of parameters (i.e., regression coefficients, variance and standard deviation components, and correlations) using the custom functions we defined earlier.
 
 ```{r}
 #| warning: false
@@ -535,7 +535,7 @@ plots_mod3[[1]] / plots_mod3[[2]] /plots_mod3[[3]]
 
 # Bonus: obtaining phylogenetic heritability and evolvability (phylogenetic CV)
 
-Below, we show how to calculate phylogenetic heritability and evolvability from the fitted `brms` object with and without a fixed effect(s). As you will see, phylogenetic hertiaiblity is fairly straightforward to obtain but evolvability is a bit more complex as it is not clear what sacle to calculate it on (e.g., log-scale or original scale). In fact, the same issue should be relevant to phylogenetic heritability as well but we do not consider this here. 
+Below, we show how to calculate phylogenetic heritability and evolvability from the fitted `brms` object with and without a fixed effect(s). As you will see, phylogenetic heritability is fairly straightforward to obtain but evolvability is a bit more complex as it is not clear what scale to calculate it on (e.g., log-scale or original scale). In fact, the same issue should be relevant to phylogenetic heritability as well but we do not consider this here. 
 
 ## a model without fixed effects
 
@@ -587,7 +587,7 @@ summary(mod0)
 
 ### Phylogenetic heritability
 
-Using Equations 14,  15 & 17 in the paper, we can calculate the phylogenetic heritability of the trait `crange_size` (the location part):
+Using Equations 14, 15 & 17 in the paper, we can calculate the phylogenetic heritability of the trait `crange_size` (the location part):
 
 ```{r}
 
@@ -635,7 +635,7 @@ Here we found a median phylogenetic heritability of around 31%.
 
 ### Evolvability
 
-Using Equations 6 in the paper, we can calculate the evolvability (CV_Al) of the trait `crange_size` (log-transformed trait; the location part), but the difficulty is that we need to calculate the phylogenetic variance on the orginal scale. We can do this by using the delta method. The details of this calculation are provided in this earlier work (see the supplmentary material):
+Using Equations 6 in the paper, we can calculate the evolvability (CV_Al) of the trait `crange_size` (log-transformed trait; the location part), but the difficulty is that we need to calculate the phylogenetic variance on the original scale. We can do this by using the delta method. The details of this calculation are provided in this earlier work (see the supplementary material):
 
 > O'Dea RE, Noble DW, Nakagawa S. Unifying individual differences in personality, predictability and plasticity: a practical guide. Methods in Ecology and Evolution. 2022 Feb;13(2):278-93.
 
@@ -665,7 +665,7 @@ quantile(CV_Al2, probs = c(0.025, 0.5, 0.975)) %>% pander()
 
 If we get the CV on the log-scale, we can see the median evolvability is around 0.85 (nearly 10 times bigger); this CV for the location is probably more comparable to CV for the scale below (as it turns, our CV for the scale is not estimable on the original scale). 
 
-We now estimate the evolvability of the trait `crange_size` (the scale part) using Equatoin 24 (we assume that this CV_As is the same as the value for the original scale):
+We now estimate the evolvability of the trait `crange_size` (the scale part) using Equation 24 (we assume that this CV_As is the same as the value for the original scale):
 
 ```{r}
 
@@ -683,7 +683,7 @@ CV_As2 <- sqrt(exp(post$sd_Phylo__sigma_Intercept^2) - 1)
 quantile(CV_As2, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
-We get the median evolvability of around 0.94, which is not that different from the evolvability of the mean estiamted on the log scale. 
+We get the median evolvability of around 0.94, which is not that different from the evolvability of the mean estimated on the log scale. 
 
 Also, we can use Equation 23:
 
@@ -695,7 +695,7 @@ quantile(CV_As2, probs = c(0.025, 0.5, 0.975), na.rm = T) %>% pander()
 
 This estimation, as expected, matches with that from Equation 24. 
 
-We also try to get the evolvability for the sacle on the original scale
+We also try to get the evolvability for the scale part on the original scale
 
 ```{r}
 # original scale conversion does not seem to make sense so commented out
@@ -711,7 +711,7 @@ We get the median evolvability of a `Inf` value so this does not seem to work.
 
 ## a model with fixed effects
 
-Here we use `mod2` as an example to see the hertiablity and evolvability of the trait `crange_size` after controlling for body mass `cmass`.
+Here we use `mod2` as an example to see the heritability and evolvability of the trait `crange_size` after controlling for body mass `cmass`.
 
 ### Phylogenetic heritability
 
@@ -734,7 +734,6 @@ sigma2_fl <- sapply(post$b_cmass, function(b) var(b*dat$cmass))
 sigma2_p <- post$sd_Phylo__Intercept^2 + sigma2_fl  + sigma2_e_bar
 
 # Equation 14
-
 H2l <- post$sd_Phylo__Intercept^2 / sigma2_p
 
 #summary(H2)
@@ -771,7 +770,7 @@ Here we found a median phylogenetic heritability of around 28%.
 
 ### Evolvability
 
-Using Equations 6 in the paper, we can calculate the evolvability (CV_Al) of the trait `crange_size` (log-transformed trait; the location part), but we first need to back-trasform like we did above. 
+Using Equations 6 in the paper, we can calculate the evolvability (CV_Al) of the trait `crange_size` (log-transformed trait; the location part), but we first need to back-transform as we did above. 
 
 ```{r}
 
@@ -800,7 +799,7 @@ quantile(CV_Al2, probs = c(0.025, 0.5, 0.975)) %>% pander()
 
 If we get the CV on the log-scale, we can see the median evolvability is around 0.83, which is higher than what we got on the original scale (like above).
 
-We now estimate the evolvability of the trait `crange_size` (the scale part) using Equatoin 24 (we assume that this CV_As is the same as the value for the original scale):
+We now estimate the evolvability of the trait `crange_size` (the scale part) using Equation 24 (we assume that this CV_As is the same as the value for the original scale):
 
 ```{r}
 # Using Equation 24
@@ -818,7 +817,7 @@ CV_As2 <- sqrt(exp(post$sd_Phylo__sigma_Intercept^2) - 1)
 quantile(CV_As2, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
-We get the median evolvability of around 0.91, which is not that different from the evolvability of the mean estiamted on the log scale.
+We get the median evolvability of around 0.91, which is not that different from the evolvability of the mean estimated on the log scale.
 
 Additionally, we can use Equation 23:
 
@@ -828,7 +827,7 @@ CV_As <- sqrt(sigma2_as_star) / sigma2_e_bar
 quantile(CV_As, probs = c(0.025, 0.5, 0.975), na.rm = T) %>% pander()
 ```
 
-This estimation does matches with that from Equation 24 unlike the above. This is because now we have a fixed effect which is taken into account in account for obtaining the phylogenetic variance on the scale part: `sigma2_as_star` (we will not try to get the evolvability on the original scale as it does not seem to work).
+This estimation matches the result from Equation 24, unlike the one above. This is because we have now a fixed effect which is taken into account for obtaining the phylogenetic variance on the scale part: `sigma2_as_star` (we will not try to get the evolvability on the original scale as it does not seem to work).
 
 # Figure code
 
