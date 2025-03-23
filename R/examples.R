@@ -8,13 +8,11 @@
 pacman::p_load(tidyverse, 
                ggplot2,
                brms,
-               rstan,
-               rstanarm,
-               loo,
                bayesplot,
+               tidybayes,
                here,
                ape,
-               cmdstanr
+               patchwork
 )
 
 # load data
@@ -28,7 +26,7 @@ str(dat)
 tree_all <- read.nexus(here("data", "Psittaciformes", "Psittaciformes_354spp_100.nex"))
 tree <- tree_all[[1]]
 
-# trun tree into correlation matrix using vcv function
+# true tree into correlation matrix using vcv function
 
 A <- vcv.phylo(tree, corr = TRUE)
 
@@ -40,7 +38,7 @@ dat$cbeak_depth <- scale(log(dat$Beak.Depth), center = TRUE, scale = FALSE)
 dat$cmass <- scale(log(dat$Mass), center = TRUE, scale = FALSE)
 dat$crange_size <- scale(log(dat$Range.Size), center = TRUE, scale = FALSE)
 
-# correlaiton check
+# phynotipic correlation among three beak traits
 
 cor(dat$cbeak_length, dat$cbeak_width)
 cor(dat$cbeak_length, dat$cbeak_depth)
@@ -54,8 +52,8 @@ dat$forest <- ifelse(dat$Habitat == "Forest", 1, 0)
 # Different varainces for different groups (Model 3)
 #######################################################
 
-form1 <- bf(cbeak_length ~ 1 + cmass + (1|p|gr(Phylo, cov = A)), 
-            sigma ~ 1 + forest 
+form1 <- bf(cbeak_length ~ 1 + cmass + forest + (1 | gr(Phylo, cov = A)) 
+            sigma ~ 1 + cmass + forest
 )
 
 prior1 <- default_prior(form1, 
@@ -88,6 +86,15 @@ summary(mod1)
 mod1 <- readRDS(here("Rdata", "mod1.rds"))
 
 summary(mod1)
+
+# visualizing
+
+plots_mod1 <- list(
+  visualize_fixed_effects(mod1),
+  visualize_random_effects(mod1)
+)
+
+plots_mod1[[1]] / plots_mod1[[2]] 
 
 #########################################
 # Mean-variance correlation (Model 4)
@@ -127,6 +134,18 @@ mod2 <- readRDS(here("Rdata", "mod2.rds"))
 
 summary(mod2)
 
+# visualizing
+
+plots_mod2 <- list(
+  visualize_fixed_effects(mod2),
+  visualize_random_effects(mod2),
+  visualize_correlations(mod2)
+)
+
+
+plots_mod2[[1]] / plots_mod2[[2]] /plots_mod2[[3]]
+
+
 ################################################
 # Co-evolution of means and variances (Model 5)
 ################################################
@@ -139,10 +158,9 @@ form3B <- bf(cbeak_depth ~1 + cmass + (1|p|gr(Phylo, cov = A)),
                 sigma ~ 1 + cmass + (1|p|gr(Phylo, cov = A))
 )
 
-form3 <- form3A + form3B + set_rescor(TRUE) #do we need to do correction??
+form3 <- form3A + form3B + set_rescor(TRUE) 
 
-# creat prior
-
+# setting prior
 prior3 <- default_prior(form3, 
                         data = dat, 
                         data2 = list(A = A),
@@ -152,7 +170,6 @@ prior3 <- default_prior(form3,
 
 
 # fit model
-
 mod3 <- brm(form3, 
                   data = dat, 
                   data2 = list(A = A),
@@ -161,8 +178,6 @@ mod3 <- brm(form3,
                   iter = 6000, 
                   warmup = 4000,
                   prior = prior3,
-                  #backend = "cmdstanr",
-                  threads = threading(9),
                   control = list(adapt_delta = 0.99, max_treedepth = 15)
 )
 
@@ -177,3 +192,43 @@ mod3 <- readRDS(here("Rdata", "mod3.rds"))
 
 summary(mod3)
 
+# visualizing
+
+plots_mod3 <- list(
+  visualize_fixed_effects(mod3),
+  visualize_random_effects(mod3),
+  visualize_correlations(mod3)
+)
+
+
+plots_mod3[[1]] / plots_mod3[[2]] /plots_mod3[[3]]
+
+##############################
+# heritability and evolvability
+##############################
+
+# 
+form0 <- bf(crange_size ~ 1  + (1 | p | gr(Phylo, cov = A)),
+            sigma ~ 1 + (1 | p | gr(Phylo, cov = A))
+)
+
+prior0 <- default_prior(form0, 
+                        data = dat, 
+                        data2 = list(A = A),
+                        family = gaussian()
+)
+
+mod0 <- brm(form0, 
+            data = dat, 
+            data2 = list(A = A),
+            chains = 2, 
+            cores = 2, 
+            iter = 8000, 
+            warmup = 1000,
+            prior = prior0,
+            control = list(adapt_delta = 0.99, max_treedepth = 15)
+)
+
+summary(mod0)
+
+saveRDS(mod0, here("Rdata", "mod0.rds"))
