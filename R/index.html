@@ -8,7 +8,7 @@
 
 <meta name="author" content="Shinichi Nakagawa, Ayumi Mizuno, Coralie Williams, Malgorzata Lagisz, Yefeng Yang and Szymon M Drobniak">
 
-<title>ONLINE SUPPLMENT: Quantifying macro-evolutionary patterns of trait mean and variance with phylogenetic location-scale models</title>
+<title>ONLINE SUPPLEMENT: Quantifying macro-evolutionary patterns of trait mean and variance with phylogenetic location-scale models</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -3093,7 +3093,7 @@ vertical-align: -.125em;
   <li><a href="#loading-pacakges" id="toc-loading-pacakges" class="nav-link" data-scroll-target="#loading-pacakges"><span class="header-section-number">4.1</span> Loading pacakges</a></li>
   <li><a href="#custom-functions" id="toc-custom-functions" class="nav-link" data-scroll-target="#custom-functions"><span class="header-section-number">4.2</span> Custom functions</a></li>
   </ul></li>
-  <li><a href="#data-loding-and-preparation" id="toc-data-loding-and-preparation" class="nav-link" data-scroll-target="#data-loding-and-preparation"><span class="header-section-number">5</span> Data loding and preparation</a></li>
+  <li><a href="#data-loading-and-preparation" id="toc-data-loading-and-preparation" class="nav-link" data-scroll-target="#data-loading-and-preparation"><span class="header-section-number">5</span> Data loading and preparation</a></li>
   <li><a href="#different-trait-variance-in-two-groups-model-3" id="toc-different-trait-variance-in-two-groups-model-3" class="nav-link" data-scroll-target="#different-trait-variance-in-two-groups-model-3"><span class="header-section-number">6</span> Different trait variance in two groups (Model 3)</a>
   <ul class="collapse">
   <li><a href="#fitting-the-model" id="toc-fitting-the-model" class="nav-link" data-scroll-target="#fitting-the-model"><span class="header-section-number">6.1</span> Fitting the model</a></li>
@@ -3133,7 +3133,7 @@ vertical-align: -.125em;
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">ONLINE SUPPLMENT: Quantifying macro-evolutionary patterns of trait mean and variance with phylogenetic location-scale models</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<div class="quarto-title-block"><div><h1 class="title">ONLINE SUPPLEMENT: Quantifying macro-evolutionary patterns of trait mean and variance with phylogenetic location-scale models</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 </div>
 
 
@@ -3175,13 +3175,13 @@ vertical-align: -.125em;
 <li><p>Co-evolution of Two Traits (Model 5)</p></li>
 </ul>
 <p>All results presented in this online material are for illustrative purposes only (more careful thoughts are required to draw biological conclusions).</p>
-<p>Additionally, we will show how to obtain phylogenetic heritablity and evolvability from the fitted <code>brms</code> object.</p>
-<p>Also, importantly, there is a sister paper to this one, which focuses on locatoin-scale meta-analytic and meta-regression. You can find the sister paper’s tutorial <a href="https://itchyshin.github.io/location-scale_meta-analysis/#multilevel-meta-analysis-and-location-scale-meta-regression">here</a>; also, the preprint of the sister paper is available on <a href="https://ecoevorxiv.org/repository/view/8540/">EcoEvoRxiv</a>:</p>
+<p>Additionally, we will show how to obtain phylogenetic heritability and evolvability from the fitted <code>brms</code> object.</p>
+<p>Also, importantly, there is a sister paper to this one, which focuses on location-scale meta-analytic and meta-regression. You can find the sister paper’s tutorial <a href="https://itchyshin.github.io/location-scale_meta-analysis/#multilevel-meta-analysis-and-location-scale-meta-regression">here</a>; also, the preprint of this sister paper is available on <a href="https://ecoevorxiv.org/repository/view/8540/">EcoEvoRxiv</a>:</p>
 <blockquote class="blockquote">
 <p>Nakagawa S, Mizuno A, Morrison K, Ricolfi L, Williams C, Drobniak SM, Lagisz M, Yang Y. Location-scale Meta-analysis and Meta-regression as a Tool to Capture Large-scale Changes in Biological and Methodological Heterogeneity: a Spotlight on Heteroscedasticity. EcoEvoRxiv. 2025.</p>
 </blockquote>
 <p>This tutorial has several tips to run location-scale models using <code>brms</code>.</p>
-<p>Furthermore, we have another sister (you are in luck) paper, which teaches Bayesian generalised linear modelling both for continuous and discrete traits. You can find the tutorial <a href="https://ayumi-495.github.io/multinomial-GLMM-tutorial/">here</a>; also, the preprint of the sister paper is available on <a href="https://ecoevorxiv.org/repository/view/8458/">EcoEvoRxiv</a>:</p>
+<p>Furthermore, we have another sister (you are in luck) paper, which teaches Bayesian generalised linear modelling both for continuous and discrete traits. You can find the tutorial <a href="https://ayumi-495.github.io/multinomial-GLMM-tutorial/">here</a>; also, the preprint of this sister paper is available on <a href="https://ecoevorxiv.org/repository/view/8458/">EcoEvoRxiv</a>:</p>
 <blockquote class="blockquote">
 <p>Mizuno, A., Drobniak, S.M., Williams, C., Lagisz, M. and Nakagawa, S., 2025. Promoting the use of phylogenetic multinomial generalised mixed-effects model to understand the evolution of discrete traits. EcoEvoRxiv. 2025.</p>
 </blockquote>
@@ -3359,13 +3359,13 @@ vertical-align: -.125em;
 </div>
 </section>
 </section>
-<section id="data-loding-and-preparation" class="level1" data-number="5">
-<h1 data-number="5"><span class="header-section-number">5</span> Data loding and preparation</h1>
+<section id="data-loading-and-preparation" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Data loading and preparation</h1>
 <p>We use the data from <strong>Avonet</strong>:</p>
 <blockquote class="blockquote">
 <p>J. A. Tobias, C. Sheard, A. L. Pigot, A. J. Devenish, J. Yang, F. Sayol, M. H. Neate-Clegg, N. Alioravainen, T. L. Weeks, R. A. Barber, et al. Avonet: morphological, ecological and geographical data for all birds. Ecology Letters, 25(3):581–597, 2022</p>
 </blockquote>
-<p>As described in the paper, we only use parrows species (<em>N</em> = 354) and we use phylogenetic trees form Jetz et al. (2012):</p>
+<p>As described in the paper, we only use parrot species (<em>N</em> = 354) and we use phylogenetic trees form Jetz et al. (2012):</p>
 <blockquote class="blockquote">
 <p>W. Jetz, G. H. Thomas, J. B. Joy, K. Hartmann, and A. O. Mooers. The global diversity of birds in space and time. Nature, 491(7424):444–448, 2012</p>
 </blockquote>
@@ -3420,7 +3420,7 @@ vertical-align: -.125em;
 <details open class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># creating the formula</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>form1 <span class="ot">&lt;-</span> <span class="fu">bf</span>(cbeak_length <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> cmass <span class="sc">+</span> forest <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> <span class="fu">gr</span>(Phylo, <span class="at">cov =</span> A)) </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>form1 <span class="ot">&lt;-</span> <span class="fu">bf</span>(cbeak_length <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> cmass <span class="sc">+</span> forest <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> <span class="fu">gr</span>(Phylo, <span class="at">cov =</span> A)), </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>         sigma <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> cmass <span class="sc">+</span> forest</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
@@ -3488,7 +3488,7 @@ vertical-align: -.125em;
 </section>
 <section id="visualizing-results" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="visualizing-results"><span class="header-section-number">6.2</span> Visualizing results</h2>
-<p>We can visualize the results (posteior distributions) of parameters (i.e., regression coefficents, variance/standard deviation components and correlations) using the custom functions we defined earlier.</p>
+<p>We can visualize the results (posterior distributions) of parameters (i.e., regression coefficients, variance and standard deviation components, and correlations) using the custom functions we defined earlier.</p>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
@@ -3789,7 +3789,7 @@ vertical-align: -.125em;
 </section>
 <section id="bonus-obtaining-phylogenetic-heritability-and-evolvability-phylogenetic-cv" class="level1" data-number="9">
 <h1 data-number="9"><span class="header-section-number">9</span> Bonus: obtaining phylogenetic heritability and evolvability (phylogenetic CV)</h1>
-<p>Below, we show how to calculate phylogenetic heritability and evolvability from the fitted <code>brms</code> object with and without a fixed effect(s). As you will see, phylogenetic hertiaiblity is fairly straightforward to obtain but evolvability is a bit more complex as it is not clear what sacle to calculate it on (e.g., log-scale or original scale). In fact, the same issue should be relevant to phylogenetic heritability as well but we do not consider this here.</p>
+<p>Below, we show how to calculate phylogenetic heritability and evolvability from the fitted <code>brms</code> object with and without a fixed effect(s). As you will see, phylogenetic heritability is fairly straightforward to obtain but evolvability is a bit more complex as it is not clear what scale to calculate it on (e.g., log-scale or original scale). In fact, the same issue should be relevant to phylogenetic heritability as well but we do not consider this here.</p>
 <section id="a-model-without-fixed-effects" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="a-model-without-fixed-effects"><span class="header-section-number">9.1</span> a model without fixed effects</h2>
 <p>We first create a phylogenetic location-scale (double-hierarchical) model for <code>cmass</code> without any fixed effects.</p>
@@ -3960,7 +3960,7 @@ vertical-align: -.125em;
 </section>
 <section id="evolvability" class="level3" data-number="9.1.2">
 <h3 data-number="9.1.2" class="anchored" data-anchor-id="evolvability"><span class="header-section-number">9.1.2</span> Evolvability</h3>
-<p>Using Equations 6 in the paper, we can calculate the evolvability (CV_Al) of the trait <code>crange_size</code> (log-transformed trait; the location part), but the difficulty is that we need to calculate the phylogenetic variance on the orginal scale. We can do this by using the delta method. The details of this calculation are provided in this earlier work (see the supplmentary material):</p>
+<p>Using Equations 6 in the paper, we can calculate the evolvability (CV_Al) of the trait <code>crange_size</code> (log-transformed trait; the location part), but the difficulty is that we need to calculate the phylogenetic variance on the original scale. We can do this by using the delta method. The details of this calculation are provided in this earlier work (see the supplementary material):</p>
 <blockquote class="blockquote">
 <p>O’Dea RE, Noble DW, Nakagawa S. Unifying individual differences in personality, predictability and plasticity: a practical guide. Methods in Ecology and Evolution. 2022 Feb;13(2):278-93.</p>
 </blockquote>
@@ -4038,7 +4038,7 @@ vertical-align: -.125em;
 </div>
 </div>
 <p>If we get the CV on the log-scale, we can see the median evolvability is around 0.85 (nearly 10 times bigger); this CV for the location is probably more comparable to CV for the scale below (as it turns, our CV for the scale is not estimable on the original scale).</p>
-<p>We now estimate the evolvability of the trait <code>crange_size</code> (the scale part) using Equatoin 24 (we assume that this CV_As is the same as the value for the original scale):</p>
+<p>We now estimate the evolvability of the trait <code>crange_size</code> (the scale part) using Equation 24 (we assume that this CV_As is the same as the value for the original scale):</p>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
@@ -4104,7 +4104,7 @@ vertical-align: -.125em;
 </table>
 </div>
 </div>
-<p>We get the median evolvability of around 0.94, which is not that different from the evolvability of the mean estiamted on the log scale.</p>
+<p>We get the median evolvability of around 0.94, which is not that different from the evolvability of the mean estimated on the log scale.</p>
 <p>Also, we can use Equation 23:</p>
 <div class="cell">
 <details open class="code-fold">
@@ -4138,7 +4138,7 @@ vertical-align: -.125em;
 </div>
 </div>
 <p>This estimation, as expected, matches with that from Equation 24.</p>
-<p>We also try to get the evolvability for the sacle on the original scale</p>
+<p>We also try to get the evolvability for the scale part on the original scale</p>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
@@ -4179,7 +4179,7 @@ vertical-align: -.125em;
 </section>
 <section id="a-model-with-fixed-effects" class="level2" data-number="9.2">
 <h2 data-number="9.2" class="anchored" data-anchor-id="a-model-with-fixed-effects"><span class="header-section-number">9.2</span> a model with fixed effects</h2>
-<p>Here we use <code>mod2</code> as an example to see the hertiablity and evolvability of the trait <code>crange_size</code> after controlling for body mass <code>cmass</code>.</p>
+<p>Here we use <code>mod2</code> as an example to see the heritability and evolvability of the trait <code>crange_size</code> after controlling for body mass <code>cmass</code>.</p>
 <section id="phylogenetic-heritability-1" class="level3" data-number="9.2.1">
 <h3 data-number="9.2.1" class="anchored" data-anchor-id="phylogenetic-heritability-1"><span class="header-section-number">9.2.1</span> Phylogenetic heritability</h3>
 <p>Using Equations 14-17 in the paper, we can calculate the phylogenetic heritability of the trait <code>crange_size</code> (the location part) after controlling for body mass <code>cmass</code>:</p>
@@ -4202,11 +4202,10 @@ vertical-align: -.125em;
 <span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>sigma2_p <span class="ot">&lt;-</span> post<span class="sc">$</span>sd_Phylo__Intercept<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> sigma2_fl  <span class="sc">+</span> sigma2_e_bar</span>
 <span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Equation 14</span></span>
-<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>H2l <span class="ot">&lt;-</span> post<span class="sc">$</span>sd_Phylo__Intercept<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> sigma2_p</span>
-<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(H2)</span></span>
-<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(H2l, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>)) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>H2l <span class="ot">&lt;-</span> post<span class="sc">$</span>sd_Phylo__Intercept<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> sigma2_p</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(H2)</span></span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(H2l, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>)) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <table class="caption-top table table-sm table-striped small">
@@ -4284,7 +4283,7 @@ vertical-align: -.125em;
 </section>
 <section id="evolvability-1" class="level3" data-number="9.2.2">
 <h3 data-number="9.2.2" class="anchored" data-anchor-id="evolvability-1"><span class="header-section-number">9.2.2</span> Evolvability</h3>
-<p>Using Equations 6 in the paper, we can calculate the evolvability (CV_Al) of the trait <code>crange_size</code> (log-transformed trait; the location part), but we first need to back-trasform like we did above.</p>
+<p>Using Equations 6 in the paper, we can calculate the evolvability (CV_Al) of the trait <code>crange_size</code> (log-transformed trait; the location part), but we first need to back-transform as we did above.</p>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
@@ -4360,7 +4359,7 @@ vertical-align: -.125em;
 </div>
 </div>
 <p>If we get the CV on the log-scale, we can see the median evolvability is around 0.83, which is higher than what we got on the original scale (like above).</p>
-<p>We now estimate the evolvability of the trait <code>crange_size</code> (the scale part) using Equatoin 24 (we assume that this CV_As is the same as the value for the original scale):</p>
+<p>We now estimate the evolvability of the trait <code>crange_size</code> (the scale part) using Equation 24 (we assume that this CV_As is the same as the value for the original scale):</p>
 <div class="cell">
 <details open class="code-fold">
 <summary>Code</summary>
@@ -4426,7 +4425,7 @@ vertical-align: -.125em;
 </table>
 </div>
 </div>
-<p>We get the median evolvability of around 0.91, which is not that different from the evolvability of the mean estiamted on the log scale.</p>
+<p>We get the median evolvability of around 0.91, which is not that different from the evolvability of the mean estimated on the log scale.</p>
 <p>Additionally, we can use Equation 23:</p>
 <div class="cell">
 <details open class="code-fold">
@@ -4459,7 +4458,7 @@ vertical-align: -.125em;
 </table>
 </div>
 </div>
-<p>This estimation does matches with that from Equation 24 unlike the above. This is because now we have a fixed effect which is taken into account in account for obtaining the phylogenetic variance on the scale part: <code>sigma2_as_star</code> (we will not try to get the evolvability on the original scale as it does not seem to work).</p>
+<p>This estimation matches the result from Equation 24, unlike the one above. This is because we have now a fixed effect which is taken into account for obtaining the phylogenetic variance on the scale part: <code>sigma2_as_star</code> (we will not try to get the evolvability on the original scale as it does not seem to work).</p>
 </section>
 </section>
 </section>
@@ -4492,12 +4491,12 @@ vertical-align: -.125em;
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>() <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
-<p><strong>R version 4.4.1 (2024-06-14)</strong></p>
+<p><strong>R version 4.4.2 (2024-10-31)</strong></p>
 <p><strong>Platform:</strong> aarch64-apple-darwin20</p>
 <p><strong>locale:</strong> en_US.UTF-8||en_US.UTF-8||en_US.UTF-8||C||en_US.UTF-8||en_US.UTF-8</p>
 <p><strong>attached base packages:</strong> <em>stats</em>, <em>graphics</em>, <em>grDevices</em>, <em>utils</em>, <em>datasets</em>, <em>methods</em> and <em>base</em></p>
-<p><strong>other attached packages:</strong> <em>pander(v.0.6.5)</em>, <em>patchwork(v.1.3.0)</em>, <em>ape(v.5.8)</em>, <em>here(v.1.0.1)</em>, <em>tidybayes(v.3.0.6)</em>, <em>bayesplot(v.1.11.1)</em>, <em>brms(v.2.21.0)</em>, <em>Rcpp(v.1.0.13)</em>, <em>lubridate(v.1.9.4)</em>, <em>forcats(v.1.0.0)</em>, <em>stringr(v.1.5.1)</em>, <em>dplyr(v.1.1.4)</em>, <em>purrr(v.1.0.2)</em>, <em>readr(v.2.1.5)</em>, <em>tidyr(v.1.3.1)</em>, <em>tibble(v.3.2.1)</em>, <em>ggplot2(v.3.5.1)</em>, <em>tidyverse(v.2.0.0)</em> and <em>pacman(v.0.5.1)</em></p>
-<p><strong>loaded via a namespace (and not attached):</strong> <em>tidyselect(v.1.2.1)</em>, <em>svUnit(v.1.0.6)</em>, <em>farver(v.2.1.2)</em>, <em>loo(v.2.8.0)</em>, <em>fastmap(v.1.2.0)</em>, <em>TH.data(v.1.1-2)</em>, <em>tensorA(v.0.36.2.1)</em>, <em>digest(v.0.6.37)</em>, <em>timechange(v.0.3.0)</em>, <em>estimability(v.1.5.1)</em>, <em>lifecycle(v.1.0.4)</em>, <em>StanHeaders(v.2.32.10)</em>, <em>survival(v.3.6-4)</em>, <em>magrittr(v.2.0.3)</em>, <em>posterior(v.1.6.0)</em>, <em>compiler(v.4.4.1)</em>, <em>rlang(v.1.1.5)</em>, <em>tools(v.4.4.1)</em>, <em>yaml(v.2.3.10)</em>, <em>knitr(v.1.49)</em>, <em>labeling(v.0.4.3)</em>, <em>bridgesampling(v.1.1-2)</em>, <em>htmlwidgets(v.1.6.4)</em>, <em>pkgbuild(v.1.4.4)</em>, <em>plyr(v.1.8.9)</em>, <em>abind(v.1.4-5)</em>, <em>multcomp(v.1.4-26)</em>, <em>withr(v.3.0.2)</em>, <em>grid(v.4.4.1)</em>, <em>stats4(v.4.4.1)</em>, <em>xtable(v.1.8-4)</em>, <em>colorspace(v.2.1-1)</em>, <em>inline(v.0.3.19)</em>, <em>emmeans(v.1.10.7)</em>, <em>scales(v.1.3.0)</em>, <em>MASS(v.7.3-60.2)</em>, <em>cli(v.3.6.3)</em>, <em>mvtnorm(v.1.3-3)</em>, <em>rmarkdown(v.2.29)</em>, <em>generics(v.0.1.3)</em>, <em>RcppParallel(v.5.1.8)</em>, <em>rstudioapi(v.0.17.1)</em>, <em>reshape2(v.1.4.4)</em>, <em>tzdb(v.0.4.0)</em>, <em>rstan(v.2.32.6)</em>, <em>splines(v.4.4.1)</em>, <em>parallel(v.4.4.1)</em>, <em>matrixStats(v.1.3.0)</em>, <em>vctrs(v.0.6.5)</em>, <em>Matrix(v.1.7-0)</em>, <em>sandwich(v.3.1-0)</em>, <em>jsonlite(v.1.8.9)</em>, <em>hms(v.1.1.3)</em>, <em>arrayhelpers(v.1.1-0)</em>, <em>ggdist(v.3.3.2)</em>, <em>glue(v.1.8.0)</em>, <em>codetools(v.0.2-20)</em>, <em>distributional(v.0.4.0)</em>, <em>stringi(v.1.8.4)</em>, <em>gtable(v.0.3.6)</em>, <em>QuickJSR(v.1.3.1)</em>, <em>munsell(v.0.5.1)</em>, <em>pillar(v.1.10.1)</em>, <em>htmltools(v.0.5.8.1)</em>, <em>Brobdingnag(v.1.2-9)</em>, <em>R6(v.2.5.1)</em>, <em>rprojroot(v.2.0.4)</em>, <em>evaluate(v.1.0.3)</em>, <em>lattice(v.0.22-6)</em>, <em>backports(v.1.5.0)</em>, <em>rstantools(v.2.4.0)</em>, <em>coda(v.0.19-4.1)</em>, <em>gridExtra(v.2.3)</em>, <em>nlme(v.3.1-164)</em>, <em>checkmate(v.2.3.2)</em>, <em>xfun(v.0.50)</em>, <em>zoo(v.1.8-12)</em> and <em>pkgconfig(v.2.0.3)</em></p>
+<p><strong>other attached packages:</strong> <em>pander(v.0.6.6)</em>, <em>patchwork(v.1.3.0)</em>, <em>ape(v.5.8-1)</em>, <em>here(v.1.0.1)</em>, <em>tidybayes(v.3.0.7)</em>, <em>bayesplot(v.1.11.1)</em>, <em>brms(v.2.22.0)</em>, <em>Rcpp(v.1.0.14)</em>, <em>lubridate(v.1.9.4)</em>, <em>forcats(v.1.0.0)</em>, <em>stringr(v.1.5.1)</em>, <em>dplyr(v.1.1.4)</em>, <em>purrr(v.1.0.4)</em>, <em>readr(v.2.1.5)</em>, <em>tidyr(v.1.3.1)</em>, <em>tibble(v.3.2.1)</em>, <em>ggplot2(v.3.5.1)</em>, <em>tidyverse(v.2.0.0)</em> and <em>pacman(v.0.5.1)</em></p>
+<p><strong>loaded via a namespace (and not attached):</strong> <em>Rdpack(v.2.6.2)</em>, <em>gridExtra(v.2.3)</em>, <em>inline(v.0.3.21)</em>, <em>sandwich(v.3.1-1)</em>, <em>rlang(v.1.1.5)</em>, <em>magrittr(v.2.0.3)</em>, <em>multcomp(v.1.4-28)</em>, <em>matrixStats(v.1.5.0)</em>, <em>compiler(v.4.4.2)</em>, <em>loo(v.2.8.0)</em>, <em>reshape2(v.1.4.4)</em>, <em>vctrs(v.0.6.5)</em>, <em>pkgconfig(v.2.0.3)</em>, <em>arrayhelpers(v.1.1-0)</em>, <em>fastmap(v.1.2.0)</em>, <em>backports(v.1.5.0)</em>, <em>labeling(v.0.4.3)</em>, <em>threejs(v.0.3.3)</em>, <em>promises(v.1.3.2)</em>, <em>rmarkdown(v.2.29)</em>, <em>markdown(v.1.13)</em>, <em>tzdb(v.0.4.0)</em>, <em>nloptr(v.2.2.0)</em>, <em>xfun(v.0.51)</em>, <em>jsonlite(v.1.9.1)</em>, <em>later(v.1.4.1)</em>, <em>parallel(v.4.4.2)</em>, <em>R6(v.2.6.1)</em>, <em>dygraphs(v.1.1.1.6)</em>, <em>stringi(v.1.8.4)</em>, <em>StanHeaders(v.2.32.10)</em>, <em>boot(v.1.3-31)</em>, <em>estimability(v.1.5.1)</em>, <em>rstan(v.2.32.7)</em>, <em>knitr(v.1.50)</em>, <em>zoo(v.1.8-13)</em>, <em>base64enc(v.0.1-3)</em>, <em>httpuv(v.1.6.15)</em>, <em>Matrix(v.1.7-3)</em>, <em>splines(v.4.4.2)</em>, <em>igraph(v.2.1.4)</em>, <em>timechange(v.0.3.0)</em>, <em>tidyselect(v.1.2.1)</em>, <em>rstudioapi(v.0.17.1)</em>, <em>abind(v.1.4-8)</em>, <em>yaml(v.2.3.10)</em>, <em>codetools(v.0.2-20)</em>, <em>miniUI(v.0.1.1.1)</em>, <em>pkgbuild(v.1.4.6)</em>, <em>plyr(v.1.8.9)</em>, <em>lattice(v.0.22-6)</em>, <em>shiny(v.1.10.0)</em>, <em>withr(v.3.0.2)</em>, <em>bridgesampling(v.1.1-2)</em>, <em>posterior(v.1.6.1)</em>, <em>coda(v.0.19-4.1)</em>, <em>evaluate(v.1.0.3)</em>, <em>survival(v.3.8-3)</em>, <em>RcppParallel(v.5.1.10)</em>, <em>ggdist(v.3.3.2)</em>, <em>xts(v.0.14.1)</em>, <em>pillar(v.1.10.1)</em>, <em>tensorA(v.0.36.2.1)</em>, <em>checkmate(v.2.3.2)</em>, <em>DT(v.0.33)</em>, <em>stats4(v.4.4.2)</em>, <em>reformulas(v.0.4.0)</em>, <em>shinyjs(v.2.1.0)</em>, <em>distributional(v.0.5.0)</em>, <em>generics(v.0.1.3)</em>, <em>rprojroot(v.2.0.4)</em>, <em>hms(v.1.1.3)</em>, <em>rstantools(v.2.4.0)</em>, <em>munsell(v.0.5.1)</em>, <em>scales(v.1.3.0)</em>, <em>minqa(v.1.2.8)</em>, <em>gtools(v.3.9.5)</em>, <em>xtable(v.1.8-4)</em>, <em>glue(v.1.8.0)</em>, <em>emmeans(v.1.10.7)</em>, <em>tools(v.4.4.2)</em>, <em>shinystan(v.2.6.0)</em>, <em>lme4(v.1.1-36)</em>, <em>colourpicker(v.1.3.0)</em>, <em>mvtnorm(v.1.3-3)</em>, <em>grid(v.4.4.2)</em>, <em>rbibutils(v.2.3)</em>, <em>QuickJSR(v.1.6.0)</em>, <em>crosstalk(v.1.2.1)</em>, <em>colorspace(v.2.1-1)</em>, <em>nlme(v.3.1-167)</em>, <em>cli(v.3.6.4)</em>, <em>svUnit(v.1.0.6)</em>, <em>Brobdingnag(v.1.2-9)</em>, <em>gtable(v.0.3.6)</em>, <em>digest(v.0.6.37)</em>, <em>TH.data(v.1.1-3)</em>, <em>htmlwidgets(v.1.6.4)</em>, <em>farver(v.2.1.2)</em>, <em>htmltools(v.0.5.8.1)</em>, <em>lifecycle(v.1.0.4)</em>, <em>mime(v.0.12)</em>, <em>rstanarm(v.2.32.1)</em>, <em>shinythemes(v.1.2.0)</em> and <em>MASS(v.7.3-65)</em></p>
 </div>
 </div>
 <!-- -->
@@ -4978,7 +4977,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class>
 <div class="sourceCode" id="cb32" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;ONLINE SUPPLMENT: Quantifying macro-evolutionary patterns of trait mean and variance with phylogenetic location-scale models&quot;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;ONLINE SUPPLEMENT: Quantifying macro-evolutionary patterns of trait mean and variance with phylogenetic location-scale models&quot;</span></span>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> &quot;**Shinichi Nakagawa, Ayumi Mizuno, Coralie Williams, Malgorzata Lagisz, Yefeng Yang and Szymon M Drobniak**&quot;</span></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co">  html:</span></span>
@@ -5047,15 +5046,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb32-68"><a href="#cb32-68" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-69"><a href="#cb32-69" aria-hidden="true" tabindex="-1"></a>All results presented in this online material are for illustrative purposes only (more careful thoughts are required to draw biological conclusions). </span>
 <span id="cb32-70"><a href="#cb32-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-71"><a href="#cb32-71" aria-hidden="true" tabindex="-1"></a>Additionally, we will show how to obtain phylogenetic heritablity and evolvability from the fitted <span class="in">`brms`</span> object.</span>
+<span id="cb32-71"><a href="#cb32-71" aria-hidden="true" tabindex="-1"></a>Additionally, we will show how to obtain phylogenetic heritability and evolvability from the fitted <span class="in">`brms`</span> object.</span>
 <span id="cb32-72"><a href="#cb32-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-73"><a href="#cb32-73" aria-hidden="true" tabindex="-1"></a>Also, importantly, there is a sister paper to this one, which focuses on locatoin-scale meta-analytic and meta-regression. You can find the sister paper&#39;s tutorial <span class="co">[</span><span class="ot">here</span><span class="co">](https://itchyshin.github.io/location-scale_meta-analysis/#multilevel-meta-analysis-and-location-scale-meta-regression)</span>; also, the preprint of the sister paper is available on <span class="co">[</span><span class="ot">EcoEvoRxiv</span><span class="co">](https://ecoevorxiv.org/repository/view/8540/)</span>:</span>
+<span id="cb32-73"><a href="#cb32-73" aria-hidden="true" tabindex="-1"></a>Also, importantly, there is a sister paper to this one, which focuses on location-scale meta-analytic and meta-regression. You can find the sister paper&#39;s tutorial <span class="co">[</span><span class="ot">here</span><span class="co">](https://itchyshin.github.io/location-scale_meta-analysis/#multilevel-meta-analysis-and-location-scale-meta-regression)</span>; also, the preprint of this sister paper is available on <span class="co">[</span><span class="ot">EcoEvoRxiv</span><span class="co">](https://ecoevorxiv.org/repository/view/8540/)</span>:</span>
 <span id="cb32-74"><a href="#cb32-74" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-75"><a href="#cb32-75" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Nakagawa S, Mizuno A, Morrison K, Ricolfi L, Williams C, Drobniak SM, Lagisz M, Yang Y. Location-scale Meta-analysis and Meta-regression as a Tool to Capture Large-scale Changes in Biological and Methodological Heterogeneity: a Spotlight on Heteroscedasticity. EcoEvoRxiv. 2025. </span></span>
 <span id="cb32-76"><a href="#cb32-76" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-77"><a href="#cb32-77" aria-hidden="true" tabindex="-1"></a>This tutorial has several tips to run location-scale models using <span class="in">`brms`</span>. </span>
 <span id="cb32-78"><a href="#cb32-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-79"><a href="#cb32-79" aria-hidden="true" tabindex="-1"></a>Furthermore, we have another sister (you are in luck) paper, which teaches Bayesian generalised linear modelling both for continuous and discrete traits. You can find the tutorial <span class="co">[</span><span class="ot">here</span><span class="co">](https://ayumi-495.github.io/multinomial-GLMM-tutorial/)</span>; also, the preprint of the sister paper is available on <span class="co">[</span><span class="ot">EcoEvoRxiv</span><span class="co">](https://ecoevorxiv.org/repository/view/8458/)</span>:</span>
+<span id="cb32-79"><a href="#cb32-79" aria-hidden="true" tabindex="-1"></a>Furthermore, we have another sister (you are in luck) paper, which teaches Bayesian generalised linear modelling both for continuous and discrete traits. You can find the tutorial <span class="co">[</span><span class="ot">here</span><span class="co">](https://ayumi-495.github.io/multinomial-GLMM-tutorial/)</span>; also, the preprint of this sister paper is available on <span class="co">[</span><span class="ot">EcoEvoRxiv</span><span class="co">](https://ecoevorxiv.org/repository/view/8458/)</span>:</span>
 <span id="cb32-80"><a href="#cb32-80" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-81"><a href="#cb32-81" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Mizuno, A., Drobniak, S.M., Williams, C., Lagisz, M. and Nakagawa, S., 2025. Promoting the use of phylogenetic multinomial generalised mixed-effects model to understand the evolution of discrete traits. EcoEvoRxiv. 2025. </span></span>
 <span id="cb32-82"><a href="#cb32-82" aria-hidden="true" tabindex="-1"></a></span>
@@ -5236,7 +5235,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb32-259"><a href="#cb32-259" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb32-260"><a href="#cb32-260" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-261"><a href="#cb32-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-262"><a href="#cb32-262" aria-hidden="true" tabindex="-1"></a><span class="fu"># Data loding and preparation</span></span>
+<span id="cb32-262"><a href="#cb32-262" aria-hidden="true" tabindex="-1"></a><span class="fu"># Data loading and preparation</span></span>
 <span id="cb32-263"><a href="#cb32-263" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-264"><a href="#cb32-264" aria-hidden="true" tabindex="-1"></a>We use the data from **Avonet**:</span>
 <span id="cb32-265"><a href="#cb32-265" aria-hidden="true" tabindex="-1"></a></span>
@@ -5244,7 +5243,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb32-267"><a href="#cb32-267" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Avonet: morphological, ecological and geographical data for all birds.</span></span>
 <span id="cb32-268"><a href="#cb32-268" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Ecology Letters, 25(3):581–597, 2022</span></span>
 <span id="cb32-269"><a href="#cb32-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-270"><a href="#cb32-270" aria-hidden="true" tabindex="-1"></a>As described in the paper, we only use parrows species (*N* = 354) and we use phylogenetic trees form Jetz et al. (2012):</span>
+<span id="cb32-270"><a href="#cb32-270" aria-hidden="true" tabindex="-1"></a>As described in the paper, we only use parrot species (*N* = 354) and we use phylogenetic trees form Jetz et al. (2012):</span>
 <span id="cb32-271"><a href="#cb32-271" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-272"><a href="#cb32-272" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; W. Jetz, G. H. Thomas, J. B. Joy, K. Hartmann, and A. O. Mooers. The global diversity of birds in space and time.</span></span>
 <span id="cb32-273"><a href="#cb32-273" aria-hidden="true" tabindex="-1"></a><span class="at">Nature, 491(7424):444–448, 2012</span></span>
@@ -5305,7 +5304,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb32-332"><a href="#cb32-332" aria-hidden="true" tabindex="-1"></a><span class="co">#| eval: false</span></span>
 <span id="cb32-333"><a href="#cb32-333" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-334"><a href="#cb32-334" aria-hidden="true" tabindex="-1"></a><span class="co"># creating the formula</span></span>
-<span id="cb32-335"><a href="#cb32-335" aria-hidden="true" tabindex="-1"></a>form1 <span class="ot">&lt;-</span> <span class="fu">bf</span>(cbeak_length <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> cmass <span class="sc">+</span> forest <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> <span class="fu">gr</span>(Phylo, <span class="at">cov =</span> A)) </span>
+<span id="cb32-335"><a href="#cb32-335" aria-hidden="true" tabindex="-1"></a>form1 <span class="ot">&lt;-</span> <span class="fu">bf</span>(cbeak_length <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> cmass <span class="sc">+</span> forest <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> <span class="fu">gr</span>(Phylo, <span class="at">cov =</span> A)), </span>
 <span id="cb32-336"><a href="#cb32-336" aria-hidden="true" tabindex="-1"></a>         sigma <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> cmass <span class="sc">+</span> forest</span>
 <span id="cb32-337"><a href="#cb32-337" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb32-338"><a href="#cb32-338" aria-hidden="true" tabindex="-1"></a></span>
@@ -5343,7 +5342,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb32-372"><a href="#cb32-372" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-373"><a href="#cb32-373" aria-hidden="true" tabindex="-1"></a><span class="fu">## Visualizing results</span></span>
 <span id="cb32-374"><a href="#cb32-374" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-375"><a href="#cb32-375" aria-hidden="true" tabindex="-1"></a>We can visualize the results (posteior distributions) of parameters (i.e., regression coefficents, variance/standard deviation components and correlations) using the custom functions we defined earlier.</span>
+<span id="cb32-375"><a href="#cb32-375" aria-hidden="true" tabindex="-1"></a>We can visualize the results (posterior distributions) of parameters (i.e., regression coefficients, variance and standard deviation components, and correlations) using the custom functions we defined earlier.</span>
 <span id="cb32-376"><a href="#cb32-376" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-379"><a href="#cb32-379" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb32-380"><a href="#cb32-380" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
@@ -5514,7 +5513,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb32-557"><a href="#cb32-557" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-558"><a href="#cb32-558" aria-hidden="true" tabindex="-1"></a><span class="fu"># Bonus: obtaining phylogenetic heritability and evolvability (phylogenetic CV)</span></span>
 <span id="cb32-559"><a href="#cb32-559" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-560"><a href="#cb32-560" aria-hidden="true" tabindex="-1"></a>Below, we show how to calculate phylogenetic heritability and evolvability from the fitted <span class="in">`brms`</span> object with and without a fixed effect(s). As you will see, phylogenetic hertiaiblity is fairly straightforward to obtain but evolvability is a bit more complex as it is not clear what sacle to calculate it on (e.g., log-scale or original scale). In fact, the same issue should be relevant to phylogenetic heritability as well but we do not consider this here. </span>
+<span id="cb32-560"><a href="#cb32-560" aria-hidden="true" tabindex="-1"></a>Below, we show how to calculate phylogenetic heritability and evolvability from the fitted <span class="in">`brms`</span> object with and without a fixed effect(s). As you will see, phylogenetic heritability is fairly straightforward to obtain but evolvability is a bit more complex as it is not clear what scale to calculate it on (e.g., log-scale or original scale). In fact, the same issue should be relevant to phylogenetic heritability as well but we do not consider this here. </span>
 <span id="cb32-561"><a href="#cb32-561" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-562"><a href="#cb32-562" aria-hidden="true" tabindex="-1"></a><span class="fu">## a model without fixed effects</span></span>
 <span id="cb32-563"><a href="#cb32-563" aria-hidden="true" tabindex="-1"></a></span>
@@ -5566,7 +5565,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb32-613"><a href="#cb32-613" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-614"><a href="#cb32-614" aria-hidden="true" tabindex="-1"></a><span class="fu">### Phylogenetic heritability</span></span>
 <span id="cb32-615"><a href="#cb32-615" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-616"><a href="#cb32-616" aria-hidden="true" tabindex="-1"></a>Using Equations 14,  15 &amp; 17 in the paper, we can calculate the phylogenetic heritability of the trait <span class="in">`crange_size`</span> (the location part):</span>
+<span id="cb32-616"><a href="#cb32-616" aria-hidden="true" tabindex="-1"></a>Using Equations 14, 15 &amp; 17 in the paper, we can calculate the phylogenetic heritability of the trait <span class="in">`crange_size`</span> (the location part):</span>
 <span id="cb32-617"><a href="#cb32-617" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-620"><a href="#cb32-620" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb32-621"><a href="#cb32-621" aria-hidden="true" tabindex="-1"></a><span class="co"># sigma2_p (total phenotypic variance)</span></span>
@@ -5613,7 +5612,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb32-664"><a href="#cb32-664" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-665"><a href="#cb32-665" aria-hidden="true" tabindex="-1"></a><span class="fu">### Evolvability</span></span>
 <span id="cb32-666"><a href="#cb32-666" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-667"><a href="#cb32-667" aria-hidden="true" tabindex="-1"></a>Using Equations 6 in the paper, we can calculate the evolvability (CV_Al) of the trait <span class="in">`crange_size`</span> (log-transformed trait; the location part), but the difficulty is that we need to calculate the phylogenetic variance on the orginal scale. We can do this by using the delta method. The details of this calculation are provided in this earlier work (see the supplmentary material):</span>
+<span id="cb32-667"><a href="#cb32-667" aria-hidden="true" tabindex="-1"></a>Using Equations 6 in the paper, we can calculate the evolvability (CV_Al) of the trait <span class="in">`crange_size`</span> (log-transformed trait; the location part), but the difficulty is that we need to calculate the phylogenetic variance on the original scale. We can do this by using the delta method. The details of this calculation are provided in this earlier work (see the supplementary material):</span>
 <span id="cb32-668"><a href="#cb32-668" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-669"><a href="#cb32-669" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; O&#39;Dea RE, Noble DW, Nakagawa S. Unifying individual differences in personality, predictability and plasticity: a practical guide. Methods in Ecology and Evolution. 2022 Feb;13(2):278-93.</span></span>
 <span id="cb32-670"><a href="#cb32-670" aria-hidden="true" tabindex="-1"></a></span>
@@ -5643,7 +5642,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb32-698"><a href="#cb32-698" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-699"><a href="#cb32-699" aria-hidden="true" tabindex="-1"></a>If we get the CV on the log-scale, we can see the median evolvability is around 0.85 (nearly 10 times bigger); this CV for the location is probably more comparable to CV for the scale below (as it turns, our CV for the scale is not estimable on the original scale). </span>
 <span id="cb32-700"><a href="#cb32-700" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-701"><a href="#cb32-701" aria-hidden="true" tabindex="-1"></a>We now estimate the evolvability of the trait <span class="in">`crange_size`</span> (the scale part) using Equatoin 24 (we assume that this CV_As is the same as the value for the original scale):</span>
+<span id="cb32-701"><a href="#cb32-701" aria-hidden="true" tabindex="-1"></a>We now estimate the evolvability of the trait <span class="in">`crange_size`</span> (the scale part) using Equation 24 (we assume that this CV_As is the same as the value for the original scale):</span>
 <span id="cb32-702"><a href="#cb32-702" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-705"><a href="#cb32-705" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb32-706"><a href="#cb32-706" aria-hidden="true" tabindex="-1"></a>CV_As <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">exp</span>(<span class="dv">4</span><span class="sc">*</span>post<span class="sc">$</span>sd_Phylo__sigma_Intercept<span class="sc">^</span><span class="dv">2</span>) <span class="sc">-</span> <span class="dv">1</span>)</span>
@@ -5660,7 +5659,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb32-719"><a href="#cb32-719" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(CV_As2, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>)) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span>
 <span id="cb32-720"><a href="#cb32-720" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb32-721"><a href="#cb32-721" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-722"><a href="#cb32-722" aria-hidden="true" tabindex="-1"></a>We get the median evolvability of around 0.94, which is not that different from the evolvability of the mean estiamted on the log scale. </span>
+<span id="cb32-722"><a href="#cb32-722" aria-hidden="true" tabindex="-1"></a>We get the median evolvability of around 0.94, which is not that different from the evolvability of the mean estimated on the log scale. </span>
 <span id="cb32-723"><a href="#cb32-723" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-724"><a href="#cb32-724" aria-hidden="true" tabindex="-1"></a>Also, we can use Equation 23:</span>
 <span id="cb32-725"><a href="#cb32-725" aria-hidden="true" tabindex="-1"></a></span>
@@ -5672,7 +5671,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb32-733"><a href="#cb32-733" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-734"><a href="#cb32-734" aria-hidden="true" tabindex="-1"></a>This estimation, as expected, matches with that from Equation 24. </span>
 <span id="cb32-735"><a href="#cb32-735" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-736"><a href="#cb32-736" aria-hidden="true" tabindex="-1"></a>We also try to get the evolvability for the sacle on the original scale</span>
+<span id="cb32-736"><a href="#cb32-736" aria-hidden="true" tabindex="-1"></a>We also try to get the evolvability for the scale part on the original scale</span>
 <span id="cb32-737"><a href="#cb32-737" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-740"><a href="#cb32-740" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
 <span id="cb32-741"><a href="#cb32-741" aria-hidden="true" tabindex="-1"></a><span class="co"># original scale conversion does not seem to make sense so commented out</span></span>
@@ -5688,7 +5687,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb32-751"><a href="#cb32-751" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-752"><a href="#cb32-752" aria-hidden="true" tabindex="-1"></a><span class="fu">## a model with fixed effects</span></span>
 <span id="cb32-753"><a href="#cb32-753" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-754"><a href="#cb32-754" aria-hidden="true" tabindex="-1"></a>Here we use <span class="in">`mod2`</span> as an example to see the hertiablity and evolvability of the trait <span class="in">`crange_size`</span> after controlling for body mass <span class="in">`cmass`</span>.</span>
+<span id="cb32-754"><a href="#cb32-754" aria-hidden="true" tabindex="-1"></a>Here we use <span class="in">`mod2`</span> as an example to see the heritability and evolvability of the trait <span class="in">`crange_size`</span> after controlling for body mass <span class="in">`cmass`</span>.</span>
 <span id="cb32-755"><a href="#cb32-755" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-756"><a href="#cb32-756" aria-hidden="true" tabindex="-1"></a><span class="fu">### Phylogenetic heritability</span></span>
 <span id="cb32-757"><a href="#cb32-757" aria-hidden="true" tabindex="-1"></a></span>
@@ -5710,120 +5709,119 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb32-775"><a href="#cb32-775" aria-hidden="true" tabindex="-1"></a>sigma2_p <span class="ot">&lt;-</span> post<span class="sc">$</span>sd_Phylo__Intercept<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> sigma2_fl  <span class="sc">+</span> sigma2_e_bar</span>
 <span id="cb32-776"><a href="#cb32-776" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-777"><a href="#cb32-777" aria-hidden="true" tabindex="-1"></a><span class="co"># Equation 14</span></span>
-<span id="cb32-778"><a href="#cb32-778" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-779"><a href="#cb32-779" aria-hidden="true" tabindex="-1"></a>H2l <span class="ot">&lt;-</span> post<span class="sc">$</span>sd_Phylo__Intercept<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> sigma2_p</span>
-<span id="cb32-780"><a href="#cb32-780" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-781"><a href="#cb32-781" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(H2)</span></span>
-<span id="cb32-782"><a href="#cb32-782" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(H2l, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>)) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span>
-<span id="cb32-783"><a href="#cb32-783" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-784"><a href="#cb32-784" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-785"><a href="#cb32-785" aria-hidden="true" tabindex="-1"></a>We can see the median phylogenetic heritablity is around 45%.</span>
-<span id="cb32-786"><a href="#cb32-786" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-787"><a href="#cb32-787" aria-hidden="true" tabindex="-1"></a>Using Equations 18-21 in the paper, we can calculate the phylogenetic heritability of the trait <span class="in">`crange_size`</span> (the scale part):</span>
-<span id="cb32-788"><a href="#cb32-788" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-791"><a href="#cb32-791" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-792"><a href="#cb32-792" aria-hidden="true" tabindex="-1"></a><span class="co"># Equation 22 - sigma2_fs</span></span>
-<span id="cb32-793"><a href="#cb32-793" aria-hidden="true" tabindex="-1"></a>sigma2_fs <span class="ot">&lt;-</span> <span class="fu">sapply</span>(post<span class="sc">$</span>b_sigma_cmass, <span class="cf">function</span>(b) <span class="fu">var</span>(b<span class="sc">*</span>dat<span class="sc">$</span>cmass))</span>
-<span id="cb32-794"><a href="#cb32-794" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-795"><a href="#cb32-795" aria-hidden="true" tabindex="-1"></a><span class="co"># Equation 21 - sigma2_sigma2_e (variance of the residual variance)</span></span>
-<span id="cb32-796"><a href="#cb32-796" aria-hidden="true" tabindex="-1"></a>sigma2_sigma2_e <span class="ot">&lt;-</span> (<span class="fu">exp</span>(<span class="dv">4</span><span class="sc">*</span>(post<span class="sc">$</span>sd_Phylo__sigma_Intercept<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> sigma2_fs)) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="fu">exp</span>(<span class="dv">4</span><span class="sc">*</span>(post<span class="sc">$</span>b_sigma_Intercept <span class="sc">+</span> post<span class="sc">$</span>sd_Phylo__sigma_Intercept<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> sigma2_fs))</span>
-<span id="cb32-797"><a href="#cb32-797" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-798"><a href="#cb32-798" aria-hidden="true" tabindex="-1"></a><span class="co"># Equation 19 - sigma2_a_star </span></span>
-<span id="cb32-799"><a href="#cb32-799" aria-hidden="true" tabindex="-1"></a>sigma2_as_star <span class="ot">&lt;-</span> sigma2_sigma2_e <span class="sc">*</span> (post<span class="sc">$</span>sd_Phylo__sigma_Intercept<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span>(post<span class="sc">$</span>sd_Phylo__sigma_Intercept<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> sigma2_fs))</span>
-<span id="cb32-800"><a href="#cb32-800" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-801"><a href="#cb32-801" aria-hidden="true" tabindex="-1"></a><span class="co"># Equation 20 - sigma2_sigma2_p (variance of the total phenotypic variance)</span></span>
-<span id="cb32-802"><a href="#cb32-802" aria-hidden="true" tabindex="-1"></a>sigma2_sigma2_p <span class="ot">=</span> sigma2_p <span class="sc">^</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> sigma2_sigma2_e</span>
-<span id="cb32-803"><a href="#cb32-803" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-804"><a href="#cb32-804" aria-hidden="true" tabindex="-1"></a><span class="co"># Equation 18</span></span>
-<span id="cb32-805"><a href="#cb32-805" aria-hidden="true" tabindex="-1"></a>H2s <span class="ot">&lt;-</span> sigma2_as_star <span class="sc">/</span> sigma2_sigma2_p</span>
-<span id="cb32-806"><a href="#cb32-806" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-807"><a href="#cb32-807" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(H2)</span></span>
-<span id="cb32-808"><a href="#cb32-808" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(H2s, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>)) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span>
-<span id="cb32-809"><a href="#cb32-809" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-810"><a href="#cb32-810" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-811"><a href="#cb32-811" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-812"><a href="#cb32-812" aria-hidden="true" tabindex="-1"></a>Here we found a median phylogenetic heritability of around 28%.</span>
-<span id="cb32-813"><a href="#cb32-813" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-814"><a href="#cb32-814" aria-hidden="true" tabindex="-1"></a><span class="fu">### Evolvability</span></span>
-<span id="cb32-815"><a href="#cb32-815" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-816"><a href="#cb32-816" aria-hidden="true" tabindex="-1"></a>Using Equations 6 in the paper, we can calculate the evolvability (CV_Al) of the trait <span class="in">`crange_size`</span> (log-transformed trait; the location part), but we first need to back-trasform like we did above. </span>
-<span id="cb32-817"><a href="#cb32-817" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-820"><a href="#cb32-820" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-821"><a href="#cb32-821" aria-hidden="true" tabindex="-1"></a><span class="co"># exp(b0) is the median of the trait</span></span>
-<span id="cb32-822"><a href="#cb32-822" aria-hidden="true" tabindex="-1"></a>ln_b0 <span class="ot">&lt;-</span> post<span class="sc">$</span>b_Intercept  <span class="sc">+</span> <span class="fu">mean</span>(<span class="fu">log</span>(dat<span class="sc">$</span>Range.Size), <span class="at">na.rm =</span> T)</span>
-<span id="cb32-823"><a href="#cb32-823" aria-hidden="true" tabindex="-1"></a>sigma2_al <span class="ot">&lt;-</span> post<span class="sc">$</span>sd_Phylo__Intercept<span class="sc">^</span><span class="dv">2</span> </span>
-<span id="cb32-824"><a href="#cb32-824" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-825"><a href="#cb32-825" aria-hidden="true" tabindex="-1"></a>mean_b0 <span class="ot">&lt;-</span> <span class="fu">exp</span>(ln_b0 <span class="sc">+</span>  <span class="fl">0.5</span> <span class="sc">*</span> (sigma2_al <span class="sc">+</span>  sigma2_e_bar) )</span>
-<span id="cb32-826"><a href="#cb32-826" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-827"><a href="#cb32-827" aria-hidden="true" tabindex="-1"></a><span class="co"># (exp(sigma_ln^2) - 1) * exp(2 * mu_ln + sigma_ln^2)</span></span>
-<span id="cb32-828"><a href="#cb32-828" aria-hidden="true" tabindex="-1"></a>sd_al <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( (<span class="fu">exp</span>(sigma2_al) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="fu">exp</span>(<span class="dv">2</span><span class="sc">*</span>ln_b0 <span class="sc">+</span> sigma2_al) )</span>
-<span id="cb32-829"><a href="#cb32-829" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-830"><a href="#cb32-830" aria-hidden="true" tabindex="-1"></a>CV_Al <span class="ot">&lt;-</span> sd_al <span class="sc">/</span> mean_b0</span>
+<span id="cb32-778"><a href="#cb32-778" aria-hidden="true" tabindex="-1"></a>H2l <span class="ot">&lt;-</span> post<span class="sc">$</span>sd_Phylo__Intercept<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> sigma2_p</span>
+<span id="cb32-779"><a href="#cb32-779" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-780"><a href="#cb32-780" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(H2)</span></span>
+<span id="cb32-781"><a href="#cb32-781" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(H2l, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>)) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span>
+<span id="cb32-782"><a href="#cb32-782" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-783"><a href="#cb32-783" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-784"><a href="#cb32-784" aria-hidden="true" tabindex="-1"></a>We can see the median phylogenetic heritablity is around 45%.</span>
+<span id="cb32-785"><a href="#cb32-785" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-786"><a href="#cb32-786" aria-hidden="true" tabindex="-1"></a>Using Equations 18-21 in the paper, we can calculate the phylogenetic heritability of the trait <span class="in">`crange_size`</span> (the scale part):</span>
+<span id="cb32-787"><a href="#cb32-787" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-790"><a href="#cb32-790" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-791"><a href="#cb32-791" aria-hidden="true" tabindex="-1"></a><span class="co"># Equation 22 - sigma2_fs</span></span>
+<span id="cb32-792"><a href="#cb32-792" aria-hidden="true" tabindex="-1"></a>sigma2_fs <span class="ot">&lt;-</span> <span class="fu">sapply</span>(post<span class="sc">$</span>b_sigma_cmass, <span class="cf">function</span>(b) <span class="fu">var</span>(b<span class="sc">*</span>dat<span class="sc">$</span>cmass))</span>
+<span id="cb32-793"><a href="#cb32-793" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-794"><a href="#cb32-794" aria-hidden="true" tabindex="-1"></a><span class="co"># Equation 21 - sigma2_sigma2_e (variance of the residual variance)</span></span>
+<span id="cb32-795"><a href="#cb32-795" aria-hidden="true" tabindex="-1"></a>sigma2_sigma2_e <span class="ot">&lt;-</span> (<span class="fu">exp</span>(<span class="dv">4</span><span class="sc">*</span>(post<span class="sc">$</span>sd_Phylo__sigma_Intercept<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> sigma2_fs)) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="fu">exp</span>(<span class="dv">4</span><span class="sc">*</span>(post<span class="sc">$</span>b_sigma_Intercept <span class="sc">+</span> post<span class="sc">$</span>sd_Phylo__sigma_Intercept<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> sigma2_fs))</span>
+<span id="cb32-796"><a href="#cb32-796" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-797"><a href="#cb32-797" aria-hidden="true" tabindex="-1"></a><span class="co"># Equation 19 - sigma2_a_star </span></span>
+<span id="cb32-798"><a href="#cb32-798" aria-hidden="true" tabindex="-1"></a>sigma2_as_star <span class="ot">&lt;-</span> sigma2_sigma2_e <span class="sc">*</span> (post<span class="sc">$</span>sd_Phylo__sigma_Intercept<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span>(post<span class="sc">$</span>sd_Phylo__sigma_Intercept<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> sigma2_fs))</span>
+<span id="cb32-799"><a href="#cb32-799" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-800"><a href="#cb32-800" aria-hidden="true" tabindex="-1"></a><span class="co"># Equation 20 - sigma2_sigma2_p (variance of the total phenotypic variance)</span></span>
+<span id="cb32-801"><a href="#cb32-801" aria-hidden="true" tabindex="-1"></a>sigma2_sigma2_p <span class="ot">=</span> sigma2_p <span class="sc">^</span> <span class="dv">2</span> <span class="sc">+</span> <span class="dv">3</span> <span class="sc">*</span> sigma2_sigma2_e</span>
+<span id="cb32-802"><a href="#cb32-802" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-803"><a href="#cb32-803" aria-hidden="true" tabindex="-1"></a><span class="co"># Equation 18</span></span>
+<span id="cb32-804"><a href="#cb32-804" aria-hidden="true" tabindex="-1"></a>H2s <span class="ot">&lt;-</span> sigma2_as_star <span class="sc">/</span> sigma2_sigma2_p</span>
+<span id="cb32-805"><a href="#cb32-805" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-806"><a href="#cb32-806" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(H2)</span></span>
+<span id="cb32-807"><a href="#cb32-807" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(H2s, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>)) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span>
+<span id="cb32-808"><a href="#cb32-808" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-809"><a href="#cb32-809" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-810"><a href="#cb32-810" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-811"><a href="#cb32-811" aria-hidden="true" tabindex="-1"></a>Here we found a median phylogenetic heritability of around 28%.</span>
+<span id="cb32-812"><a href="#cb32-812" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-813"><a href="#cb32-813" aria-hidden="true" tabindex="-1"></a><span class="fu">### Evolvability</span></span>
+<span id="cb32-814"><a href="#cb32-814" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-815"><a href="#cb32-815" aria-hidden="true" tabindex="-1"></a>Using Equations 6 in the paper, we can calculate the evolvability (CV_Al) of the trait <span class="in">`crange_size`</span> (log-transformed trait; the location part), but we first need to back-transform as we did above. </span>
+<span id="cb32-816"><a href="#cb32-816" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-819"><a href="#cb32-819" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-820"><a href="#cb32-820" aria-hidden="true" tabindex="-1"></a><span class="co"># exp(b0) is the median of the trait</span></span>
+<span id="cb32-821"><a href="#cb32-821" aria-hidden="true" tabindex="-1"></a>ln_b0 <span class="ot">&lt;-</span> post<span class="sc">$</span>b_Intercept  <span class="sc">+</span> <span class="fu">mean</span>(<span class="fu">log</span>(dat<span class="sc">$</span>Range.Size), <span class="at">na.rm =</span> T)</span>
+<span id="cb32-822"><a href="#cb32-822" aria-hidden="true" tabindex="-1"></a>sigma2_al <span class="ot">&lt;-</span> post<span class="sc">$</span>sd_Phylo__Intercept<span class="sc">^</span><span class="dv">2</span> </span>
+<span id="cb32-823"><a href="#cb32-823" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-824"><a href="#cb32-824" aria-hidden="true" tabindex="-1"></a>mean_b0 <span class="ot">&lt;-</span> <span class="fu">exp</span>(ln_b0 <span class="sc">+</span>  <span class="fl">0.5</span> <span class="sc">*</span> (sigma2_al <span class="sc">+</span>  sigma2_e_bar) )</span>
+<span id="cb32-825"><a href="#cb32-825" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-826"><a href="#cb32-826" aria-hidden="true" tabindex="-1"></a><span class="co"># (exp(sigma_ln^2) - 1) * exp(2 * mu_ln + sigma_ln^2)</span></span>
+<span id="cb32-827"><a href="#cb32-827" aria-hidden="true" tabindex="-1"></a>sd_al <span class="ot">&lt;-</span> <span class="fu">sqrt</span>( (<span class="fu">exp</span>(sigma2_al) <span class="sc">-</span> <span class="dv">1</span>) <span class="sc">*</span> <span class="fu">exp</span>(<span class="dv">2</span><span class="sc">*</span>ln_b0 <span class="sc">+</span> sigma2_al) )</span>
+<span id="cb32-828"><a href="#cb32-828" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-829"><a href="#cb32-829" aria-hidden="true" tabindex="-1"></a>CV_Al <span class="ot">&lt;-</span> sd_al <span class="sc">/</span> mean_b0</span>
+<span id="cb32-830"><a href="#cb32-830" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-831"><a href="#cb32-831" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-832"><a href="#cb32-832" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-833"><a href="#cb32-833" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(CV_Al, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>)) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span>
-<span id="cb32-834"><a href="#cb32-834" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-835"><a href="#cb32-835" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-836"><a href="#cb32-836" aria-hidden="true" tabindex="-1"></a>We can see the median evolvability is around 0.38.</span>
-<span id="cb32-837"><a href="#cb32-837" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-840"><a href="#cb32-840" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-841"><a href="#cb32-841" aria-hidden="true" tabindex="-1"></a><span class="co"># alternatively, we can get CV on ln-scale</span></span>
-<span id="cb32-842"><a href="#cb32-842" aria-hidden="true" tabindex="-1"></a>CV_Al2 <span class="ot">&lt;-</span> sigma2_al <span class="sc">/</span> ln_b0</span>
-<span id="cb32-843"><a href="#cb32-843" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(CV_Al2, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>)) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span>
-<span id="cb32-844"><a href="#cb32-844" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-845"><a href="#cb32-845" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-846"><a href="#cb32-846" aria-hidden="true" tabindex="-1"></a>If we get the CV on the log-scale, we can see the median evolvability is around 0.83, which is higher than what we got on the original scale (like above).</span>
-<span id="cb32-847"><a href="#cb32-847" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-848"><a href="#cb32-848" aria-hidden="true" tabindex="-1"></a>We now estimate the evolvability of the trait <span class="in">`crange_size`</span> (the scale part) using Equatoin 24 (we assume that this CV_As is the same as the value for the original scale):</span>
-<span id="cb32-849"><a href="#cb32-849" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-852"><a href="#cb32-852" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-853"><a href="#cb32-853" aria-hidden="true" tabindex="-1"></a><span class="co"># Using Equation 24</span></span>
-<span id="cb32-854"><a href="#cb32-854" aria-hidden="true" tabindex="-1"></a>CV_As <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">exp</span>(<span class="dv">4</span><span class="sc">*</span>post<span class="sc">$</span>sd_Phylo__sigma_Intercept<span class="sc">^</span><span class="dv">2</span>) <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb32-855"><a href="#cb32-855" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-856"><a href="#cb32-856" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(CV_As, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>)) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span>
-<span id="cb32-857"><a href="#cb32-857" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-858"><a href="#cb32-858" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-859"><a href="#cb32-859" aria-hidden="true" tabindex="-1"></a>We get the median evolvability of around 3.2. As above, this is evolvability of variance but we can get evolvability of the standard deviation using Equation 25.</span>
-<span id="cb32-860"><a href="#cb32-860" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-863"><a href="#cb32-863" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-864"><a href="#cb32-864" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively, we can get CV_As on the SD scale</span></span>
-<span id="cb32-865"><a href="#cb32-865" aria-hidden="true" tabindex="-1"></a>CV_As2 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">exp</span>(post<span class="sc">$</span>sd_Phylo__sigma_Intercept<span class="sc">^</span><span class="dv">2</span>) <span class="sc">-</span> <span class="dv">1</span>)</span>
-<span id="cb32-866"><a href="#cb32-866" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-867"><a href="#cb32-867" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(CV_As2, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>)) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span>
-<span id="cb32-868"><a href="#cb32-868" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-869"><a href="#cb32-869" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-870"><a href="#cb32-870" aria-hidden="true" tabindex="-1"></a>We get the median evolvability of around 0.91, which is not that different from the evolvability of the mean estiamted on the log scale.</span>
-<span id="cb32-871"><a href="#cb32-871" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-872"><a href="#cb32-872" aria-hidden="true" tabindex="-1"></a>Additionally, we can use Equation 23:</span>
-<span id="cb32-873"><a href="#cb32-873" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-876"><a href="#cb32-876" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-877"><a href="#cb32-877" aria-hidden="true" tabindex="-1"></a>CV_As <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(sigma2_as_star) <span class="sc">/</span> sigma2_e_bar</span>
-<span id="cb32-878"><a href="#cb32-878" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-879"><a href="#cb32-879" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(CV_As, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>), <span class="at">na.rm =</span> T) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span>
-<span id="cb32-880"><a href="#cb32-880" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-881"><a href="#cb32-881" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-882"><a href="#cb32-882" aria-hidden="true" tabindex="-1"></a>This estimation does matches with that from Equation 24 unlike the above. This is because now we have a fixed effect which is taken into account in account for obtaining the phylogenetic variance on the scale part: <span class="in">`sigma2_as_star`</span> (we will not try to get the evolvability on the original scale as it does not seem to work).</span>
-<span id="cb32-883"><a href="#cb32-883" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-884"><a href="#cb32-884" aria-hidden="true" tabindex="-1"></a><span class="fu"># Figure code</span></span>
-<span id="cb32-885"><a href="#cb32-885" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-888"><a href="#cb32-888" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-889"><a href="#cb32-889" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb32-890"><a href="#cb32-890" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 10</span></span>
-<span id="cb32-891"><a href="#cb32-891" aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
-<span id="cb32-892"><a href="#cb32-892" aria-hidden="true" tabindex="-1"></a><span class="co"># putting all plots together </span></span>
-<span id="cb32-893"><a href="#cb32-893" aria-hidden="true" tabindex="-1"></a>(plots_mod1[[<span class="dv">1</span>]] <span class="sc">+</span> plots_mod1[[<span class="dv">2</span>]]) <span class="sc">+</span> </span>
-<span id="cb32-894"><a href="#cb32-894" aria-hidden="true" tabindex="-1"></a>(plots_mod2[[<span class="dv">1</span>]] <span class="sc">/</span> plots_mod2[[<span class="dv">2</span>]] <span class="sc">/</span>plots_mod2[[<span class="dv">3</span>]] ) <span class="sc">+</span> </span>
-<span id="cb32-895"><a href="#cb32-895" aria-hidden="true" tabindex="-1"></a>(plots_mod3[[<span class="dv">1</span>]] <span class="sc">/</span> plots_mod3[[<span class="dv">2</span>]] <span class="sc">/</span>plots_mod3[[<span class="dv">3</span>]]) <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), <span class="at">widths =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>)) <span class="sc">+</span> </span>
-<span id="cb32-896"><a href="#cb32-896" aria-hidden="true" tabindex="-1"></a>  <span class="co"># put A, B, C</span></span>
-<span id="cb32-897"><a href="#cb32-897" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(<span class="at">tag_levels =</span> <span class="st">&#39;A&#39;</span>)</span>
-<span id="cb32-898"><a href="#cb32-898" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb32-899"><a href="#cb32-899" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-900"><a href="#cb32-900" aria-hidden="true" tabindex="-1"></a><span class="fu"># Software and package versions</span></span>
-<span id="cb32-901"><a href="#cb32-901" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-904"><a href="#cb32-904" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb32-905"><a href="#cb32-905" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
-<span id="cb32-906"><a href="#cb32-906" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>() <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span>
-<span id="cb32-907"><a href="#cb32-907" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-832"><a href="#cb32-832" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(CV_Al, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>)) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span>
+<span id="cb32-833"><a href="#cb32-833" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-834"><a href="#cb32-834" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-835"><a href="#cb32-835" aria-hidden="true" tabindex="-1"></a>We can see the median evolvability is around 0.38.</span>
+<span id="cb32-836"><a href="#cb32-836" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-839"><a href="#cb32-839" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-840"><a href="#cb32-840" aria-hidden="true" tabindex="-1"></a><span class="co"># alternatively, we can get CV on ln-scale</span></span>
+<span id="cb32-841"><a href="#cb32-841" aria-hidden="true" tabindex="-1"></a>CV_Al2 <span class="ot">&lt;-</span> sigma2_al <span class="sc">/</span> ln_b0</span>
+<span id="cb32-842"><a href="#cb32-842" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(CV_Al2, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>)) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span>
+<span id="cb32-843"><a href="#cb32-843" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-844"><a href="#cb32-844" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-845"><a href="#cb32-845" aria-hidden="true" tabindex="-1"></a>If we get the CV on the log-scale, we can see the median evolvability is around 0.83, which is higher than what we got on the original scale (like above).</span>
+<span id="cb32-846"><a href="#cb32-846" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-847"><a href="#cb32-847" aria-hidden="true" tabindex="-1"></a>We now estimate the evolvability of the trait <span class="in">`crange_size`</span> (the scale part) using Equation 24 (we assume that this CV_As is the same as the value for the original scale):</span>
+<span id="cb32-848"><a href="#cb32-848" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-851"><a href="#cb32-851" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-852"><a href="#cb32-852" aria-hidden="true" tabindex="-1"></a><span class="co"># Using Equation 24</span></span>
+<span id="cb32-853"><a href="#cb32-853" aria-hidden="true" tabindex="-1"></a>CV_As <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">exp</span>(<span class="dv">4</span><span class="sc">*</span>post<span class="sc">$</span>sd_Phylo__sigma_Intercept<span class="sc">^</span><span class="dv">2</span>) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb32-854"><a href="#cb32-854" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-855"><a href="#cb32-855" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(CV_As, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>)) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span>
+<span id="cb32-856"><a href="#cb32-856" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-857"><a href="#cb32-857" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-858"><a href="#cb32-858" aria-hidden="true" tabindex="-1"></a>We get the median evolvability of around 3.2. As above, this is evolvability of variance but we can get evolvability of the standard deviation using Equation 25.</span>
+<span id="cb32-859"><a href="#cb32-859" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-862"><a href="#cb32-862" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-863"><a href="#cb32-863" aria-hidden="true" tabindex="-1"></a><span class="co"># Alternatively, we can get CV_As on the SD scale</span></span>
+<span id="cb32-864"><a href="#cb32-864" aria-hidden="true" tabindex="-1"></a>CV_As2 <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(<span class="fu">exp</span>(post<span class="sc">$</span>sd_Phylo__sigma_Intercept<span class="sc">^</span><span class="dv">2</span>) <span class="sc">-</span> <span class="dv">1</span>)</span>
+<span id="cb32-865"><a href="#cb32-865" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-866"><a href="#cb32-866" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(CV_As2, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>)) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span>
+<span id="cb32-867"><a href="#cb32-867" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-868"><a href="#cb32-868" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-869"><a href="#cb32-869" aria-hidden="true" tabindex="-1"></a>We get the median evolvability of around 0.91, which is not that different from the evolvability of the mean estimated on the log scale.</span>
+<span id="cb32-870"><a href="#cb32-870" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-871"><a href="#cb32-871" aria-hidden="true" tabindex="-1"></a>Additionally, we can use Equation 23:</span>
+<span id="cb32-872"><a href="#cb32-872" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-875"><a href="#cb32-875" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-876"><a href="#cb32-876" aria-hidden="true" tabindex="-1"></a>CV_As <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(sigma2_as_star) <span class="sc">/</span> sigma2_e_bar</span>
+<span id="cb32-877"><a href="#cb32-877" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-878"><a href="#cb32-878" aria-hidden="true" tabindex="-1"></a><span class="fu">quantile</span>(CV_As, <span class="at">probs =</span> <span class="fu">c</span>(<span class="fl">0.025</span>, <span class="fl">0.5</span>, <span class="fl">0.975</span>), <span class="at">na.rm =</span> T) <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span>
+<span id="cb32-879"><a href="#cb32-879" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-880"><a href="#cb32-880" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-881"><a href="#cb32-881" aria-hidden="true" tabindex="-1"></a>This estimation matches the result from Equation 24, unlike the one above. This is because we have now a fixed effect which is taken into account for obtaining the phylogenetic variance on the scale part: <span class="in">`sigma2_as_star`</span> (we will not try to get the evolvability on the original scale as it does not seem to work).</span>
+<span id="cb32-882"><a href="#cb32-882" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-883"><a href="#cb32-883" aria-hidden="true" tabindex="-1"></a><span class="fu"># Figure code</span></span>
+<span id="cb32-884"><a href="#cb32-884" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-887"><a href="#cb32-887" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-888"><a href="#cb32-888" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb32-889"><a href="#cb32-889" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-height: 10</span></span>
+<span id="cb32-890"><a href="#cb32-890" aria-hidden="true" tabindex="-1"></a><span class="co">#| </span></span>
+<span id="cb32-891"><a href="#cb32-891" aria-hidden="true" tabindex="-1"></a><span class="co"># putting all plots together </span></span>
+<span id="cb32-892"><a href="#cb32-892" aria-hidden="true" tabindex="-1"></a>(plots_mod1[[<span class="dv">1</span>]] <span class="sc">+</span> plots_mod1[[<span class="dv">2</span>]]) <span class="sc">+</span> </span>
+<span id="cb32-893"><a href="#cb32-893" aria-hidden="true" tabindex="-1"></a>(plots_mod2[[<span class="dv">1</span>]] <span class="sc">/</span> plots_mod2[[<span class="dv">2</span>]] <span class="sc">/</span>plots_mod2[[<span class="dv">3</span>]] ) <span class="sc">+</span> </span>
+<span id="cb32-894"><a href="#cb32-894" aria-hidden="true" tabindex="-1"></a>(plots_mod3[[<span class="dv">1</span>]] <span class="sc">/</span> plots_mod3[[<span class="dv">2</span>]] <span class="sc">/</span>plots_mod3[[<span class="dv">3</span>]]) <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">heights =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">3</span>), <span class="at">widths =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>)) <span class="sc">+</span> </span>
+<span id="cb32-895"><a href="#cb32-895" aria-hidden="true" tabindex="-1"></a>  <span class="co"># put A, B, C</span></span>
+<span id="cb32-896"><a href="#cb32-896" aria-hidden="true" tabindex="-1"></a>  <span class="fu">plot_annotation</span>(<span class="at">tag_levels =</span> <span class="st">&#39;A&#39;</span>)</span>
+<span id="cb32-897"><a href="#cb32-897" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb32-898"><a href="#cb32-898" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-899"><a href="#cb32-899" aria-hidden="true" tabindex="-1"></a><span class="fu"># Software and package versions</span></span>
+<span id="cb32-900"><a href="#cb32-900" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-903"><a href="#cb32-903" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb32-904"><a href="#cb32-904" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb32-905"><a href="#cb32-905" aria-hidden="true" tabindex="-1"></a><span class="fu">sessionInfo</span>() <span class="sc">%&gt;%</span> <span class="fu">pander</span>()</span>
+<span id="cb32-906"><a href="#cb32-906" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
