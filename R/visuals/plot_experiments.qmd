@@ -66,7 +66,7 @@ ggplot(data = data, aes(
 
 
 ngenera <- rev(sort(table(data$Genus)))
-ngenera <- ngenera[ngenera > 8]
+ngenera <- ngenera[ngenera > 7]
 
 data <- data %>%
     group_by(Genus) %>%
