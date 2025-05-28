@@ -58,7 +58,9 @@ You will see how to fit phylogenetic location-scale models (PLSMs) in a Bayesian
 
 # Contents
 
-In this online material, we will illustrate how to fit three models described in our paper, subtitled as:
+In this online material, we will first introduce how to fit phylogenetic location-scale models (PLSMs) using `brms`.
+
+Then, we will illustrate how to fit three models described in our paper, subtitled as:
 
 - Different Trait Variance in Two Groups (Model 3)
 
@@ -313,10 +315,76 @@ We use the following variables in our models:
 
 - `forest`: a binary variable indicating whether the species lives in the forest or other habits (created based on `Habitat`)
 
+# A baseline: fitting a *location-only* phylogenetic model  
+
+Before adding a scale component it is helpful to see the “classic” phylogenetic generalised linear mixed model (PGLMM) that acts *only* on the mean.  
+Here we predict centred log-range size (`crange_size`) from centred body mass (`cmass`), while allowing a Brownian-motion random effect (`Phylo`) on the location part and letting the residual variance stay constant across species.
+
+## Fitting the model
+
+```{r}
+#| eval: false
+# Location-only PGLMM ------------------------------------------
+form_loc <- bf(
+  crange_size ~ 1 + cmass + 
+    (1 | gr(Phylo, cov = A)) # this is how to fit phylogenetic effect
+  # σ (residual SD) is left at its default single parameter
+)
+
+# (weakly-informative) priors
+prior_loc <- default_prior(
+  formula = form_loc,
+  data    = dat,
+  data2   = list(A = A),
+  family  = gaussian()
+)
+
+mod_loc <- brm(
+  formula = form_loc,
+  data    = dat,
+  data2   = list(A = A),
+  chains  = 4, cores = 4,
+  iter    = 6000, warmup = 2000,
+  prior   = prior_loc,
+  control = list(adapt_delta = 0.95, max_treedepth = 12)
+)
+
+saveRDS(mod_loc, here("Rdata", "mod_loc.rds"))
+```
+
+Check the results: 
+
+```{r}
+#| warning: false
+mod_loc <- readRDS(here("Rdata", "mod_loc.rds"))
+
+summary(mod_loc)
+```
+
+
+## Visualizing results
+
+```{r}
+#| warning: false
+# Fixed and random effects
+plots_mod0 <- list(
+  visualize_fixed_effects(mod_loc),
+  visualize_random_effects(mod_loc)
+)
+
+plots_mod0[[1]] / plots_mod0[[2]] + plot_layout(heights = c(2, 1))
+```
+
+**Posterior distributions of different types of parameters**; the vertical dashed line indicates zero, aiding the interpretation of effect direction with thick lines showing 66% credible intervals and thin whiskers 95% credible intervals (not spanning zero being interpreted as 'statistical significant'). 
+
+
+## Result summary
+
+- 
 
 # Different trait variance in two groups (Model 3)
 
-In this first model, we will fit a location-scale model to investigate whether the mean and variance of beak length (`cbeak_length`) differs between species living in the forest and those living in other habitats.
+In this first phylogenetic location-scale model (PLSM), we will fit a location-scale model to investigate whether the mean and variance of beak length (`cbeak_length`) differs between species living in the forest and those living in other habitats.
 
 ## Fitting the model
 
@@ -380,6 +448,7 @@ plots_mod1[[1]] / plots_mod1[[2]] + plot_layout(heights = c(2, 1))
 ```
 
 **Posterior distributions of different types of parameters**; the vertical dashed line indicates zero, aiding the interpretation of effect direction with thick lines showing 66% credible intervals and thin whiskers 95% credible intervals (not spanning zero being interpreted as 'statistical significant'). 
+
 
 # Co-evolution of mean and variance (Model 4)
 
