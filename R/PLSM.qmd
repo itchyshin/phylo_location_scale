@@ -276,7 +276,7 @@ dat <- read.csv(here("data", "Psittaciformes", "Psittaciformes_354spp.csv"))
 
 #str(dat)
 
-# reading nexus file (use ape pacakge)
+# reading nexus file (use ape package)
 tree_all <- read.nexus(here("data", "Psittaciformes", "Psittaciformes_354spp_100.nex"))
 tree <- tree_all[[1]]
 
@@ -460,7 +460,7 @@ In this third model, we will fit a phylogenetic bivariate location-scale model t
 
 ## Fitting the model
 
-The `brms` syntax for Model 4 is as follows:
+The `brms` syntax for Model 5 is as follows:
   
 ```{r}
 #| eval: false
@@ -615,7 +615,7 @@ We can see the median phylogenetic heritablity is around 38%.
 Using Equations 18-21 in the paper, we can calculate the phylogenetic heritability of the trait `crange_size` (the scale part):
 
 ```{r}
-# Eqatuion 21 - sigma2_sigma2_e (variance of the residual variance)
+# Equation 21 - sigma2_sigma2_e (variance of the residual variance)
 sigma2_sigma2_e <- (exp(4*post$sd_Phylo__sigma_Intercept^2) - 1) * exp(4*(post$b_sigma_Intercept + post$sd_Phylo__sigma_Intercept^2))
 
 # Equation 19 - sigma2_a_star 
