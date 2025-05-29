@@ -349,7 +349,7 @@ mod0 <- brm(form0,
 )
 
 # time taken to run the model
-
+#  179.714 seconds (Total)
 
 saveRDS(mod0, here("Rdata", "mod0.rds"))
 ```
@@ -419,6 +419,9 @@ mod1 <- brm(form1,
             control = list(adapt_delta = 0.99, max_treedepth = 15)
 )
 
+# time taken to run the model
+#  179.714 seconds (Total)
+
 # saving
 saveRDS(mod1, here("Rdata", "mod1.rds"))
 ```
@@ -451,6 +454,9 @@ plots_mod1[[1]] / plots_mod1[[2]] + plot_layout(heights = c(2, 1))
 
 **Posterior distributions of different types of parameters**; the vertical dashed line indicates zero, aiding the interpretation of effect direction with thick lines showing 66% credible intervals and thin whiskers 95% credible intervals (not spanning zero being interpreted as 'statistical significant'). 
 
+## Result summary
+
+- 
 
 # Co-evolution of mean and variance (Model 4)
 
@@ -488,6 +494,9 @@ mod2 <- brm(form2,
             control = list(adapt_delta = 0.99, max_treedepth = 15)
 )
 
+# time taken to run the model
+#  179.714 seconds (Total)
+
 # saving
 saveRDS(mod2, here("Rdata", "mod2.rds"))
 
@@ -524,6 +533,12 @@ plots_mod2[[1]] / plots_mod2[[2]] /plots_mod2[[3]] + plot_layout(heights = c(2, 
 ```
 
 **Posterior distributions of different types of parameters**; the vertical dashed line indicates zero, aiding the interpretation of effect direction with thick lines showing 66% credible intervals and thin whiskers 95% credible intervals (not spanning zero being interpreted as 'statistical significant'). 
+
+## Result summary
+
+- 
+
+- 
 
 # Co-evolution of two traits (Model 5)
 
@@ -569,6 +584,9 @@ mod3 <- brm(form3,
 
 summary(mod3)
 
+# time taken to run the model
+#  179.714 seconds (Total)
+
 # saving
 saveRDS(mod3, here("Rdata", "mod3.rds"))
 ```
@@ -603,6 +621,10 @@ plots_mod3[[1]] / plots_mod3[[2]] /plots_mod3[[3]]
 ```
 
 **Posterior distributions of different types of parameters**; the vertical dashed line indicates zero, aiding the interpretation of effect direction with thick lines showing 66% credible intervals and thin whiskers 95% credible intervals (not spanning zero being interpreted as 'statistical significant'). 
+
+## Result summary
+
+- 
 
 # Bonus: obtaining phylogenetic heritability and evolvability (phylogenetic CV)
 
