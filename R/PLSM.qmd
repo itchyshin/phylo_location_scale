@@ -324,41 +324,43 @@ Here we predict centred log-range size (`crange_size`) from centred body mass (`
 
 ```{r}
 #| eval: false
-# Location-only PGLMM ------------------------------------------
-form_loc <- bf(
-  crange_size ~ 1 + cmass + 
-    (1 | gr(Phylo, cov = A)) # this is how to fit phylogenetic effect
-  # σ (residual SD) is left at its default single parameter
+# creating the formula
+form0 <- bf(cbeak_length ~ 1 + cmass + forest + 
+              (1 | gr(Phylo, cov = A)) # phylogenetic random effect
 )
 
-# (weakly-informative) priors
-prior_loc <- default_prior(
-  formula = form_loc,
-  data    = dat,
-  data2   = list(A = A),
-  family  = gaussian()
+# setting priors
+prior0 <- default_prior(form0, 
+                        data = dat, 
+                        data2 = list(A = A),
+                        family = gaussian()
 )
 
-mod_loc <- brm(
-  formula = form_loc,
-  data    = dat,
-  data2   = list(A = A),
-  chains  = 4, cores = 4,
-  iter    = 6000, warmup = 2000,
-  prior   = prior_loc,
-  control = list(adapt_delta = 0.95, max_treedepth = 12)
+# running the model
+mod0 <- brm(form0, 
+            data = dat, 
+            data2 = list(A = A),
+            chains = 2, 
+            cores = 2, 
+            iter = 8000, 
+            warmup = 5000,
+            prior = prior0,
+            control = list(adapt_delta = 0.99, max_treedepth = 15)
 )
 
-saveRDS(mod_loc, here("Rdata", "mod_loc.rds"))
+# time taken to run the model
+
+
+saveRDS(mod0, here("Rdata", "mod0.rds"))
 ```
 
 Check the results: 
 
 ```{r}
 #| warning: false
-mod_loc <- readRDS(here("Rdata", "mod_loc.rds"))
+mod0 <- readRDS(here("Rdata", "mod0.rds"))
 
-summary(mod_loc)
+summary(mod0)
 ```
 
 
