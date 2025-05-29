@@ -495,7 +495,7 @@ mod2 <- brm(form2,
 )
 
 # time taken to run the model
-#  179.714 seconds (Total)
+#  14265.3 seconds (Total)
 
 # saving
 saveRDS(mod2, here("Rdata", "mod2.rds"))
