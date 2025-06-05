@@ -80,9 +80,7 @@ The second one's tutorial [here](https://ayumi-495.github.io/multinomial-GLMM-tu
 
 > Mizuno, A., Drobniak, S.M., Williams, C., Lagisz, M. and Nakagawa, S., 2025. Promoting the use of phylogenetic multinomial generalised mixed-effects model to understand the evolution of discrete traits. EcoEvoRxiv. 2025. 
 
-Also 
-
-This paper teaches you how to diagnose Bayesian models and how to interpret the results.
+Also, these tutorials teach you how to diagnose Bayesian models and how to interpret the results.
 
 # Prerequisites
 
