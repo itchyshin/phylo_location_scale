@@ -43,6 +43,8 @@ knitr::opts_chunk$set(
 )
 ```
 
+
+
 # Introduction
 
 This online material is a supplement to our paper "Quantifying macro-evolutionary patterns of trait mean and variance with phylogenetic location-scale models".
@@ -93,6 +95,8 @@ For example, to install the `brms` , you can execute `install.packages("brms")` 
 
 Version information of each package is listed at the end of this tutorial.
 
+
+
 ```{r packages}
 # attempt to load or install necessary packages
 if(!require(pacman)) install.packages("pacman")
@@ -109,10 +113,14 @@ pacman::p_load(tidyverse,
 
 ```
 
+
+
 ## Custom functions
 
 We also provide some additional helper functions to help visualize the results (mainly extracted from the `brms` object).
 If you want to use these custom functions in your own data, you'll need to change the variable names according to your own data (check out the `R` code and you'll see what we mean).
+
+
 
 ```{r}
 #| code-fold: true
@@ -257,6 +265,8 @@ visualize_correlations <- function(model) {
 ```
 
 
+
+
 # Data loading and preparation
 
 We use the data from **Avonet**:
@@ -269,6 +279,8 @@ As described in the paper, we only use parrot species (*N* = 354) and we use phy
 
 > W. Jetz, G. H. Thomas, J. B. Joy, K. Hartmann, and A. O. Mooers. The global diversity of birds in space and time.
 Nature, 491(7424):444–448, 2012
+
+
 
 ```{r}
 # load data
@@ -299,6 +311,8 @@ dat$crange_size <- scale(log(dat$Range.Size), center = TRUE, scale = FALSE)
 dat$forest <- ifelse(dat$Habitat == "Forest", 1, 0)
 ```
 
+
+
 We use the following variables in our models:
 
 - `cbeak_length`: log-transformed and centred beak length (`Beak.Length_Culmen`)
@@ -319,6 +333,8 @@ Before adding a scale component it is helpful to see the “classic” phylogene
 Here we predict centred log-range size (`crange_size`) from centred body mass (`cmass`), while allowing a Brownian-motion random effect (`Phylo`) on the location part and letting the residual variance stay constant across species.
 
 ## Fitting the model
+
+
 
 ```{r}
 #| eval: false
@@ -352,7 +368,11 @@ mod0 <- brm(form0,
 saveRDS(mod0, here("Rdata", "mod0.rds"))
 ```
 
+
+
 Check the results: 
+
+
 
 ```{r}
 #| warning: false
@@ -362,7 +382,11 @@ summary(mod0)
 ```
 
 
+
+
 ## Visualizing results
+
+
 
 ```{r}
 #| warning: false
@@ -374,6 +398,8 @@ plots_mod0 <- list(
 
 plots_mod0[[1]] / plots_mod0[[2]] + plot_layout(heights = c(2, 1))
 ```
+
+
 
 **Posterior distributions of different types of parameters**; the vertical dashed line indicates zero, aiding the interpretation of effect direction with thick lines showing 66% credible intervals and thin whiskers 95% credible intervals (not spanning zero being interpreted as 'statistical significant'). 
 
@@ -390,6 +416,8 @@ In this first phylogenetic location-scale model (PLSM), we will fit a location-s
 ## Fitting the model
 
 The `brms` syntax for Model 3 is as follows:
+
+
 
 ```{r}
 #| eval: false
@@ -426,7 +454,11 @@ mod1 <- brm(form1,
 saveRDS(mod1, here("Rdata", "mod1.rds"))
 ```
 
+
+
 Check the results: 
+
+
 
 ```{r}
 # loading and checking
@@ -435,9 +467,13 @@ mod1 <- readRDS(here("Rdata", "mod1.rds"))
 summary(mod1)
 ```
 
+
+
 ## Visualizing results
 
 We can visualize the results (posterior distributions) of parameters (i.e., regression coefficients, variance and standard deviation components, and correlations) using the custom functions we defined earlier.
+
+
 
 ```{r}
 #| warning: false
@@ -451,6 +487,8 @@ plots_mod1 <- list(
 
 plots_mod1[[1]] / plots_mod1[[2]] + plot_layout(heights = c(2, 1))
 ```
+
+
 
 **Posterior distributions of different types of parameters**; the vertical dashed line indicates zero, aiding the interpretation of effect direction with thick lines showing 66% credible intervals and thin whiskers 95% credible intervals (not spanning zero being interpreted as 'statistical significant'). 
 
@@ -467,6 +505,8 @@ In this second model, we will fit a phylogenetic location-scale model to investi
 ## Fitting the model
 
 The `brms` syntax for Model 4 is as follows:
+
+
 
 ```{r}
 #| eval: false
@@ -504,7 +544,11 @@ saveRDS(mod2, here("Rdata", "mod2.rds"))
 
 ```
 
+
+
 Check the results: 
+
+
 
 ```{r}
 # loading and checking
@@ -515,9 +559,13 @@ summary(mod2)
 ```
 
 
+
+
 ## Visualizing results
 
 As above, using the custom functions:
+
+
 
 ```{r}
 #| warning: false
@@ -533,6 +581,8 @@ plots_mod2 <- list(
 
 plots_mod2[[1]] / plots_mod2[[2]] /plots_mod2[[3]] + plot_layout(heights = c(2, 1, 1))
 ```
+
+
 
 **Posterior distributions of different types of parameters**; the vertical dashed line indicates zero, aiding the interpretation of effect direction with thick lines showing 66% credible intervals and thin whiskers 95% credible intervals (not spanning zero being interpreted as 'statistical significant'). 
 
@@ -550,6 +600,8 @@ In this third model, we will fit a phylogenetic bivariate location-scale model t
 
 The `brms` syntax for Model 5 is as follows:
   
+
+
 ```{r}
 #| eval: false
 
@@ -593,7 +645,11 @@ summary(mod3)
 saveRDS(mod3, here("Rdata", "mod3.rds"))
 ```
 
+
+
 Check the results: 
+
+
 
 ```{r}
 # loading and checking
@@ -603,9 +659,13 @@ summary(mod3)
 ```
 
 
+
+
 ## Visualizing results
 
 Again, using the custom functions:
+
+
 
 ```{r}
 #| warning: false
@@ -621,6 +681,8 @@ plots_mod3 <- list(
 
 plots_mod3[[1]] / plots_mod3[[2]] /plots_mod3[[3]]
 ```
+
+
 
 **Posterior distributions of different types of parameters**; the vertical dashed line indicates zero, aiding the interpretation of effect direction with thick lines showing 66% credible intervals and thin whiskers 95% credible intervals (not spanning zero being interpreted as 'statistical significant'). 
 
@@ -638,6 +700,8 @@ Below, we show how to calculate phylogenetic heritability and evolvability from 
 We first create a phylogenetic location-scale (double-hierarchical) model for `cmass` without any fixed effects. 
 
 The `brms` syntax for this phylogenetic location-scale model is as follows:
+
+
 
 ```{r}
 #| eval: false
@@ -671,7 +735,11 @@ mod0 <- brm(form0,
 saveRDS(mod0, here("Rdata", "mod0.rds"))
 ```
 
+
+
 Check the results: 
+
+
 
 ```{r}
 # loading and checking
@@ -681,9 +749,13 @@ summary(mod0)
 ```
 
 
+
+
 ### Phylogenetic heritability
 
 Using Equations 14, 15 & 17 in the paper, we can calculate the phylogenetic heritability of the trait `crange_size` (the location part):
+
+
 
 ```{r}
 
@@ -706,9 +778,13 @@ H2l <- post$sd_Phylo__Intercept^2 / sigma2_p
 quantile(H2l, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
+
+
 We can see the median phylogenetic heritablity is around 38%.
 
 Using Equations 18-21 in the paper, we can calculate the phylogenetic heritability of the trait `crange_size` (the scale part):
+
+
 
 ```{r}
 # Equation 21 - sigma2_sigma2_e (variance of the residual variance)
@@ -727,6 +803,8 @@ H2s <- sigma2_as_star / sigma2_sigma2_p
 quantile(H2s, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
+
+
 Here we found a median phylogenetic heritability of around 31%.
 
 ### Evolvability
@@ -734,6 +812,8 @@ Here we found a median phylogenetic heritability of around 31%.
 Using Equations 6 in the paper, we can calculate the evolvability (CV_Al) of the trait `crange_size` (log-transformed trait; the location part), but the difficulty is that we need to calculate the phylogenetic variance on the original scale. We can do this by using the delta method. The details of this calculation are provided in this earlier work (see the supplementary material):
 
 > O'Dea RE, Noble DW, Nakagawa S. Unifying individual differences in personality, predictability and plasticity: a practical guide. Methods in Ecology and Evolution. 2022 Feb;13(2):278-93.
+
+
 
 ```{r}
 # exp(b0) is the median of the trait
@@ -750,7 +830,11 @@ CV_Al <- sd_al / mean_b0
 quantile(CV_Al, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
+
+
 We can see the median evolvability is around 0.08
+
+
 
 ```{r}
 # alternatively, we can get CV on ln-scale
@@ -759,9 +843,13 @@ CV_Al2 <- sigma2_al / ln_b0
 quantile(CV_Al2, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
+
+
 If we get the CV on the log-scale, we can see the median evolvability is around 0.85 (nearly 10 times bigger); this CV for the location is probably more comparable to CV for the scale below (as it turns, our CV for the scale is not estimable on the original scale). 
 
 We now estimate the evolvability of the trait `crange_size` (the scale part) using Equation 24 (we assume that this CV_As is the same as the value for the original scale):
+
+
 
 ```{r}
 
@@ -770,7 +858,11 @@ CV_As <- sqrt(exp(4*post$sd_Phylo__sigma_Intercept^2) - 1)
 quantile(CV_As, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
+
+
 We get the median evolvability of around 3.4. This is evolvability of variance but we can get evolvability of the standard deviation using Equation 25. 
+
+
 
 ```{r}
 # Alternatively, we can get CV_As on the SD scale
@@ -779,9 +871,13 @@ CV_As2 <- sqrt(exp(post$sd_Phylo__sigma_Intercept^2) - 1)
 quantile(CV_As2, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
+
+
 We get the median evolvability of around 0.94, which is not that different from the evolvability of the mean estimated on the log scale. 
 
 Also, we can use Equation 23:
+
+
 
 ```{r}
 CV_As2 <- sqrt(sigma2_as_star) / sigma2_e_bar
@@ -789,9 +885,13 @@ CV_As2 <- sqrt(sigma2_as_star) / sigma2_e_bar
 quantile(CV_As2, probs = c(0.025, 0.5, 0.975), na.rm = T) %>% pander()
 ```
 
+
+
 This estimation, as expected, matches with that from Equation 24. 
 
 We also try to get the evolvability for the scale part on the original scale
+
+
 
 ```{r}
 # original scale conversion does not seem to make sense so commented out
@@ -803,6 +903,8 @@ CV_As2_orig <- sqrt(sigma2_as_star_orig) / sigma2_e_bar_orig
 quantile(CV_As2_orig, probs = c(0.025, 0.5, 0.975), na.rm = T) %>% pander()
 ```
 
+
+
 We get the median evolvability of a `Inf` value so this does not seem to work. 
 
 ## a model with fixed effects
@@ -812,6 +914,8 @@ Here we use `mod2` as an example to see the heritability and evolvability of the
 ### Phylogenetic heritability
 
 Using Equations 14-17 in the paper, we can calculate the phylogenetic heritability of the trait `crange_size` (the location part) after controlling for body mass `cmass`:
+
+
 
 ```{r}
 
@@ -836,9 +940,13 @@ H2l <- post$sd_Phylo__Intercept^2 / sigma2_p
 quantile(H2l, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
+
+
 We can see the median phylogenetic heritablity is around 45%.
 
 Using Equations 18-21 in the paper, we can calculate the phylogenetic heritability of the trait `crange_size` (the scale part):
+
+
 
 ```{r}
 
@@ -862,11 +970,15 @@ quantile(H2s, probs = c(0.025, 0.5, 0.975)) %>% pander()
 
 ```
 
+
+
 Here we found a median phylogenetic heritability of around 28%.
 
 ### Evolvability
 
 Using Equations 6 in the paper, we can calculate the evolvability (CV_Al) of the trait `crange_size` (log-transformed trait; the location part), but we first need to back-transform as we did above. 
+
+
 
 ```{r}
 
@@ -885,7 +997,11 @@ CV_Al <- sd_al / mean_b0
 quantile(CV_Al, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
+
+
 We can see the median evolvability is around 0.38.
+
+
 
 ```{r}
 # alternatively, we can get CV on ln-scale
@@ -893,9 +1009,13 @@ CV_Al2 <- sigma2_al / ln_b0
 quantile(CV_Al2, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
+
+
 If we get the CV on the log-scale, we can see the median evolvability is around 0.83, which is higher than what we got on the original scale (like above).
 
 We now estimate the evolvability of the trait `crange_size` (the scale part) using Equation 24 (we assume that this CV_As is the same as the value for the original scale):
+
+
 
 ```{r}
 # Using Equation 24
@@ -904,7 +1024,11 @@ CV_As <- sqrt(exp(4*post$sd_Phylo__sigma_Intercept^2) - 1)
 quantile(CV_As, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
+
+
 We get the median evolvability of around 3.2. As above, this is evolvability of variance but we can get evolvability of the standard deviation using Equation 25.
+
+
 
 ```{r}
 # Alternatively, we can get CV_As on the SD scale
@@ -913,9 +1037,13 @@ CV_As2 <- sqrt(exp(post$sd_Phylo__sigma_Intercept^2) - 1)
 quantile(CV_As2, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
+
+
 We get the median evolvability of around 0.91, which is not that different from the evolvability of the mean estimated on the log scale.
 
 Additionally, we can use Equation 23:
+
+
 
 ```{r}
 CV_As <- sqrt(sigma2_as_star) / sigma2_e_bar
@@ -923,9 +1051,13 @@ CV_As <- sqrt(sigma2_as_star) / sigma2_e_bar
 quantile(CV_As, probs = c(0.025, 0.5, 0.975), na.rm = T) %>% pander()
 ```
 
+
+
 This estimation matches the result from Equation 24, unlike the one above. This is because we have now a fixed effect which is taken into account for obtaining the phylogenetic variance on the scale part: `sigma2_as_star` (we will not try to get the evolvability on the original scale as it does not seem to work).
 
 # Figure code
+
+
 
 ```{r}
 #| code-fold: true
@@ -939,9 +1071,14 @@ This estimation matches the result from Equation 24, unlike the one above. This 
   plot_annotation(tag_levels = 'A')
 ```
 
+
+
 # Software and package versions
+
+
 
 ```{r}
 #| code-fold: true
 sessionInfo() %>% pander()
 ```
+
