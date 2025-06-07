@@ -322,6 +322,7 @@ Here we predict centred log-range size (`crange_size`) from centred body mass (`
 
 ```{r}
 #| eval: false
+
 # creating the formula
 form0 <- bf(cbeak_length ~ 1 + cmass + forest + 
               (1 | gr(Phylo, cov = A)) # phylogenetic random effect
@@ -644,40 +645,43 @@ The `brms` syntax for this phylogenetic location-scale model is as follows:
 
 # creating the formula
 # |p| indicates we are going to estimate correlations between these 2 random effects
-form0 <- bf(crange_size ~ 1  + (1 | p | gr(Phylo, cov = A)),
+form4 <- bf(crange_size ~ 1  + (1 | p | gr(Phylo, cov = A)),
             sigma ~ 1 + (1 | p | gr(Phylo, cov = A))
 )
 
 # setting prior
-prior0 <- default_prior(form0, 
+prior4 <- default_prior(form4, 
                         data = dat, 
                         data2 = list(A = A),
                         family = gaussian()
 )
 
 # fit model
-mod0 <- brm(form0, 
+mod4 <- brm(form4, 
             data = dat, 
             data2 = list(A = A),
             chains = 2, 
             cores = 2, 
             iter = 8000, 
             warmup = 1000,
-            prior = prior0,
+            prior = prior4,
             control = list(adapt_delta = 0.99, max_treedepth = 15)
 )
 
+# time taken to run the model
+#  8523.23 seconds (Total)
+
 # saving
-saveRDS(mod0, here("Rdata", "mod0.rds"))
+saveRDS(mod4, here("Rdata", "mod4.rds"))
 ```
 
 Check the results: 
 
 ```{r}
 # loading and checking
-mod0 <- readRDS(here("Rdata", "mod0.rds"))
+mod4 <- readRDS(here("Rdata", "mod4.rds"))
 
-summary(mod0)
+summary(mod4)
 ```
 
 
@@ -690,7 +694,7 @@ Using Equations 14, 15 & 17 in the paper, we can calculate the phylogenetic heri
 # sigma2_p (total phenotypic variance)
 
 # posterior draws
-post <- as_draws_df(mod0)
+post <- as_draws_df(mod4)
 
 # Equation 17: first calculate sigma2_e_bar (average residual variance)
 sigma2_e_bar <- exp(2*post$b_sigma_Intercept + 2*post$sd_Phylo__sigma_Intercept^2)
@@ -706,7 +710,7 @@ H2l <- post$sd_Phylo__Intercept^2 / sigma2_p
 quantile(H2l, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
-We can see the median phylogenetic heritablity is around 38%.
+We can see the median phylogenetic heritablity is around 39%.
 
 Using Equations 18-21 in the paper, we can calculate the phylogenetic heritability of the trait `crange_size` (the scale part):
 
@@ -750,7 +754,7 @@ CV_Al <- sd_al / mean_b0
 quantile(CV_Al, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
-We can see the median evolvability is around 0.08
+We can see the median evolvability is around 0.07
 
 ```{r}
 # alternatively, we can get CV on ln-scale
@@ -836,7 +840,7 @@ H2l <- post$sd_Phylo__Intercept^2 / sigma2_p
 quantile(H2l, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
-We can see the median phylogenetic heritablity is around 45%.
+We can see the median phylogenetic heritablity is around 44%.
 
 Using Equations 18-21 in the paper, we can calculate the phylogenetic heritability of the trait `crange_size` (the scale part):
 
@@ -862,7 +866,7 @@ quantile(H2s, probs = c(0.025, 0.5, 0.975)) %>% pander()
 
 ```
 
-Here we found a median phylogenetic heritability of around 28%.
+Here we found a median phylogenetic heritability of around 29%.
 
 ### Evolvability
 
@@ -885,7 +889,7 @@ CV_Al <- sd_al / mean_b0
 quantile(CV_Al, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
-We can see the median evolvability is around 0.38.
+We can see the median evolvability is around 0.30.
 
 ```{r}
 # alternatively, we can get CV on ln-scale
@@ -893,7 +897,7 @@ CV_Al2 <- sigma2_al / ln_b0
 quantile(CV_Al2, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
-If we get the CV on the log-scale, we can see the median evolvability is around 0.83, which is higher than what we got on the original scale (like above).
+If we get the CV on the log-scale, we can see the median evolvability is around 0.82, which is higher than what we got on the original scale (like above).
 
 We now estimate the evolvability of the trait `crange_size` (the scale part) using Equation 24 (we assume that this CV_As is the same as the value for the original scale):
 
