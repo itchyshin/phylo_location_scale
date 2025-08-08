@@ -72,7 +72,7 @@ This tutorial has several tips to run location-scale models using `brms`.
 
 Furthermore, there are two papers, which teaches Bayesian generalised linear modelling. 
 
-The first one's tutorial[here](https://github.com/Benjamin-Halliwell/MR-PMM); also, the preprint is available on [DOI]( https://doi.org/10.1111/brv.70001):
+The first one's tutorial [here](https://github.com/Benjamin-Halliwell/MR-PMM); also, the preprint is available on [DOI]( https://doi.org/10.1111/brv.70001):
 
 > Halliwell, B., Holland, B. R., & Yates, L. A. (2025). Multi‐response phylogenetic mixed models: concepts and application. Biological Reviews, 100(3), 1294-1316.
 
@@ -104,9 +104,13 @@ pacman::p_load(tidyverse,
                here,
                ape,
                patchwork,
-               pander
+               pander,
+               stringr,
+               tibble,
+               dplyr
 )
 
+html_out <- knitr::is_html_output() 
 ```
 
 ## Custom functions
@@ -630,7 +634,104 @@ plots_mod3[[1]] / plots_mod3[[2]] /plots_mod3[[3]]
 - The beak length and beak width are evolving together, as indicated by the strong positive correlation between the two traits.
 - Also, variances of the two traits are evolving together, as indicated by the strong positive correlation between the two scale components.
 
-# Bonus: obtaining phylogenetic heritability and evolvability (phylogenetic CV)
+# Bonus 1: implementing the Figure 2 cells in brms 
+
+This table links each conceptual cell in Figure 2 (the main text) to the corresponding distributional brms formulae and the parameters to report.
+Use the same group-level ID (e.g., `a`) in random effects you want correlated across parts/traits.
+
+```{r}
+#| label: fig2map-data
+#| include: false
+
+code_chunk <- function(x) paste0("```r\n", x, "\n```")
+
+tbl_fig2 <- tribble(
+  ~cell, ~question, ~pseudo,
+
+  "Within-trait mean–variance (ρ[a(ls)])",
+  "Do lineages with larger means show greater or lower dispersion in the *same* trait?",
+  code_chunk(
+"bf(
+  y ~ 1 + X + (1 | a | gr(species, cov = A)),
+  sigma ~ 1 + X + (1 | a | gr(species, cov = A))
+)
+family = gaussian()"),
+
+  "Across-trait mean–mean (ρ[a(l1 l2)])",
+  "Do two traits coevolve in their means (integration vs. trade-off)?",
+  code_chunk(
+"bf1 <- bf(
+  y1 ~ 1 + X1 + (1 | a | gr(species, cov = A)),
+  sigma ~ 1 + X1 + (1 | a | gr(species, cov = A))
+)
+bf2 <- bf(
+  y2 ~ 1 + X2 + (1 | a | gr(species, cov = A)),
+  sigma ~ 1 + X2 + (1 | a | gr(species, cov = A))
+)
+brm(bf1 + bf2, data2 = list(A = A), family = gaussian(), ...)"),
+
+  "Across-trait variance–variance (ρ[a(s1 s2)])",
+  "Do two traits co-diverge (or contra-diverge) in dispersion?",
+  code_chunk(
+"# same multivariate structure as above; ensure both traits have distributional parts
+bf1 <- bf(
+  y1 ~ 1 + X1 + (1 | a | gr(species, cov = A)),
+  sigma ~ 1 + X1 + (1 | a | gr(species, cov = A))
+)
+bf2 <- bf(
+  y2 ~ 1 + X2 + (1 | a | gr(species, cov = A)),
+  sigma ~ 1 + X2 + (1 | a | gr(species, cov = A))
+)"),
+
+  "Across-trait mean–variance (ρ[a(l1 s2)], ρ[a(l2 s1)])",
+  "Does a shift in the mean of trait 1 relax or constrain variability in trait 2 (and vice versa)?",
+  code_chunk(
+"# same multivariate distributional model; cross-part/trait correlations learned via shared ID `a`
+brm(bf1 + bf2, data2 = list(A = A), family = gaussian(), ...)")
+) %>%
+  mutate(
+    cell = stringr::str_replace_all(cell, "\\[", "\\\\["),
+    question = stringr::str_replace_all(question, "\\*", "\\\\*")
+  )
+```
+
+
+```{r}
+#| label: fig2map-render
+#| echo: false
+#| message: false
+#| warning: false
+if (html_out && requireNamespace("gt", quietly = TRUE)) {
+  library(gt)
+  gt(tbl_fig2) |>
+    gt::fmt_markdown(columns = c(cell, question, pseudo)) |>
+    gt::tab_header(
+      title = md("**Implementing the Figure 2 cells in `brms` (pseudo-code)**")
+    ) |>
+    gt::cols_label(
+      cell = "Figure 2 cell / biological question",
+      question = "",
+      pseudo = "Minimal distributional formulae"
+    ) |>
+    gt::cols_width(
+    cell ~ gt::px(300)  # wider first column
+    ) |>
+    gt::opt_row_striping() |>
+    gt::tab_options(table.font.size = gt::px(14))
+} else {
+  knitr::kable(
+    tbl_fig2,
+    format = if (knitr::is_latex_output()) "latex" else "html",
+    booktabs = TRUE,
+    col.names = c("Figure 2 cell / question", "", "Minimal distributional formulae"),
+    escape = FALSE,
+    longtable = TRUE
+  )
+}
+```
+
+
+# Bonus 2: obtaining phylogenetic heritability and macro-evolvability (phylogenetic CV)
 
 Below, we show how to calculate phylogenetic heritability and evolvability from the fitted `brms` object with and without a fixed effect(s). As you will see, phylogenetic heritability is fairly straightforward to obtain but evolvability is a bit more complex as it is not clear what scale to calculate it on (e.g., log-scale or original scale). In fact, the same issue should be relevant to phylogenetic heritability as well but we do not consider this here. 
 
@@ -733,7 +834,7 @@ quantile(H2s, probs = c(0.025, 0.5, 0.975)) %>% pander()
 
 Here we found a median phylogenetic heritability of around 31%.
 
-### Evolvability
+### Macro-evolvability
 
 Using Equations 6 in the paper, we can calculate the evolvability (CV_Al) of the trait `crange_size` (log-transformed trait; the location part), but the difficulty is that we need to calculate the phylogenetic variance on the original scale. We can do this by using the delta method. The details of this calculation are provided in this earlier work (see the supplementary material):
 
