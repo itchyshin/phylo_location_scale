@@ -46,7 +46,7 @@ knitr::opts_chunk$set(
 # Introduction
 
 This online material is a supplement to our paper "Quantifying macro-evolutionary patterns of trait mean and variance with phylogenetic location-scale models".
-You will see how to fit phylogenetic location-scale models (PLSMs) in a Bayesian framework using `brms` package in `R`.
+You will see how to fit phylogenetic location-scale models (PLSMs) in a Bayesian framework using `brms` package in `R`. All the code and related data are available in this repository [here](https://github.com/itchyshin/phylo_location_scale).
 
 # Contents
 
