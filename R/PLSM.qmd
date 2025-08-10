@@ -62,7 +62,7 @@ Then, we will illustrate how to fit three models described in our paper, subtitl
 
 All results presented in this online material are for illustrative purposes only (more careful thoughts are required to draw biological conclusions). 
 
-Additionally, we will show how to obtain phylogenetic heritability and evolvability from the fitted `brms` object.
+Additionally, we will show how to obtain phylogenetic heritability and macro-evolvability from the fitted `brms` object.
 
 Also, importantly, there is a paper, which focuses on location-scale meta-analytic and meta-regression. You can find the sister paper's tutorial [here](https://itchyshin.github.io/location-scale_meta-analysis/#multilevel-meta-analysis-and-location-scale-meta-regression); also, the preprint of this sister paper is available on [DOI]( https://doi.org/10.1111/gcb.70204):
 
@@ -733,7 +733,7 @@ if (html_out && requireNamespace("gt", quietly = TRUE)) {
 
 # Bonus 2: obtaining phylogenetic heritability and macro-evolvability (phylogenetic CV)
 
-Below, we show how to calculate phylogenetic heritability and evolvability from the fitted `brms` object with and without a fixed effect(s). As you will see, phylogenetic heritability is fairly straightforward to obtain but evolvability is a bit more complex as it is not clear what scale to calculate it on (e.g., log-scale or original scale). In fact, the same issue should be relevant to phylogenetic heritability as well but we do not consider this here. 
+Below, we show how to calculate phylogenetic heritability and macro-evolvability from the fitted `brms` object with and without a fixed effect(s). As you will see, phylogenetic heritability is fairly straightforward to obtain but macro-evolvability is a bit more complex as it is not clear what scale to calculate it on (e.g., log-scale or original scale). In fact, the same issue should be relevant to phylogenetic heritability as well but we do not consider this here. 
 
 ## a model without fixed effects
 
@@ -834,9 +834,10 @@ quantile(H2s, probs = c(0.025, 0.5, 0.975)) %>% pander()
 
 Here we found a median phylogenetic heritability of around 31%.
 
+
 ### Macro-evolvability
 
-Using Equations 6 in the paper, we can calculate the evolvability (CV_Al) of the trait `crange_size` (log-transformed trait; the location part), but the difficulty is that we need to calculate the phylogenetic variance on the original scale. We can do this by using the delta method. The details of this calculation are provided in this earlier work (see the supplementary material):
+Using Equations 6 in the paper, we can calculate the macro-evolvability (CV_Al) of the trait `crange_size` (log-transformed trait; the location part), but the difficulty is that we need to calculate the phylogenetic variance on the original scale. We can do this by using the delta method. The details of this calculation are provided in this earlier work (see the supplementary material):
 
 > O'Dea RE, Noble DW, Nakagawa S. Unifying individual differences in personality, predictability and plasticity: a practical guide. Methods in Ecology and Evolution. 2022 Feb;13(2):278-93.
 
@@ -855,7 +856,7 @@ CV_Al <- sd_al / mean_b0
 quantile(CV_Al, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
-We can see the median evolvability is around 0.07
+We can see the median macro-evolvability is around 0.07
 
 ```{r}
 # alternatively, we can get CV on ln-scale
@@ -864,9 +865,9 @@ CV_Al2 <- sigma2_al / ln_b0
 quantile(CV_Al2, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
-If we get the CV on the log-scale, we can see the median evolvability is around 0.85 (nearly 10 times bigger); this CV for the location is probably more comparable to CV for the scale below (as it turns, our CV for the scale is not estimable on the original scale). 
+If we get the CV on the log-scale, we can see the median macro-evolvability is around 0.85 (nearly 10 times bigger); this CV for the location is probably more comparable to CV for the scale below (as it turns, our CV for the scale is not estimable on the original scale). 
 
-We now estimate the evolvability of the trait `crange_size` (the scale part) using Equation 24 (we assume that this CV_As is the same as the value for the original scale):
+We now estimate the macro-evolvability of the trait `crange_size` (the scale part) using Equation 24 (we assume that this CV_As is the same as the value for the original scale):
 
 ```{r}
 
@@ -875,7 +876,7 @@ CV_As <- sqrt(exp(4*post$sd_Phylo__sigma_Intercept^2) - 1)
 quantile(CV_As, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
-We get the median evolvability of around 3.4. This is evolvability of variance but we can get evolvability of the standard deviation using Equation 25. 
+We get the median macro-evolvability of around 3.4. This is macro-evolvability of variance but we can get macro-evolvability of the standard deviation using Equation 25. 
 
 ```{r}
 # Alternatively, we can get CV_As on the SD scale
@@ -884,7 +885,7 @@ CV_As2 <- sqrt(exp(post$sd_Phylo__sigma_Intercept^2) - 1)
 quantile(CV_As2, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
-We get the median evolvability of around 0.94, which is not that different from the evolvability of the mean estimated on the log scale. 
+We get the median macro-evolvability of around 0.94, which is not that different from the macro-evolvability of the mean estimated on the log scale. 
 
 Also, we can use Equation 23:
 
@@ -896,7 +897,7 @@ quantile(CV_As2, probs = c(0.025, 0.5, 0.975), na.rm = T) %>% pander()
 
 This estimation, as expected, matches with that from Equation 24. 
 
-We also try to get the evolvability for the scale part on the original scale
+We also try to get the macro-evolvability for the scale part on the original scale
 
 ```{r}
 # original scale conversion does not seem to make sense so commented out
@@ -908,11 +909,11 @@ CV_As2_orig <- sqrt(sigma2_as_star_orig) / sigma2_e_bar_orig
 quantile(CV_As2_orig, probs = c(0.025, 0.5, 0.975), na.rm = T) %>% pander()
 ```
 
-We get the median evolvability of a `Inf` value so this does not seem to work. 
+We get the median macro-evolvability of a `Inf` value so this does not seem to work. 
 
 ## a model with fixed effects
 
-Here we use `mod2` as an example to see the heritability and evolvability of the trait `crange_size` after controlling for body mass `cmass`.
+Here we use `mod2` as an example to see the phylogenetic heritability and macro-evolvability of the trait `crange_size` after controlling for body mass `cmass`.
 
 ### Phylogenetic heritability
 
@@ -969,9 +970,9 @@ quantile(H2s, probs = c(0.025, 0.5, 0.975)) %>% pander()
 
 Here we found a median phylogenetic heritability of around 29%.
 
-### Evolvability
+### Macro-evolvability
 
-Using Equations 6 in the paper, we can calculate the evolvability (CV_Al) of the trait `crange_size` (log-transformed trait; the location part), but we first need to back-transform as we did above. 
+Using Equations 6 in the paper, we can calculate the macro-evolvability (CV_Al) of the trait `crange_size` (log-transformed trait; the location part), but we first need to back-transform as we did above. 
 
 ```{r}
 
@@ -990,7 +991,7 @@ CV_Al <- sd_al / mean_b0
 quantile(CV_Al, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
-We can see the median evolvability is around 0.30.
+We can see the median macro-evolvability is around 0.30.
 
 ```{r}
 # alternatively, we can get CV on ln-scale
@@ -998,9 +999,9 @@ CV_Al2 <- sigma2_al / ln_b0
 quantile(CV_Al2, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
-If we get the CV on the log-scale, we can see the median evolvability is around 0.82, which is higher than what we got on the original scale (like above).
+If we get the CV on the log-scale, we can see the median macro-evolvability is around 0.82, which is higher than what we got on the original scale (like above).
 
-We now estimate the evolvability of the trait `crange_size` (the scale part) using Equation 24 (we assume that this CV_As is the same as the value for the original scale):
+We now estimate the macro-evolvability of the trait `crange_size` (the scale part) using Equation 24 (we assume that this CV_As is the same as the value for the original scale):
 
 ```{r}
 # Using Equation 24
@@ -1009,7 +1010,7 @@ CV_As <- sqrt(exp(4*post$sd_Phylo__sigma_Intercept^2) - 1)
 quantile(CV_As, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
-We get the median evolvability of around 3.2. As above, this is evolvability of variance but we can get evolvability of the standard deviation using Equation 25.
+We get the median macro-evolvability of around 3.2. As above, this is macro-evolvability of variance but we can get macro-evolvability of the standard deviation using Equation 25.
 
 ```{r}
 # Alternatively, we can get CV_As on the SD scale
@@ -1018,7 +1019,7 @@ CV_As2 <- sqrt(exp(post$sd_Phylo__sigma_Intercept^2) - 1)
 quantile(CV_As2, probs = c(0.025, 0.5, 0.975)) %>% pander()
 ```
 
-We get the median evolvability of around 0.91, which is not that different from the evolvability of the mean estimated on the log scale.
+We get the median macro-evolvability of around 0.91, which is not that different from the macro-evolvability of the mean estimated on the log scale.
 
 Additionally, we can use Equation 23:
 
@@ -1028,7 +1029,7 @@ CV_As <- sqrt(sigma2_as_star) / sigma2_e_bar
 quantile(CV_As, probs = c(0.025, 0.5, 0.975), na.rm = T) %>% pander()
 ```
 
-This estimation matches the result from Equation 24, unlike the one above. This is because we have now a fixed effect which is taken into account for obtaining the phylogenetic variance on the scale part: `sigma2_as_star` (we will not try to get the evolvability on the original scale as it does not seem to work).
+This estimation matches the result from Equation 24, unlike the one above. This is because we have now a fixed effect which is taken into account for obtaining the phylogenetic variance on the scale part: `sigma2_as_star` (we will not try to get the macro-evolvability on the original scale as it does not seem to work).
 
 # Figure code
 
