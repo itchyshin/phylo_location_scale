@@ -1,6 +1,6 @@
 ---
 title: "ONLINE SUPPLEMENT: Quantifying macro-evolutionary patterns of trait mean and variance with phylogenetic location-scale models"
-author: "**TBA**"
+author: "Nakagawa, Shinichi, Ayumi Mizuno, Coralie Williams, Malgorzata Lagisz, Yefeng Yang, and Szymon M Drobniak"
 date: "`r format(Sys.time(), '%d %B %Y')`"
 format:
   html:
